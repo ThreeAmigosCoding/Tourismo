@@ -1,8 +1,6 @@
-﻿
-
-namespace Tourismo.Core.Model.Travel.Accommodation
+﻿namespace Tourismo.Core.Model.TravelManagement
 {
-    public enum Type
+    public enum AccommodationType
     {
         Restaurant,
         Hotel,

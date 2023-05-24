@@ -1,8 +1,7 @@
-﻿
-using Tourismo.Core.Model.Helper;
+﻿using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Utility;
 
-namespace Tourismo.Core.Model.Travel
+namespace Tourismo.Core.Model.TravelManagement
 {
     public class TouristAttraction : BaseObservableEntity
     {

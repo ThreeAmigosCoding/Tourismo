@@ -1,6 +1,6 @@
 ﻿using Tourismo.Core.Utility;
 
-namespace Tourismo.Core.Model.User
+namespace Tourismo.Core.Model.UserManagement
 {
     public class User : BaseObservableEntity
     {

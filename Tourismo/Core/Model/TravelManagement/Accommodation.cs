@@ -1,8 +1,7 @@
-﻿
-using Tourismo.Core.Model.Helper;
+﻿using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Utility;
 
-namespace Tourismo.Core.Model.Travel.Accommodation
+namespace Tourismo.Core.Model.TravelManagement
 {
     public class Accommodation : BaseObservableEntity
     {
@@ -15,7 +14,7 @@ namespace Tourismo.Core.Model.Travel.Accommodation
         private Location _location;
         public Location Location { get => _location; set => OnPropertyChanged(ref _location, value); }
 
-        private Type _type;
-        public Type Type { get => _type; set => OnPropertyChanged(ref _type, value); }
+        private AccommodationType _type;
+        public AccommodationType Type { get => _type; set => OnPropertyChanged(ref _type, value); }
     }
 }
