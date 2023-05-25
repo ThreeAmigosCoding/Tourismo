@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Tourismo.Core.Persistence;
 
 namespace Tourismo
 {
@@ -13,5 +14,12 @@ namespace Tourismo
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                DatabaseContextSeed.Seed(db);
+            }
+        }
     }
 }

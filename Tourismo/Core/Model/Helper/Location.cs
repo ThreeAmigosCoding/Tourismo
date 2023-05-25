@@ -1,6 +1,9 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace Tourismo.Core.Model.Helper
 {
+    [Owned]
     public class Location
     {
         private string _address;

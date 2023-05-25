@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Tourismo.Core.Utility;
 
 namespace Tourismo.Core.Model.TravelManagement
@@ -8,9 +9,11 @@ namespace Tourismo.Core.Model.TravelManagement
         private string _name;
         public string Name { get => _name; set => OnPropertyChanged(ref _name, value); }
 
+        [ForeignKey("DefaultSectionId")]
         private List<TouristAttraction> _defaultAttractions;
         public List<TouristAttraction> DefaultAttractions { get => _defaultAttractions; set => OnPropertyChanged(ref _defaultAttractions, value); }
 
+        [ForeignKey("AdditionalSectionId")]
         private List<TouristAttraction> _additionalAttractions;
         public List<TouristAttraction> AdditionalAttractions { get => _additionalAttractions; set => OnPropertyChanged(ref _additionalAttractions, value); }
 
