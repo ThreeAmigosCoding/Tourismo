@@ -15,11 +15,12 @@
             </ResourceDictionary.MergedDictionaries>
 
             <SolidColorBrush x:Key="DarkGreen" Color="#032D23"/>
+            <SolidColorBrush x:Key="LightGreen" Color="#50A060"/>
 
             <!--Fonts-->
             <FontFamily x:Key="Password">pack://application:,,,/Resources/Fonts/#password</FontFamily>
-            <FontFamily x:Key="Playfair">pack://application:,,,/Resources/Fonts/#playfair</FontFamily>
-            <FontFamily x:Key="Poppins">pack://application:,,,/Resources/Fonts/#poppins</FontFamily>
+            <FontFamily x:Key="Playfair">pack://application:,,,/Resources/Fonts/#Playfair Display</FontFamily>
+            <FontFamily x:Key="Poppins">pack://application:,,,/Resources/Fonts/#Poppins</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
