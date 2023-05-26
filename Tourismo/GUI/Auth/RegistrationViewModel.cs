@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using Tourismo.Core.Commands.Auth;
 using Tourismo.GUI.Utility;
 
 namespace Tourismo.GUI.Auth
@@ -88,10 +90,13 @@ namespace Tourismo.GUI.Auth
             }
         }
 
+        public ICommand? LoginRegisterSwitchCommand { get; }
+
         public RegistrationViewModel()
         {
             _errMsgVisibility = Visibility.Hidden;
             _errMsgText = "";
+            LoginRegisterSwitchCommand = new LoginRegisterSwitchCommand(this);
         }
 
     }
