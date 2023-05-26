@@ -4,7 +4,7 @@
 
 
     <DataTemplate DataType="{x:Type vm:LoginViewModel}">
-        <vm:Login/>
+        <vm:LoginView/>
     </DataTemplate>
 
 </ResourceDictionary>

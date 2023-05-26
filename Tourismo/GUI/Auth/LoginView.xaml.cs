@@ -17,9 +17,9 @@ namespace Tourismo.GUI.Auth
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class LoginView : Window
     {
-        public Login()
+        public LoginView()
         {
             InitializeComponent();
         }
