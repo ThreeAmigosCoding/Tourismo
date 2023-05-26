@@ -1,4 +1,4 @@
-﻿<Window x:Class="Tourismo.GUI.Auth.LoginView"
+﻿<UserControl x:Class="Tourismo.GUI.Auth.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Tourismo.GUI.Auth"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
         mc:Ignorable="d"
-        Title="Login" Height="800" Width="1200">
+        Height="800" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -106,12 +106,17 @@
                         FontSize="18"
                         FontFamily="{DynamicResource Poppins}"/>
 
-                    <AccessText 
+                    <TextBlock 
                         FontSize="18" 
                         Text="Get Started" 
                         Grid.Column="1" 
                         FontFamily="{DynamicResource Poppins}"
-                        FontWeight="Bold" Style="{StaticResource HoverEffectTextStyle}"/>
+                        FontWeight="Bold" 
+                        Style="{StaticResource HoverEffectTextStyle}">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding LoginRegisterSwitchCommand}" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </Grid>
                 
             </Grid>
@@ -124,4 +129,4 @@
         </Image>
 
     </Grid>
-</Window>
+</UserControl>

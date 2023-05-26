@@ -4,9 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tourismo"
+        xmlns:ninject="clr-namespace:Tourismo.Core.Ninject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="{Binding ViewTitle}" 
+        Height="800" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <ninject:ServiceLocator x:Key="ServiceLocator" />
+    </Window.Resources>
+
+    <Window.DataContext>
+        <Binding Path="MainViewModel" Source="{StaticResource ServiceLocator}" />
+    </Window.DataContext>
+    <Grid>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
