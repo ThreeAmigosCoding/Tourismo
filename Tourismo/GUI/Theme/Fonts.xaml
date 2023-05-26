@@ -1,0 +1,8 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <FontFamily x:Key="Password">pack://application:,,,/Resources/Fonts/#password</FontFamily>
+    <FontFamily x:Key="Playfair">pack://application:,,,/Resources/Fonts/#Playfair Display</FontFamily>
+    <FontFamily x:Key="Poppins">pack://application:,,,/Resources/Fonts/#Poppins</FontFamily>
+
+</ResourceDictionary>

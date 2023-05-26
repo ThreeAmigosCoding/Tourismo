@@ -11,26 +11,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Green.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
 
+                <ResourceDictionary Source="GUI/Theme/Colors.xaml"/>
+                <ResourceDictionary Source="GUI/Theme/Fonts.xaml"/>
+                <ResourceDictionary Source="GUI/Theme/Styles.xaml"/>
+
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <SolidColorBrush x:Key="DarkGreen" Color="#032D23"/>
-            <SolidColorBrush x:Key="LightGreen" Color="#50A060"/>
-
-            <!--Fonts-->
-            <FontFamily x:Key="Password">pack://application:,,,/Resources/Fonts/#password</FontFamily>
-            <FontFamily x:Key="Playfair">pack://application:,,,/Resources/Fonts/#Playfair Display</FontFamily>
-            <FontFamily x:Key="Poppins">pack://application:,,,/Resources/Fonts/#Poppins</FontFamily>
-
-            <Style x:Key="HoverEffectTextStyle" TargetType="AccessText">
-                <Setter Property="Foreground" Value="{StaticResource LightGreen}"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Opacity" Value="0.4" />
-                        <Setter Property="Cursor" Value="Hand" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
