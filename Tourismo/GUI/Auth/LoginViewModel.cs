@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Tourismo.Core.Commands.Auth;
+using Tourismo.Core.Service.Interface.UserManagement;
 using Tourismo.GUI.Utility;
 
 namespace Tourismo.GUI.Auth
 {
     public class LoginViewModel : ViewModelBase
     {
+
+        private IUserService _userService;
+        public IUserService UserService { get => _userService; }
 
         private string _email;
         public string Email
@@ -57,12 +61,15 @@ namespace Tourismo.GUI.Auth
         }
 
         public ICommand? LoginRegisterSwitchCommand { get; }
+        public ICommand? LoginCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(IUserService userService)
         {
+            _userService = userService;
             _errMsgVisibility = Visibility.Hidden;
             _errMsgText = "";
             LoginRegisterSwitchCommand = new LoginRegisterSwitchCommand(this);
+            LoginCommand = new LoginCommand(this);
         }
 
     }

@@ -33,8 +33,7 @@ namespace Tourismo.GUI.Utility
             LVM = loginVM;
             RVM = registrationVM;
             SwitchCurrentViewModel(LVM);
-            RegisterHandler();
-            
+            RegisterHandler(); 
         }
 
         private void RegisterHandler()
