@@ -10,5 +10,7 @@ namespace Tourismo.Core.Repository.Interface.UserManagement
     public interface IUserRepository : ICRUDRepository<User>
     {
         User Authenticate(string email, string password);
+
+        bool Exists(string email);
     }
 }

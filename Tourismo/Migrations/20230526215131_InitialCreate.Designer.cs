@@ -11,8 +11,8 @@ using Tourismo.Core.Persistence;
 namespace Tourismo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230525151854_initial")]
-    partial class initial
+    [Migration("20230526215131_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,6 +251,10 @@ namespace Tourismo.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("longtext");
 

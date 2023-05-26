@@ -6,14 +6,28 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Tourismo.Core.Commands.Auth;
+using Tourismo.Core.Service.Interface.UserManagement;
 using Tourismo.GUI.Utility;
 
 namespace Tourismo.GUI.Auth
 {
     public class RegistrationViewModel : ViewModelBase
     {
+        #region Attributes
 
         private string _name;
+        private string _lastName;
+        private string _email;
+        private string _phone;
+        private string _password;
+        private string _errMsgText;
+        private Visibility _errMsgVisibility;
+        private IUserService _userService;
+
+        #endregion
+
+        #region Properties
+
         public string Name
         {
             get => _name;
@@ -23,8 +37,7 @@ namespace Tourismo.GUI.Auth
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-        private string _lastName;
+        
         public string LastName
         {
             get => _lastName;
@@ -35,7 +48,6 @@ namespace Tourismo.GUI.Auth
             }
         }
 
-        private string _email;
         public string Email
         {
             get => _email;
@@ -45,8 +57,7 @@ namespace Tourismo.GUI.Auth
                 OnPropertyChanged(nameof(Email));
             }
         }
-
-        private string _phone;
+   
         public string Phone
         {
             get => _phone;
@@ -57,7 +68,6 @@ namespace Tourismo.GUI.Auth
             }
         }
 
-        private string _password;
         public string Password
         {
             get => _password;
@@ -68,7 +78,6 @@ namespace Tourismo.GUI.Auth
             }
         }
 
-        private string _errMsgText;
         public string ErrMsgText
         {
             get => _errMsgText;
@@ -79,7 +88,6 @@ namespace Tourismo.GUI.Auth
             }
         }
 
-        private Visibility _errMsgVisibility;
         public Visibility ErrMsgVisibility
         {
             get => _errMsgVisibility;
@@ -90,13 +98,24 @@ namespace Tourismo.GUI.Auth
             }
         }
 
-        public ICommand? LoginRegisterSwitchCommand { get; }
+        public IUserService UserService { get => _userService; }
 
-        public RegistrationViewModel()
+        #endregion
+
+        #region Commands
+
+        public ICommand? LoginRegisterSwitchCommand { get; }
+        public ICommand? RegistrationCommand { get; }
+
+        #endregion
+
+        public RegistrationViewModel(IUserService userService)
         {
+            _userService = userService;
             _errMsgVisibility = Visibility.Hidden;
             _errMsgText = "";
             LoginRegisterSwitchCommand = new LoginRegisterSwitchCommand(this);
+            RegistrationCommand = new RegistrationCommand(this);
         }
 
     }

@@ -15,5 +15,10 @@ namespace Tourismo.Core.Repository.Implementation.UserManagement
         {
             return _entities.FirstOrDefault(u => u.EmailAddress == email && u.Password == password);
         }
+
+        public bool Exists(string email)
+        {
+            return _context.Users.Any(u => u.EmailAddress == email);
+        }
     }
 }

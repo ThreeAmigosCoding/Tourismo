@@ -13,9 +13,9 @@ namespace Tourismo.Core.Commands.Auth
     public class LoginCommand : CommandBase
     {
         private readonly LoginViewModel? _viewModel;
-        public LoginCommand(LoginViewModel loginVM)
+        public LoginCommand(LoginViewModel viewModel)
         {
-            _viewModel = loginVM;
+            _viewModel = viewModel;
             _viewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 

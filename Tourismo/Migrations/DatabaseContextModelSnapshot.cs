@@ -251,6 +251,10 @@ namespace Tourismo.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("Role")
                         .HasColumnType("int");
 

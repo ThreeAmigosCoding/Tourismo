@@ -79,7 +79,8 @@
                     Foreground="Red" 
                     Visibility="{Binding ErrMsgVisibility}" 
                     Text="{Binding ErrMsgText}" 
-                    Margin="0 15 0 0"/>
+                    Margin="0 15 0 10"
+                    FontSize="16"/>
                                               
                 <Button 
                     Grid.Row="6" 
