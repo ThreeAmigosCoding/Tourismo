@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:auth="clr-namespace:Tourismo.GUI.Auth"
-                    xmlns:navigation="clr-namespace:Tourismo.GUI.Navigation">
+                    xmlns:navigation="clr-namespace:Tourismo.GUI.Navigation"
+                    xmlns:client="clr-namespace:Tourismo.GUI.Client">
 
 
     <DataTemplate DataType="{x:Type auth:LoginViewModel}">
@@ -11,11 +12,19 @@
     <DataTemplate DataType="{x:Type auth:RegistrationViewModel}">
         <auth:RegistrationView/>
     </DataTemplate>
-
+    
+    <!--Client-->
+    
     <DataTemplate DataType="{x:Type navigation:ClientHomeViewModel}">
         <navigation:ClientHomeView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type client:TravelsOverviewViewModel}">
+        <client:TravelsOverviewView/>
+    </DataTemplate>
+
+    <!--Agent-->
+    
     <DataTemplate DataType="{x:Type navigation:AgentHomeViewModel}">
         <navigation:AgentHomeView/>
     </DataTemplate>
