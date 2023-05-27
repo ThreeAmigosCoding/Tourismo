@@ -12,4 +12,46 @@
     </Style>
 
 
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+       TargetType="{x:Type RadioButton}"
+       x:Key="MenuButtonTheme">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Background="{TemplateBinding Background}">
+                            <TextBlock Text="{TemplateBinding Property=Content}"
+                                   VerticalAlignment="Center"
+                                   Margin="20,0,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsChecked}"
+                                                     Value="True">
+                                                <Setter Property="Foreground" Value="White" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource DarkGreen}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
 </ResourceDictionary>
