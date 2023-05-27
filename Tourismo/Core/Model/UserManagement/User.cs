@@ -1,4 +1,5 @@
-﻿using Tourismo.Core.Utility;
+﻿using System;
+using Tourismo.Core.Utility;
 
 namespace Tourismo.Core.Model.UserManagement
 {
@@ -15,9 +16,14 @@ namespace Tourismo.Core.Model.UserManagement
 
         private string _lastName;
         public string LastName { get => _lastName; set => OnPropertyChanged(ref _lastName, value); }
+
+        private string _phone;
+        public string Phone { get => _phone; set => OnPropertyChanged(ref _phone, value); }
+
         public string FullName => $"{_firstName} {_lastName}";
 
         private Role _role;
         public Role Role { get => _role; set => OnPropertyChanged(ref _role, value); }
+
     }
 }

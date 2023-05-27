@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Tourismo.GUI.Auth">
+
+
+    <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+        <vm:LoginView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:RegistrationViewModel}">
+        <vm:RegistrationView/>
+    </DataTemplate>
+
+</ResourceDictionary>

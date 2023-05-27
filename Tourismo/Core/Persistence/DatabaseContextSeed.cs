@@ -20,6 +20,7 @@ namespace Tourismo.Core.Persistence
                 Password = "password1",
                 FirstName = "John",
                 LastName = "Doe",
+                Phone = "0123456789",
                 Role = Role.Client
             };
 
@@ -29,9 +30,11 @@ namespace Tourismo.Core.Persistence
                 Password = "password2",
                 FirstName = "Jane",
                 LastName = "Smith",
+                Phone = "0123456789",
                 Role = Role.Agent
             };
 
+            
             // Create accommodations
             Accommodation accommodation1 = new Accommodation
             {
