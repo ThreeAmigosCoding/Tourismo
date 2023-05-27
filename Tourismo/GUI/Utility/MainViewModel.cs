@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Tourismo.GUI.Auth;
 using Tourismo.Core.Ninject;
 using System.Runtime.Intrinsics.Arm;
+using Tourismo.GUI.Navigation;
 
 namespace Tourismo.GUI.Utility
 {
@@ -40,12 +41,14 @@ namespace Tourismo.GUI.Utility
         {
             EventBus.RegisterHandler("ClientLogin", () =>
             {
-
+                ClientHomeViewModel ClientHomeViewModel = ServiceLocator.Get<ClientHomeViewModel>();
+                SwitchCurrentViewModel(ClientHomeViewModel);
             });
 
             EventBus.RegisterHandler("AgentLogin", () =>
             {
-
+                AgentHomeViewModel AgentHomeViewModel = ServiceLocator.Get<AgentHomeViewModel>();
+                SwitchCurrentViewModel(AgentHomeViewModel);
             });
 
             EventBus.RegisterHandler("GoToLogin", () =>

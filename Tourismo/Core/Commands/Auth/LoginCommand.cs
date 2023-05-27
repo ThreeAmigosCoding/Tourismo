@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tourismo.Core.Model.UserManagement;
 using Tourismo.Core.Utility;
 using Tourismo.GUI.Auth;
+using Tourismo.GUI.Utility;
 
 namespace Tourismo.Core.Commands.Auth
 {
@@ -43,7 +44,20 @@ namespace Tourismo.Core.Commands.Auth
                 return;
             }
 
-            MessageBox.Show("Login works!");
+            GlobalStore.AddObject("LoggedUser", user);
+            
+            switch (user.Role)
+            {
+                case Role.Client:
+                    EventBus.FireEvent("ClientLogin");
+                    break;
+                case Role.Agent:
+                    EventBus.FireEvent("AgentLogin");
+                    break;
+                default:
+                    MessageBox.Show("Login failed!");
+                    return;
+            }
         }
     }
 }
