@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,14 @@ namespace Tourismo.GUI.Client
         {
             InitializeComponent();
         }
+
+        private void MapControl_ViewChangeOnFrame(object sender, MapEventArgs e)
+        {
+            if (mapControl.ZoomLevel < 7)
+            {
+                mapControl.ZoomLevel = 7;
+            }
+        }
+
     }
 }

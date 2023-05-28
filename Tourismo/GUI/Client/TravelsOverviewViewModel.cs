@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.GUI.Utility;
@@ -17,7 +20,6 @@ namespace Tourismo.GUI.Client
         private readonly List<Travel> _travels;
         private ITravelService _travelService;
         private readonly MyMapCredentials _mapApiKey = new MyMapCredentials();
-        
         #endregion
 
         #region Properties
@@ -35,7 +37,5 @@ namespace Tourismo.GUI.Client
             _travelService = travelService;
             _travels = _travelService.ReadAll().ToList();
         }
-
-
     }
 }

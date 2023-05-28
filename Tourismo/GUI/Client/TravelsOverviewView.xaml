@@ -79,8 +79,9 @@
         <!--Mapa-->
         <Grid Grid.Column="1"
               Background="{StaticResource DarkGreen}">
-            <m:Map Mode="Road" CredentialsProvider="{Binding MapApiKey}">
-          
+            <m:Map x:Name="mapControl" Mode="Road" CredentialsProvider="{Binding MapApiKey}"
+                   Center="44.0165, 21.0059" ZoomLevel="7" ViewChangeOnFrame="MapControl_ViewChangeOnFrame">
+                
             </m:Map>
         </Grid>
 
