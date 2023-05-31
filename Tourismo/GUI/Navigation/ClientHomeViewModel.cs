@@ -28,6 +28,7 @@ namespace Tourismo.GUI.Navigation
         public ClientHomeViewModel() {
             ClientTravelsOverviewCommand = new ClientTravelsOverviewCommand();
             LogOutCommand = new LogOutCommand();
+            SwitchCurrentViewModel(ServiceLocator.Get<TravelsOverviewViewModel>());
             RegisterHandler();
         }
 
