@@ -26,13 +26,13 @@ namespace Tourismo.GUI.Client
             InitializeComponent();
         }
 
-        private void MapControl_ViewChangeOnFrame(object sender, MapEventArgs e)
-        {
-            if (mapControl.ZoomLevel < 7)
-            {
-                mapControl.ZoomLevel = 7;
-            }
-        }
+        //private void MapControl_ViewChangeOnFrame(object sender, MapEventArgs e)
+        //{
+        //    if (mapControl.ZoomLevel < 7)
+        //    {
+        //        mapControl.ZoomLevel = 7;
+        //    }
+        //}
 
     }
 }

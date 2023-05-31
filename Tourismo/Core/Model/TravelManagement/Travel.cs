@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Utility;
 
@@ -20,5 +22,10 @@ namespace Tourismo.Core.Model.TravelManagement
 
         private double _minimalPrice;
         public double MinimalPrice { get => _minimalPrice; set => OnPropertyChanged(ref _minimalPrice, value); }
+
+        private string _shortDescription;
+        public string ShortDescription { get => _shortDescription; set => OnPropertyChanged(ref _shortDescription, value); }
+
+
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Tourismo.GUI.Client"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
@@ -10,7 +11,6 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0"
@@ -20,8 +20,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock 
-                    Grid.Row="0" 
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0"
                     Text="Travels"
                     FontWeight="Regular"
                     FontSize="36"  
@@ -29,15 +35,44 @@
                     FontFamily="{DynamicResource Playfair}" 
                     Foreground="{StaticResource DarkGreen}"/>
 
+
+                <TextBox Grid.Column="1" 
+                         FontSize="18" 
+                         Margin="10, 0, 40, 0" 
+                         TextWrapping="Wrap" 
+                         VerticalAlignment="Top" 
+                         Width="300" 
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}" 
+                         materialDesign:HintAssist.Hint="🔍 Search" 
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+
+
+            </Grid>
+
+
+
             <ScrollViewer Grid.Row="1" 
                           HorizontalScrollBarVisibility="Hidden" 
                           VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding Travels}">
+                <ItemsControl ItemsSource="{Binding FilteredTravels}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel FlowDirection="LeftToRight"
+                                       ItemWidth="460"
+                                       Width="{Binding ActualWidth, 
+                                       RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                              AncestorType={x:Type ScrollViewer}}}"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
 
                             <Grid Margin="0, 0, 10, 20"
                                   Style="{DynamicResource HoverEffectTravelCard}">
+                                <!--<Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"
+                                                      MaxWidth="460"/>
+                                </Grid.ColumnDefinitions>-->
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="250"/>
@@ -54,20 +89,39 @@
                                     Grid.Row="1"
                                     Stretch="UniformToFill"
                                     Source="../../Resources/Images/Travel/travel1.jpg">
-                                  
+
+                                    <!--Source="{Binding ImagePath, StringFormat='../../../Resources/Images/Travel/{0}'}">-->
+
                                 </Image>
-                                <TextBlock Grid.Row="2"
-                                      Background="{StaticResource DarkGreen}"
+                                <Grid Grid.Row="2" 
+                                      Background="{StaticResource DarkGreen}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0"
                                       FontFamily="{DynamicResource Poppins}"
                                       FontSize="18"
                                       Foreground="White"
-                                      Padding="10"
-                                      Text="{Binding MinimalPrice, StringFormat='Starts from: {0}rsd'}">
-                                </TextBlock>
+                                      Padding="10 8"
+                                      Text="{Binding MinimalPrice, StringFormat='Starts at: {0}rsd'}">
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1"
+                                      FontFamily="{DynamicResource Poppins}"
+                                      FontSize="18"
+                                      Foreground="White"
+                                      Padding="10 8"
+                                      Text="{Binding ShortDescription}"
+                                      TextWrapping="Wrap">
+                                    </TextBlock>
+                                </Grid>
+                                
                             </Grid>
                             
-                            
-
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -77,13 +131,13 @@
         
         
         <!--Mapa-->
-        <Grid Grid.Column="1"
+        <!--<Grid Grid.Column="1"
               Background="{StaticResource DarkGreen}">
-            <m:Map x:Name="mapControl" Mode="Road" CredentialsProvider="{Binding MapApiKey}"
+            <m:Map x:Name="mapControl" Mode="AerialWithLabels" CredentialsProvider="{Binding MapApiKey}"
                    Center="44.0165, 21.0059" ZoomLevel="7" ViewChangeOnFrame="MapControl_ViewChangeOnFrame">
                 
             </m:Map>
-        </Grid>
+        </Grid>-->
 
     </Grid>
 </UserControl>
