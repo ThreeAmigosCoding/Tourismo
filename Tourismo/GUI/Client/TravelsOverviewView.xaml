@@ -131,7 +131,25 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-                
+
+                <TextBlock Grid.Column="0"
+                           Text="No results" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="32"
+                           FontFamily="{DynamicResource Playfair}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding FilteredTravels.Count}" Value="0">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>  
+                </TextBlock>
+
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20, -60, 0, 0">
 
                     <TextBox Grid.Column="1" 

@@ -30,6 +30,7 @@ namespace Tourismo.Core.Ninject
             Bind(typeof(ICRUDRepository<>)).To(typeof(CRUDRepository<>));
             Bind(typeof(IUserRepository)).To(typeof(UserRepository));
             Bind(typeof(ITravelRepository)).To(typeof(TravelRepository));
+            Bind(typeof(IArrangementRepository)).To(typeof(ArrangementRepository));
 
             #endregion
 
@@ -37,6 +38,7 @@ namespace Tourismo.Core.Ninject
 
             Bind(typeof(IUserService)).To(typeof(UserService));
             Bind(typeof(ITravelService)).To(typeof(TravelService));
+            Bind(typeof(IArrangementService)).To(typeof(ArrangementService));
 
             #endregion
         }

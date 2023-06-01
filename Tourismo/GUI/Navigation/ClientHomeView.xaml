@@ -43,7 +43,7 @@
                              FontSize="20"
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding ReservationsOverviewCommand}"
+                             Command="{Binding ClientReservationsOverviewCommand}"
                              Width="200"/>
                 </StackPanel>
 
@@ -54,15 +54,14 @@
                     Foreground="White"
                     BorderBrush="Transparent"
                     Command="{Binding LogOutCommand}"
-                    Margin="10,0,0,20"
+                    Margin="10,0,10,20"
                     FontSize="16"
                     Height="36"
                     FontFamily="{DynamicResource Poppins}"/>
             </Grid>
 
             <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10"
+                            Grid.Column="1"                            
                             Content="{Binding CurrentViewModel}"/>
         </Grid>
     </Border>

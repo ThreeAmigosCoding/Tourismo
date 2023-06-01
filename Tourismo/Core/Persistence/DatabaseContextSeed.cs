@@ -145,7 +145,7 @@ namespace Tourismo.Core.Persistence
                 Periods = new List<DateRange>
                 {
                     new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(9) },
-                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(17) }
+                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(23) }
                 },
                 ImagePath = "homoljskePlanine.jpg",
                 MinimalPrice = 500,
@@ -159,7 +159,7 @@ namespace Tourismo.Core.Persistence
                 Periods = new List<DateRange>
                 {
                     new DateRange { StartDate = DateTime.Now.AddDays(3), EndDate = DateTime.Now.AddDays(7) },
-                    new DateRange { StartDate = DateTime.Now.AddDays(12), EndDate = DateTime.Now.AddDays(17) }
+                    new DateRange { StartDate = DateTime.Now.AddDays(12), EndDate = DateTime.Now.AddDays(16) }
                 },
                 ImagePath = "rtanj.jpg",
                 MinimalPrice = 600,
@@ -173,7 +173,7 @@ namespace Tourismo.Core.Persistence
                 Periods = new List<DateRange>
                 {
                     new DateRange { StartDate = DateTime.Now.AddDays(8), EndDate = DateTime.Now.AddDays(14) },
-                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(17) }
+                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(21) }
                 },
                 ImagePath = "travel1.jpg",
                 MinimalPrice = 700,
@@ -187,7 +187,7 @@ namespace Tourismo.Core.Persistence
                 Periods = new List<DateRange>
                 {
                     new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(7) },
-                    new DateRange { StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(17) }
+                    new DateRange { StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(16) }
                 },
                 ImagePath = "travel1.jpg",
                 MinimalPrice = 400,
@@ -200,25 +200,43 @@ namespace Tourismo.Core.Persistence
                 Traveler = user1,
                 Travel = travel1,
                 Accommodations = new List<Accommodation> { accommodation1 },
-                AdditionalAttractions = new List<TouristAttraction>
-                {
-                    new TouristAttraction
-                    {
-                        Name = "Attraction 3",
-                        Description = "Description 3",
-                        Price = 30,
-                        ImagePath = "test.jpeg",
-                        Location = new Location
-                        {
-                            Address = "654 Walnut St",
-                            Latitude = 40.9876,
-                            Longitude = -75.7890
-                        }
-                    }
-                },
-                Period = new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(7) },
+                AdditionalAttractions = new List<TouristAttraction>{},
+                Period = new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(9) },
+                Price = 500,
+                ArrangementStatus = ArrangementStatus.Reserved
+            };
+
+            Arrangement arrangement2 = new Arrangement
+            {
+                Traveler = user1,
+                Travel = travel2,
+                Accommodations = new List<Accommodation> { accommodation2 },
+                AdditionalAttractions = new List<TouristAttraction>{},
+                Period = new DateRange { StartDate = DateTime.Now.AddDays(12), EndDate = DateTime.Now.AddDays(17) },
                 Price = 600,
                 ArrangementStatus = ArrangementStatus.Reserved
+            };
+
+            Arrangement arrangement3 = new Arrangement
+            {
+                Traveler = user1,
+                Travel = travel1,
+                Accommodations = new List<Accommodation> { accommodation1 },
+                AdditionalAttractions = new List<TouristAttraction> { },
+                Period = new DateRange { StartDate = DateTime.Now.AddDays(-30), EndDate = DateTime.Now.AddDays(-22) },
+                Price = 500,
+                ArrangementStatus = ArrangementStatus.Finished
+            };
+
+            Arrangement arrangement4 = new Arrangement
+            {
+                Traveler = user1,
+                Travel = travel3,
+                Accommodations = new List<Accommodation> { },
+                AdditionalAttractions = new List<TouristAttraction> { },
+                Period = new DateRange { StartDate = DateTime.Now.AddDays(-40), EndDate = DateTime.Now.AddDays(-34) },
+                Price = 700,
+                ArrangementStatus = ArrangementStatus.Finished
             };
 
             context.Users.Add(user1);
@@ -230,6 +248,8 @@ namespace Tourismo.Core.Persistence
             context.Travels.Add(travel3);
             context.Travels.Add(travel4);
             context.Arrangements.Add(arrangement1);
+            context.Arrangements.Add(arrangement2);
+            context.Arrangements.Add(arrangement3);
             context.SaveChanges();
         }
     }
