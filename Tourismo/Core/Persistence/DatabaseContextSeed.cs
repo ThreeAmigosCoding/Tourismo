@@ -250,6 +250,7 @@ namespace Tourismo.Core.Persistence
             context.Arrangements.Add(arrangement1);
             context.Arrangements.Add(arrangement2);
             context.Arrangements.Add(arrangement3);
+            context.Arrangements.Add(arrangement4);
             context.SaveChanges();
         }
     }

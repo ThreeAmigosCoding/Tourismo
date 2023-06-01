@@ -11,5 +11,6 @@ namespace Tourismo.Core.Service.Interface.TravelManagement
     public interface IArrangementService : ICRUDService<Arrangement>
     {
         List<Arrangement> GetUserReservations(String email);
+        List<Arrangement> GetUserHistory(String email);
     }
 }

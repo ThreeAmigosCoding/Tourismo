@@ -12,7 +12,7 @@ namespace Tourismo.Core.Commands.Auth
 
         public override void Execute(object? parameter)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to log out?", "Log out", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to log out?", "Log Out", MessageBoxButton.YesNo, MessageBoxImage.Question);
             
             if (result == MessageBoxResult.Yes)
             {

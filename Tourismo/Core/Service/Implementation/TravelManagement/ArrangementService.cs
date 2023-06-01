@@ -28,6 +28,14 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
                 .ToList();
         }
 
+        public List<Arrangement> GetUserHistory(String email)
+        {
+            return _arrangementRepository.ReadAll()
+                .Where(arrangement => arrangement.Traveler.EmailAddress == email && arrangement.ArrangementStatus == ArrangementStatus.Finished)
+                .OrderByDescending(arrangement => arrangement.Period.StartDate)
+                .ToList();
+        }
+
         #region CRUD Methods
 
         public Arrangement Create(Arrangement entity)
