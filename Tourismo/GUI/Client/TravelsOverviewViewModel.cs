@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Tourismo.Core.Commands.Client;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.GUI.Utility;
@@ -19,22 +21,35 @@ namespace Tourismo.GUI.Client
 
         #region Attributes
 
-        private readonly List<Travel> _travels;
+        private List<Travel> _travels;
         private ObservableCollection<Travel> _filteredTravels;
         private string _searchText;
         private ITravelService _travelService;
-        private DateTime _startDate;
-        private DateTime _endDate;
+        private DateTime? _startDate;
+        private DateTime? _endDate;
         private DateTime _lowerBoundaryStart;
         private DateTime _lowerBoundaryEnd;
         private readonly MyMapCredentials _mapApiKey = new MyMapCredentials();
         private List<string> _sortBy = VariableResources.TravelSortValues;
+        private string _sortCriteria = "Date (soonest first)";
+        private string _minPrice;
+        private string _maxPrice;
+        private Visibility _errMsgVisibility;
+        private string _errMsgText;
 
         #endregion
 
         #region Properties
 
-        public List<Travel> Travels => _travels;
+        public List<Travel> Travels
+        {
+            get { return _travels; }
+            set
+            {
+                _travels = value;
+                OnPropertyChanged(nameof(Travels));
+            }
+        }
 
         public List<string> SortBy => _sortBy;
 
@@ -59,14 +74,14 @@ namespace Tourismo.GUI.Client
         }
         public ITravelService TravelService { get => _travelService; }
 
-        public DateTime StartDate
+        public DateTime? StartDate
         {
             get { return _startDate; }
             set
             {
                 _startDate = value;
-                LowerBoundaryEnd = _startDate.AddDays(1);
-                if (DateTime.Compare(EndDate, LowerBoundaryEnd) < 0)
+                if (StartDate != null) LowerBoundaryEnd = _startDate.Value.AddDays(1);
+                if (EndDate != null && DateTime.Compare((DateTime)EndDate, LowerBoundaryEnd) < 0)
                 {
                     EndDate = LowerBoundaryEnd;
                 }
@@ -74,7 +89,7 @@ namespace Tourismo.GUI.Client
             }
         }
 
-        public DateTime EndDate
+        public DateTime? EndDate
         {
             get { return _endDate; }
             set
@@ -86,7 +101,15 @@ namespace Tourismo.GUI.Client
 
         public MyMapCredentials MapApiKey => _mapApiKey;
 
-        public DateTime LowerBoundaryStart => _lowerBoundaryStart;
+        public DateTime LowerBoundaryStart
+        {
+            get { return _lowerBoundaryStart; }
+            set
+            {
+                _lowerBoundaryStart = value;
+                OnPropertyChanged(nameof(LowerBoundaryStart));
+            }
+        }
 
         public DateTime LowerBoundaryEnd 
         {
@@ -98,17 +121,79 @@ namespace Tourismo.GUI.Client
             } 
         }
 
+        public string SortCriteria
+        {
+            get => _sortCriteria;
+            set
+            {
+                _sortCriteria = value;
+                FilteredTravels = _travelService.SortByCriteria(FilteredTravels, SortCriteria);
+                Travels = _travelService.SortByCriteria(new ObservableCollection<Travel>(Travels), SortCriteria).ToList();
+                OnPropertyChanged(nameof(SortCriteria));
+            }
+        }
+
+        public string MinPrice
+        {
+            get => _minPrice;
+            set
+            {
+                _minPrice = value;
+                OnPropertyChanged(nameof(MinPrice));
+            }
+        }
+
+        public string MaxPrice
+        {
+            get => _maxPrice;
+            set
+            {
+                _maxPrice = value;
+                OnPropertyChanged(nameof(MaxPrice));
+            }
+        }
+
+        public string ErrMsgText
+        {
+            get => _errMsgText;
+            set
+            {
+                _errMsgText = value;
+                OnPropertyChanged(nameof(ErrMsgText));
+            }
+        }
+
+        public Visibility ErrMsgVisibility
+        {
+            get => _errMsgVisibility;
+            set
+            {
+                _errMsgVisibility = value;
+                OnPropertyChanged(nameof(ErrMsgVisibility));
+            }
+        }
+
         #endregion
 
-        
+        #region Commands
+
+        public ICommand ApplyFiltersCommand { get; }
+        public ICommand ResetFiltersCommand { get; }
+
+        #endregion 
+
+
         public TravelsOverviewViewModel(ITravelService travelService)
         {
             _travelService = travelService;
-            _travels = _travelService.ReadAll().OrderBy(t => t.Name).ToList();
-            _startDate = DateTime.Now;
-            _endDate = DateTime.Now.AddDays(1);
-            _lowerBoundaryStart = DateTime.Now;
-            _lowerBoundaryEnd = _lowerBoundaryStart.AddDays(1);
+            _travels = _travelService.ReadAll().OrderBy(t => t.Periods.Min(p => p.StartDate)).ToList();
+            _startDate = null;
+            _endDate = null;
+            //_lowerBoundaryStart = DateTime.Now;
+            //_lowerBoundaryEnd = _lowerBoundaryStart.AddDays(1);
+
+            ResetFiltersCommand = new ResetFiltersCommand(this);
+            ApplyFiltersCommand = new ApplyFiltersCommand(this);
 
             FilterItems();
         }
@@ -122,9 +207,9 @@ namespace Tourismo.GUI.Client
             else
             {
                 var filteredItems = Travels.Where(t =>
-                    t.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                    t.ShortDescription.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+                 t.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                 t.ShortDescription.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                 .ToList();
 
                 FilteredTravels = new ObservableCollection<Travel>(filteredItems);
             }

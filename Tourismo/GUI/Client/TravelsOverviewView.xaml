@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:Tourismo.GUI.Client"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:utility ="clr-namespace:Tourismo.GUI.Utility"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
              d:DesignHeight="800" d:DesignWidth="800">
 
     <UserControl.Resources>
@@ -40,11 +41,6 @@
                     HorizontalAlignment="Left"
                     FontFamily="{DynamicResource Playfair}" 
                     Foreground="{StaticResource DarkGreen}"/>
-
-
-                
-
-
             </Grid>
 
             <Grid Grid.Row="1" Margin="0, 10, 0, 0">
@@ -104,6 +100,7 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
 
                                         <TextBlock Grid.Row="0"
@@ -119,6 +116,14 @@
                                           Foreground="White"
                                           Padding="10 8"
                                           Text="{Binding ShortDescription}"
+                                          TextWrapping="Wrap">
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="2"
+                                          FontFamily="{DynamicResource Poppins}"
+                                          FontSize="18"
+                                          Foreground="White"
+                                          Padding="10 8"                                         
+                                          Text="{Binding SoonestPeriod}"
                                           TextWrapping="Wrap">
                                         </TextBlock>
                                     </Grid>
@@ -155,13 +160,13 @@
                             Foreground="{StaticResource DarkGreen}"/>
 
 
-                            <ComboBox Background="White" 
+                        <ComboBox Background="White" 
                                       Height="40"
                                       ItemsSource="{Binding SortBy}"
+                                      SelectedItem="{Binding SortCriteria, UpdateSourceTrigger=PropertyChanged}"
                                       FontFamily="{DynamicResource Poppins}"
                                       SelectedIndex="0">
-                                
-                            </ComboBox>
+                        </ComboBox>
                     </StackPanel>
 
                     <TextBlock Text="Filters"
@@ -183,36 +188,34 @@
                                        FontWeight="Bold">
                                 
                             </TextBlock>
-                            
-                            <CheckBox Content="$0 - $100"
-                                      FontWeight="Medium"
-                                      FontFamily="{DynamicResource Poppins}"
-                                      FontSize="18">
-                            </CheckBox>
 
-                            <CheckBox Content="$100 - $250"
-                                      FontWeight="Medium"
-                                      FontFamily="{DynamicResource Poppins}"
-                                      FontSize="18">
-                            </CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0"
+                                     FontSize="18"
+                                     Margin="0, 0, 10, 0"
+                                     TextWrapping="Wrap" 
+                                     VerticalAlignment="Top" 
+                                     FontFamily="{DynamicResource Poppins}"
+                                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}" 
+                                     materialDesign:HintAssist.Hint="Min" 
+                                     Text="{Binding MinPrice, UpdateSourceTrigger=PropertyChanged}" />
 
-                            <CheckBox Content="$250 - $500"
-                                      FontWeight="Medium"
-                                      FontFamily="{DynamicResource Poppins}"
-                                      FontSize="18">
-                            </CheckBox>
+                                <TextBox Grid.Column="1"
+                                     FontSize="18" 
+                                     TextWrapping="Wrap" 
+                                     VerticalAlignment="Top" 
+                                     FontFamily="{DynamicResource Poppins}"
+                                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}" 
+                                     materialDesign:HintAssist.Hint="Max" 
+                                     Text="{Binding MaxPrice, UpdateSourceTrigger=PropertyChanged}" />
 
-                            <CheckBox Content="$500 - $1000"
-                                      FontWeight="Medium"
-                                      FontFamily="{DynamicResource Poppins}"
-                                      FontSize="18">
-                            </CheckBox>
+                            </Grid>
 
-                            <CheckBox Content="$1000+"
-                                      FontWeight="Medium"
-                                      FontFamily="{DynamicResource Poppins}"
-                                      FontSize="18">
-                            </CheckBox>
+
                         </StackPanel>
 
                         <Separator VerticalAlignment="Stretch" Margin="0, 20, 0, 0" />
@@ -233,7 +236,7 @@
                                             SelectedDate="{Binding StartDate}"
                                             FontFamily="{DynamicResource Poppins}"
                                             FontSize="14"
-                                            Language="en-US"
+                                            Language="en-UK"
                                             DisplayDateStart="{Binding LowerBoundaryStart, Mode=OneWay}"/>
                             </StackPanel>
 
@@ -245,11 +248,42 @@
                                             SelectedDate="{Binding EndDate}"
                                             FontFamily="{DynamicResource Poppins}"
                                             FontSize="14"
-                                            Language="en-US"
+                                            Language="en-UK"
                                             DisplayDateStart="{Binding LowerBoundaryEnd, Mode=TwoWay}"/>
                             </StackPanel>
 
                         </StackPanel>
+
+                        <Separator VerticalAlignment="Stretch" Margin="0, 20, 0, 0" />
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0, 15, 0, 0">
+                            <Button Content="Apply"
+                                    Margin="0, 0, 10, 0"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontFamily="{DynamicResource Poppins}"
+                                    Width="80"
+                                    Command="{Binding ApplyFiltersCommand}"/>
+                            <Button Content="Reset"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontFamily="{DynamicResource Poppins}"
+                                    Width="80"
+                                    Command="{Binding ResetFiltersCommand}"/>
+                        </StackPanel>
+
+                        <TextBlock 
+                                Grid.Row="5" 
+                                Foreground="Red" 
+                                Visibility="{Binding ErrMsgVisibility}" 
+                                Text="{Binding ErrMsgText}" 
+                                FontFamily="{DynamicResource Poppins}"
+                                Margin="0 15 0 10"
+                                FontSize="16"/>
+
                     </StackPanel>
                     
                 </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Utility;
@@ -12,10 +13,10 @@ namespace Tourismo.Core.Model.TravelManagement
         public string Name { get => _name; set => OnPropertyChanged(ref _name, value); }
 
         private List<Section> _sections;
-        public List<Section> Sections { get => _sections; set => OnPropertyChanged(ref _sections, value); }
+        public virtual List<Section> Sections { get => _sections; set => OnPropertyChanged(ref _sections, value); }
 
         private List<DateRange> _periods;
-        public List<DateRange> Periods { get => _periods; set => OnPropertyChanged(ref _periods, value); }
+        public virtual List<DateRange> Periods { get => _periods; set => OnPropertyChanged(ref _periods, value); }
 
         private string _imagePath;
         public string ImagePath { get => _imagePath; set => OnPropertyChanged(ref _imagePath, value); }
@@ -26,6 +27,26 @@ namespace Tourismo.Core.Model.TravelManagement
         private string _shortDescription;
         public string ShortDescription { get => _shortDescription; set => OnPropertyChanged(ref _shortDescription, value); }
 
+        public DateRange SoonestPeriod
+        {
+            get { return CalculateSoonestPeriod(); }
+        }
 
+        private DateRange CalculateSoonestPeriod()
+        {
+            DateTime currentDate = DateTime.Now;
+            DateRange soonestPeriod = null;
+
+            foreach (DateRange period in Periods)
+            {
+                if (period.StartDate > currentDate)
+                {
+                    soonestPeriod = period;
+                    break;
+                }
+            }
+
+            return soonestPeriod;
+        }
     }
 }

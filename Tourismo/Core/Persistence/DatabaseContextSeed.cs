@@ -144,8 +144,8 @@ namespace Tourismo.Core.Persistence
                 Sections = new List<Section> { section1 },
                 Periods = new List<DateRange>
                 {
-                    new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(7) },
-                    new DateRange { StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(17) }
+                    new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(9) },
+                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(17) }
                 },
                 ImagePath = "homoljskePlanine.jpg",
                 MinimalPrice = 500,
@@ -158,11 +158,11 @@ namespace Tourismo.Core.Persistence
                 Sections = new List<Section> { section2 },
                 Periods = new List<DateRange>
                 {
-                    new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(7) },
-                    new DateRange { StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(17) }
+                    new DateRange { StartDate = DateTime.Now.AddDays(3), EndDate = DateTime.Now.AddDays(7) },
+                    new DateRange { StartDate = DateTime.Now.AddDays(12), EndDate = DateTime.Now.AddDays(17) }
                 },
                 ImagePath = "rtanj.jpg",
-                MinimalPrice = 500,
+                MinimalPrice = 600,
                 ShortDescription = "The adventure begins! Night climbing and waiting for the sunrise on top of Šiljak."
             };
 
@@ -172,11 +172,11 @@ namespace Tourismo.Core.Persistence
                 Sections = new List<Section> { section1 },
                 Periods = new List<DateRange>
                 {
-                    new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(7) },
-                    new DateRange { StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(17) }
+                    new DateRange { StartDate = DateTime.Now.AddDays(8), EndDate = DateTime.Now.AddDays(14) },
+                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(17) }
                 },
                 ImagePath = "travel1.jpg",
-                MinimalPrice = 500,
+                MinimalPrice = 700,
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             };
 
@@ -190,7 +190,7 @@ namespace Tourismo.Core.Persistence
                     new DateRange { StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(17) }
                 },
                 ImagePath = "travel1.jpg",
-                MinimalPrice = 500,
+                MinimalPrice = 400,
                 ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             };
 

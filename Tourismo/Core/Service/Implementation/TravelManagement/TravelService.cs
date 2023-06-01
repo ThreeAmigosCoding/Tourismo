@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,5 +48,46 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
         }
 
         #endregion
+
+        public ObservableCollection<Travel> SortByCriteria(ObservableCollection<Travel> travels, string criteria)
+        {
+            switch (criteria)
+            {
+                case "Date (soonest first)":
+                    return new ObservableCollection<Travel>(travels.OrderBy(t => t.Periods.Min(p => p.StartDate)));
+
+                case "Date (latest first)":
+                    return new ObservableCollection<Travel>(travels.OrderByDescending(t => t.Periods.Max(p => p.EndDate)));
+
+                case "Price (lowest first)":
+                    return new ObservableCollection<Travel>(travels.OrderBy(t => t.MinimalPrice));
+
+                case "Price (highest first)":
+                    return new ObservableCollection<Travel>(travels.OrderByDescending(t => t.MinimalPrice));
+
+                case "Name":
+                    return new ObservableCollection<Travel>(travels.OrderBy(t => t.Name));
+
+                default:
+                    return travels;
+            }
+        }
+
+        public ObservableCollection<Travel> Filter(ObservableCollection<Travel> travels, double minPrice, double maxPrice, 
+            DateTime minDate, DateTime maxDate)
+        {
+            var filteredTravels = new ObservableCollection<Travel>(
+                travels.Where(travel =>
+                    travel.MinimalPrice >= minPrice &&
+                    travel.MinimalPrice <= maxPrice &&
+                    travel.Periods.Any(period =>
+                        period.StartDate >= minDate &&
+                        period.StartDate <= maxDate
+                    )
+                )
+            );
+
+            return filteredTravels;
+        }
     }
 }

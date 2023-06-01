@@ -21,7 +21,7 @@ namespace Tourismo.Core.Repository.Implementation
 
         public virtual IEnumerable<T> ReadAll()
         {
-            return _entities.ToList();
+            return _entities.IncludeAll().ToList();
         }
 
         public virtual T Read(Guid id)

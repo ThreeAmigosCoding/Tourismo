@@ -9,7 +9,7 @@ namespace Tourismo.Resources.Variables
     public static class VariableResources
     {
 
-        public static List<string> TravelSortValues { get; set;} = new List<string> {"Date (soonest first)", "Date (latest first)", "Price (lowest first)", "Price (highest first)" };
+        public static List<string> TravelSortValues { get; set;} = new List<string> {"Date (soonest first)", "Date (latest first)", "Price (lowest first)", "Price (highest first)", "Name" };
 
     }
 }
