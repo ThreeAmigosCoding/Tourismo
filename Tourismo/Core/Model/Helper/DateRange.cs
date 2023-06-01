@@ -17,7 +17,9 @@ namespace Tourismo.Core.Model.Helper
 
         public override string ToString()
         {
-            return _startDate.ToString() + " - " + _endDate.ToString();
+            string startDateString = _startDate.ToString("MM/dd/yyyy");
+            string endDateString = _endDate.ToString("MM/dd/yyyy");
+            return startDateString + " - " + endDateString;
         }
     }
 }

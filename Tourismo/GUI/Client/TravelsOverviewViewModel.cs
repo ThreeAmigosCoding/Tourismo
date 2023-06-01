@@ -189,8 +189,8 @@ namespace Tourismo.GUI.Client
             _travels = _travelService.ReadAll().OrderBy(t => t.Periods.Min(p => p.StartDate)).ToList();
             _startDate = null;
             _endDate = null;
-            //_lowerBoundaryStart = DateTime.Now;
-            //_lowerBoundaryEnd = _lowerBoundaryStart.AddDays(1);
+            _lowerBoundaryStart = DateTime.Now;
+            _lowerBoundaryEnd = _lowerBoundaryStart.AddDays(1);
 
             ResetFiltersCommand = new ResetFiltersCommand(this);
             ApplyFiltersCommand = new ApplyFiltersCommand(this);

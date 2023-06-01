@@ -11,8 +11,8 @@ using Tourismo.Core.Persistence;
 namespace Tourismo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230601120601_test")]
-    partial class test
+    [Migration("20230601185016_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

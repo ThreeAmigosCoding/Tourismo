@@ -68,10 +68,7 @@
 
                                 <Grid Margin="0, 0, 35, 20"
                                       Style="{DynamicResource HoverEffectTravelCard}">
-                                    <!--<Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"
-                                                          MaxWidth="460"/>
-                                    </Grid.ColumnDefinitions>-->
+
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="250"/>
@@ -123,7 +120,7 @@
                                           FontSize="18"
                                           Foreground="White"
                                           Padding="10 8"                                         
-                                          Text="{Binding SoonestPeriod}"
+                                          Text="{Binding SoonestPeriod, StringFormat='Soonest trip: {0}'}"
                                           TextWrapping="Wrap">
                                         </TextBlock>
                                     </Grid>
@@ -140,7 +137,7 @@
                     <TextBox Grid.Column="1" 
                          FontSize="18" 
                          
-                         TextWrapping="Wrap" 
+                         TextWrapping="NoWrap" 
                          VerticalAlignment="Top" 
                          
                          FontFamily="{DynamicResource Poppins}"
@@ -165,6 +162,7 @@
                                       ItemsSource="{Binding SortBy}"
                                       SelectedItem="{Binding SortCriteria, UpdateSourceTrigger=PropertyChanged}"
                                       FontFamily="{DynamicResource Poppins}"
+                                      FontSize="14"
                                       SelectedIndex="0">
                         </ComboBox>
                     </StackPanel>
@@ -282,7 +280,8 @@
                                 Text="{Binding ErrMsgText}" 
                                 FontFamily="{DynamicResource Poppins}"
                                 Margin="0 15 0 10"
-                                FontSize="16"/>
+                                FontSize="16"
+                                TextWrapping="Wrap"/>
 
                     </StackPanel>
                     
