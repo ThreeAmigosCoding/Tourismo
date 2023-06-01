@@ -25,10 +25,13 @@ namespace Tourismo.GUI.Navigation
         public ICommand? LogOutCommand { get; set; }
         public ICommand? ClientTravelsOverviewCommand { get; set; }
         public ICommand? ClientReservationsOverviewCommand { get; set; }
+        public ICommand? ClientHistoryOverviewCommand { get; set; }
+
 
         public ClientHomeViewModel() {
             ClientTravelsOverviewCommand = new ClientTravelsOverviewCommand();
             ClientReservationsOverviewCommand = new ClientReservationsOverviewCommand();
+            ClientHistoryOverviewCommand = new ClientHistoryOverviewCommand();
             LogOutCommand = new LogOutCommand();
             SwitchCurrentViewModel(ServiceLocator.Get<TravelsOverviewViewModel>());
             RegisterHandler();
@@ -46,6 +49,11 @@ namespace Tourismo.GUI.Navigation
             {
                 ReservationsOverviewViewModel ReservationsOverviewViewModel = ServiceLocator.Get<ReservationsOverviewViewModel>();
                 SwitchCurrentViewModel(ReservationsOverviewViewModel);
+            });
+            EventBus.RegisterHandler("ClientHistoryOverview", () =>
+            {
+                HistoryOverviewViewModel HistoryOverviewViewModel = ServiceLocator.Get<HistoryOverviewViewModel>();
+                SwitchCurrentViewModel(HistoryOverviewViewModel);
             });
         }
 

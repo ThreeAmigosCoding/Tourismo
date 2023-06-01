@@ -30,7 +30,7 @@ namespace Tourismo.GUI.Utility
         public MainViewModel(LoginViewModel loginVM, RegistrationViewModel registrationVM)
         {
             TitleManager.TitleChanged += OnTitleChanged;
-            TitleManager.Title = "Login";
+            TitleManager.Title = "Tourismo";
             LVM = loginVM;
             RVM = registrationVM;
             SwitchCurrentViewModel(LVM);
@@ -57,7 +57,6 @@ namespace Tourismo.GUI.Utility
                 ServiceLocator.Reset();
                 LVM = ServiceLocator.Get<LoginViewModel>();
                 SwitchCurrentViewModel(LVM);
-                TitleManager.Title = "Login";
                 RegisterHandler();
             });
 
@@ -67,7 +66,6 @@ namespace Tourismo.GUI.Utility
                 ServiceLocator.Reset();
                 RVM = ServiceLocator.Get<RegistrationViewModel>();
                 SwitchCurrentViewModel(RVM);
-                TitleManager.Title = "Sign Up";
                 RegisterHandler();
             });
         }
