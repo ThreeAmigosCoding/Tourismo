@@ -5,10 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tourismo.Core.Repository.Implementation;
+using Tourismo.Core.Repository.Implementation.TravelManagement;
 using Tourismo.Core.Repository.Implementation.UserManagement;
 using Tourismo.Core.Repository.Interface;
+using Tourismo.Core.Repository.Interface.TravelManagement;
 using Tourismo.Core.Repository.Interface.UserManagement;
+using Tourismo.Core.Service.Implementation.TravelManagement;
 using Tourismo.Core.Service.Implementation.UserManagement;
+using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.Core.Service.Interface.UserManagement;
 using Tourismo.GUI.Auth;
 using Tourismo.GUI.Utility;
@@ -25,12 +29,14 @@ namespace Tourismo.Core.Ninject
 
             Bind(typeof(ICRUDRepository<>)).To(typeof(CRUDRepository<>));
             Bind(typeof(IUserRepository)).To(typeof(UserRepository));
+            Bind(typeof(ITravelRepository)).To(typeof(TravelRepository));
 
             #endregion
 
             #region Services
 
             Bind(typeof(IUserService)).To(typeof(UserService));
+            Bind(typeof(ITravelService)).To(typeof(TravelService));
 
             #endregion
         }

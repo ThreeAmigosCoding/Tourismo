@@ -38,70 +38,151 @@ namespace Tourismo.Core.Persistence
             // Create accommodations
             Accommodation accommodation1 = new Accommodation
             {
-                Name = "Hotel A",
+                Name = "Kod Rajka",
                 Price = 100,
                 Location = new Location
                 {
-                    Address = "123 Main St",
-                    Latitude = 40.1234,
-                    Longitude = -75.5678
-                },
-                Type = AccommodationType.Hotel
-            };
-
-            Accommodation accommodation2 = new Accommodation
-            {
-                Name = "Restaurant B",
-                Price = 50,
-                Location = new Location
-                {
-                    Address = "456 Elm St",
-                    Latitude = 40.5678,
-                    Longitude = -75.1234
+                    Address = "161 Ždrelo RS, 12300",
+                    Latitude = 44.27481,
+                    Longitude = 21.52464
                 },
                 Type = AccommodationType.Restaurant
             };
 
+            Accommodation accommodation2 = new Accommodation
+            {
+                Name = "Konak Ljubica",
+                Price = 100,
+                Location = new Location
+                {
+                    Address = "Мирово b.b, Mirovo 19370",
+                    Latitude = 43.81318,
+                    Longitude = 21.88434
+                },
+                Type = AccommodationType.LogCabbin
+            };
+
+
+
             // Create sections
             Section section1 = new Section
             {
-                Name = "Section 1",
+                Name = "Homoljske planine",
                 DefaultAttractions = new List<TouristAttraction>
                 {
                     new TouristAttraction
                     {
-                        Name = "Attraction 1",
+                        Name = "Homoljske planine",
                         Description = "Description 1",
                         Price = 10,
-                        ImagePath = "test.jpeg",
+                        ImagePath = "homoljskePlanine.jpg",
                         Location = new Location
                         {
-                            Address = "789 Oak St",
-                            Latitude = 40.8765,
-                            Longitude = -75.4321
+                            Address = "Jošanica",
+                            Latitude = 44.33132,
+                            Longitude = 21.75847
+                             
                         }
                     },
                     new TouristAttraction
                     {
-                        Name = "Attraction 2",
+                        Name = "Manastir Gornjak",
                         Description = "Description 2",
                         Price = 20,
-                        ImagePath = "test.jpeg",
+                        ImagePath = "manastirGornjak.jpg",
                         Location = new Location
                         {
-                            Address = "987 Pine St",
-                            Latitude = 40.5432,
-                            Longitude = -75.8765
+                            Address = "105, Breznica",
+                            Latitude = 44.26608,
+                            Longitude = 21.54357
+                        }
+                    },
+                    new TouristAttraction
+                    {
+                        Name = "Banja Ždrelo",
+                        Description = "Description 2",
+                        Price = 20,
+                        ImagePath = "banjaZdrelo.jpg",
+                        Location = new Location
+                        {
+                            Address = "Zdrelo, 66, Ždrelo 12300",
+                            Latitude = 44.30689,
+                            Longitude = 21.48383
                         }
                     }
                 },
-                Accommodations = new List<Accommodation> { accommodation1, accommodation2 }
+                Accommodations = new List<Accommodation> { accommodation1 }
+            };
+
+            Section section2 = new Section
+            {
+                Name = "Rtanj",
+                DefaultAttractions = new List<TouristAttraction>
+                {
+                    new TouristAttraction
+                    {
+                        Name = "Rtanj",
+                        Description = "Description 1",
+                        Price = 10,
+                        ImagePath = "rtanj.jpg",
+                        Location = new Location
+                        {
+                            Address = "Rtanj",
+                            Latitude = 43.77269,
+                            Longitude = 21.87629
+
+                        }
+                    }         
+                },
+                Accommodations = new List<Accommodation> { accommodation2 }
             };
 
             // Create travel
             Travel travel1 = new Travel
             {
-                Name = "Travel 1",
+                Name = "Homoljske planine",
+                Sections = new List<Section> { section1 },
+                Periods = new List<DateRange>
+                {
+                    new DateRange { StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(9) },
+                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(17) }
+                },
+                ImagePath = "homoljskePlanine.jpg",
+                MinimalPrice = 500,
+                ShortDescription = "We take you to the regions of Eastern Serbia, where we discover what to see in the Homolj mountains."
+            };
+
+            Travel travel2 = new Travel
+            {
+                Name = "Rtanj",
+                Sections = new List<Section> { section2 },
+                Periods = new List<DateRange>
+                {
+                    new DateRange { StartDate = DateTime.Now.AddDays(3), EndDate = DateTime.Now.AddDays(7) },
+                    new DateRange { StartDate = DateTime.Now.AddDays(12), EndDate = DateTime.Now.AddDays(17) }
+                },
+                ImagePath = "rtanj.jpg",
+                MinimalPrice = 600,
+                ShortDescription = "The adventure begins! Night climbing and waiting for the sunrise on top of Šiljak."
+            };
+
+            Travel travel3 = new Travel
+            {
+                Name = "Travel 3",
+                Sections = new List<Section> { section1 },
+                Periods = new List<DateRange>
+                {
+                    new DateRange { StartDate = DateTime.Now.AddDays(8), EndDate = DateTime.Now.AddDays(14) },
+                    new DateRange { StartDate = DateTime.Now.AddDays(15), EndDate = DateTime.Now.AddDays(17) }
+                },
+                ImagePath = "travel1.jpg",
+                MinimalPrice = 700,
+                ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            };
+
+            Travel travel4 = new Travel
+            {
+                Name = "Travel 4",
                 Sections = new List<Section> { section1 },
                 Periods = new List<DateRange>
                 {
@@ -109,7 +190,8 @@ namespace Tourismo.Core.Persistence
                     new DateRange { StartDate = DateTime.Now.AddDays(10), EndDate = DateTime.Now.AddDays(17) }
                 },
                 ImagePath = "travel1.jpg",
-                MinimalPrice = 500
+                MinimalPrice = 400,
+                ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             };
 
             // Create arrangement
@@ -142,9 +224,11 @@ namespace Tourismo.Core.Persistence
             context.Users.Add(user1);
             context.Users.Add(user2);
             context.Accommodations.Add(accommodation1);
-            context.Accommodations.Add(accommodation2);
             context.Sections.Add(section1);
             context.Travels.Add(travel1);
+            context.Travels.Add(travel2);
+            context.Travels.Add(travel3);
+            context.Travels.Add(travel4);
             context.Arrangements.Add(arrangement1);
             context.SaveChanges();
         }

@@ -14,5 +14,12 @@ namespace Tourismo.Core.Model.Helper
 
         private DateTime _endDate;
         public DateTime EndDate { get => _endDate; set => OnPropertyChanged(ref _endDate, value); }
+
+        public override string ToString()
+        {
+            string startDateString = _startDate.ToString("MM/dd/yyyy");
+            string endDateString = _endDate.ToString("MM/dd/yyyy");
+            return startDateString + " - " + endDateString;
+        }
     }
 }

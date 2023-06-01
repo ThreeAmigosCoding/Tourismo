@@ -11,7 +11,7 @@ using Tourismo.Core.Persistence;
 namespace Tourismo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230526215131_InitialCreate")]
+    [Migration("20230601185016_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -218,6 +218,10 @@ namespace Tourismo.Migrations
                         .HasColumnType("double");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ShortDescription")
                         .IsRequired()
                         .HasColumnType("longtext");
 

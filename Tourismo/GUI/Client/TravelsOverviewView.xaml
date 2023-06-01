@@ -1,0 +1,305 @@
+﻿<UserControl x:Class="Tourismo.GUI.Client.TravelsOverviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Tourismo.GUI.Client"
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:utility ="clr-namespace:Tourismo.GUI.Utility"
+             mc:Ignorable="d"
+             xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+             d:DesignHeight="800" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <utility:ImageNameConverter x:Key="ImageNameConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0"
+              Margin="20 20 20 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0"
+                    Text="Travels"
+                    FontWeight="Regular"
+                    FontSize="36"  
+                    HorizontalAlignment="Left"
+                    FontFamily="{DynamicResource Playfair}" 
+                    Foreground="{StaticResource DarkGreen}"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0, 10, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+            
+                <ScrollViewer Grid.Column="0"
+                              HorizontalScrollBarVisibility="Hidden" 
+                              VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding FilteredTravels}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel FlowDirection="LeftToRight"
+                                           Width="{Binding ActualWidth, 
+                                           RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                  AncestorType={x:Type ScrollViewer}}}"
+                                     />
+
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid Margin="0, 0, 35, 20"
+                                      Style="{DynamicResource HoverEffectTravelCard}">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="250"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock 
+                                        Grid.Row="0"
+                                        FontSize="28"
+                                        FontFamily="{DynamicResource Playfair}"
+                                        FontWeight="Medium"
+                                        Text="{Binding Name}"
+                                        Margin="0, 10, 0, 10"/>
+                                    <Image
+                                        Grid.Row="1"
+                                        Stretch="UniformToFill"
+                                        Source="{Binding ImagePath, Converter={StaticResource ImageNameConverter}}">
+
+
+
+                                    </Image>
+                                    <Grid Grid.Row="2" 
+                                          Background="{StaticResource DarkGreen}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0"
+                                          FontFamily="{DynamicResource Poppins}"
+                                          FontSize="18"
+                                          Foreground="White"
+                                          Padding="10 8"
+                                          Text="{Binding MinimalPrice, StringFormat='Starts at: {0}rsd'}">
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="1"
+                                          FontFamily="{DynamicResource Poppins}"
+                                          FontSize="18"
+                                          Foreground="White"
+                                          Padding="10 8"
+                                          Text="{Binding ShortDescription}"
+                                          TextWrapping="Wrap">
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="2"
+                                          FontFamily="{DynamicResource Poppins}"
+                                          FontSize="18"
+                                          Foreground="White"
+                                          Padding="10 8"                                         
+                                          Text="{Binding SoonestPeriod, StringFormat='Soonest trip: {0}'}"
+                                          TextWrapping="Wrap">
+                                        </TextBlock>
+                                    </Grid>
+                                
+                                </Grid>
+                            
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                
+                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20, -60, 0, 0">
+
+                    <TextBox Grid.Column="1" 
+                         FontSize="18" 
+                         
+                         TextWrapping="NoWrap" 
+                         VerticalAlignment="Top" 
+                         
+                         FontFamily="{DynamicResource Poppins}"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}" 
+                         materialDesign:HintAssist.Hint="🔍 Search" 
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                    
+                    <StackPanel Margin="0, 20, 0, 0">
+                       
+                        <TextBlock 
+                            Grid.Column="0"
+                            Text="Sort by"
+                            FontWeight="Regular"
+                            FontSize="22"  
+                            HorizontalAlignment="Left"
+                            FontFamily="{DynamicResource Poppins}" 
+                            Foreground="{StaticResource DarkGreen}"/>
+
+
+                        <ComboBox Background="White" 
+                                      Height="40"
+                                      ItemsSource="{Binding SortBy}"
+                                      SelectedItem="{Binding SortCriteria, UpdateSourceTrigger=PropertyChanged}"
+                                      FontFamily="{DynamicResource Poppins}"
+                                      FontSize="14"
+                                      SelectedIndex="0">
+                        </ComboBox>
+                    </StackPanel>
+
+                    <TextBlock Text="Filters"
+                                FontWeight="Regular"
+                                FontSize="22"  
+                                HorizontalAlignment="Left"
+                                FontFamily="{DynamicResource Poppins}" 
+                                Foreground="{StaticResource DarkGreen}"
+                                Margin="0, 15, 0, 0">
+                        
+                    </TextBlock>
+
+                    <StackPanel> 
+                        <StackPanel Margin="0, 10, 0, 0">
+
+                            <TextBlock Text="Price"
+                                       FontFamily="{DynamicResource Poppins}"
+                                       FontSize="18"
+                                       FontWeight="Bold">
+                                
+                            </TextBlock>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0"
+                                     FontSize="18"
+                                     Margin="0, 0, 10, 0"
+                                     TextWrapping="Wrap" 
+                                     VerticalAlignment="Top" 
+                                     FontFamily="{DynamicResource Poppins}"
+                                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}" 
+                                     materialDesign:HintAssist.Hint="Min" 
+                                     Text="{Binding MinPrice, UpdateSourceTrigger=PropertyChanged}" />
+
+                                <TextBox Grid.Column="1"
+                                     FontSize="18" 
+                                     TextWrapping="Wrap" 
+                                     VerticalAlignment="Top" 
+                                     FontFamily="{DynamicResource Poppins}"
+                                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}" 
+                                     materialDesign:HintAssist.Hint="Max" 
+                                     Text="{Binding MaxPrice, UpdateSourceTrigger=PropertyChanged}" />
+
+                            </Grid>
+
+
+                        </StackPanel>
+
+                        <Separator VerticalAlignment="Stretch" Margin="0, 20, 0, 0" />
+
+                        <StackPanel Margin="0, 10, 0, 0">
+
+                            <TextBlock Text="Date range"
+                                       FontFamily="{DynamicResource Poppins}"
+                                       FontSize="18"
+                                       FontWeight="Bold">
+                            </TextBlock>
+
+                            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+                                <TextBlock Text="Start date: "
+                                           FontSize="18"
+                                           FontFamily="{DynamicResource Poppins}"/>
+                                <DatePicker SelectedDateFormat="Short" 
+                                            SelectedDate="{Binding StartDate}"
+                                            FontFamily="{DynamicResource Poppins}"
+                                            FontSize="14"
+                                            Language="en-UK"
+                                            DisplayDateStart="{Binding LowerBoundaryStart, Mode=OneWay}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+                                <TextBlock Text="End date: "
+                                           FontSize="18"
+                                           FontFamily="{DynamicResource Poppins}"/>
+                                <DatePicker SelectedDateFormat="Short"                                        
+                                            SelectedDate="{Binding EndDate}"
+                                            FontFamily="{DynamicResource Poppins}"
+                                            FontSize="14"
+                                            Language="en-UK"
+                                            DisplayDateStart="{Binding LowerBoundaryEnd, Mode=TwoWay}"/>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <Separator VerticalAlignment="Stretch" Margin="0, 20, 0, 0" />
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0, 15, 0, 0">
+                            <Button Content="Apply"
+                                    Margin="0, 0, 10, 0"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontFamily="{DynamicResource Poppins}"
+                                    Width="80"
+                                    Command="{Binding ApplyFiltersCommand}"/>
+                            <Button Content="Reset"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontFamily="{DynamicResource Poppins}"
+                                    Width="80"
+                                    Command="{Binding ResetFiltersCommand}"/>
+                        </StackPanel>
+
+                        <TextBlock 
+                                Grid.Row="5" 
+                                Foreground="Red" 
+                                Visibility="{Binding ErrMsgVisibility}" 
+                                Text="{Binding ErrMsgText}" 
+                                FontFamily="{DynamicResource Poppins}"
+                                Margin="0 15 0 10"
+                                FontSize="16"
+                                TextWrapping="Wrap"/>
+
+                    </StackPanel>
+                    
+                </StackPanel>
+                
+            </Grid>
+            
+        </Grid>
+        
+        
+        <!--Mapa-->
+        <!--<Grid Grid.Column="1"
+              Background="{StaticResource DarkGreen}">
+            <m:Map x:Name="mapControl" Mode="AerialWithLabels" CredentialsProvider="{Binding MapApiKey}"
+                   Center="44.0165, 21.0059" ZoomLevel="7" ViewChangeOnFrame="MapControl_ViewChangeOnFrame">
+                
+            </m:Map>
+        </Grid>-->
+
+    </Grid>
+</UserControl>

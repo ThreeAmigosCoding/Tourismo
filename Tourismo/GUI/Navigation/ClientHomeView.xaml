@@ -34,8 +34,9 @@
                              FontSize="20"
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding TravelsOverviewCommand}"
-                             Width="200"/>
+                             Command="{Binding ClientTravelsOverviewCommand}"
+                             Width="200" 
+                             IsChecked="True"/>
 
                     <RadioButton Content="🎫 Reservations"
                              Height="50"

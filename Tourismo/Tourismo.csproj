@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Resources\Images\logo_square.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Images\logo_green.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,14 +14,19 @@
     <None Remove="Resources\Images\HCI-Background.jpg" />
     <None Remove="Resources\Images\Logo.png" />
     <None Remove="Resources\Images\LogoV2.svg" />
+    <None Remove="Resources\Images\Travel\homoljskePlanine.jpg" />
+    <None Remove="Resources\Images\Travel\rtanj.jpg" />
+    <None Remove="Resources\Images\Travel\travel1.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\logo_square.ico" />
+    <Content Include="Resources\Images\logo_green.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="GUI\Agent\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Resources\Images\TouristAttraction\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +37,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
     <PackageReference Include="MySql.Data" Version="8.0.33" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="MySqlConnector" Version="2.2.6" />
@@ -50,6 +56,15 @@
     </Resource>
     <Resource Include="Resources\Images\Logo.png" />
     <Resource Include="Resources\Images\LogoV2.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Travel\homoljskePlanine.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Travel\rtanj.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Travel\travel1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

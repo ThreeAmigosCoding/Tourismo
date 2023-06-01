@@ -11,7 +11,7 @@ namespace Tourismo.Core.Model.TravelManagement
         private double _price;
         public double Price { get => _price; set => OnPropertyChanged(ref _price, value); }
 
-        private Location _location;
+        private  Location _location;
         public Location Location { get => _location; set => OnPropertyChanged(ref _location, value); }
 
         private AccommodationType _type;

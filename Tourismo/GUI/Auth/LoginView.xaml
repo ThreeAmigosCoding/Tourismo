@@ -78,6 +78,7 @@
                     Foreground="Red" 
                     Visibility="{Binding ErrMsgVisibility}" 
                     Text="{Binding ErrMsgText}" 
+                    FontFamily="{DynamicResource Poppins}"
                     Margin="0 15 0 10"
                     FontSize="16"/>
                                               

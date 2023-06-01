@@ -11,14 +11,14 @@ namespace Tourismo.Core.Model.TravelManagement
 
         [ForeignKey("DefaultSectionId")]
         private List<TouristAttraction> _defaultAttractions;
-        public List<TouristAttraction> DefaultAttractions { get => _defaultAttractions; set => OnPropertyChanged(ref _defaultAttractions, value); }
+        public virtual List<TouristAttraction> DefaultAttractions { get => _defaultAttractions; set => OnPropertyChanged(ref _defaultAttractions, value); }
 
         [ForeignKey("AdditionalSectionId")]
         private List<TouristAttraction> _additionalAttractions;
-        public List<TouristAttraction> AdditionalAttractions { get => _additionalAttractions; set => OnPropertyChanged(ref _additionalAttractions, value); }
+        public virtual List<TouristAttraction> AdditionalAttractions { get => _additionalAttractions; set => OnPropertyChanged(ref _additionalAttractions, value); }
 
         private List<Accommodation> _accommodations;
-        public List<Accommodation> Accommodations { get => _accommodations; set => OnPropertyChanged(ref _accommodations, value); }
+        public virtual List<Accommodation> Accommodations { get => _accommodations; set => OnPropertyChanged(ref _accommodations, value); }
     }
 
 }
