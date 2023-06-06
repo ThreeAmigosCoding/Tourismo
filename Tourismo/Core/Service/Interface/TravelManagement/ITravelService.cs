@@ -14,5 +14,7 @@ namespace Tourismo.Core.Service.Interface.TravelManagement
 
         ObservableCollection<Travel> Filter(ObservableCollection<Travel> travels, double minPrice, double maxPrice,
             DateTime minDate, DateTime maxDate);
+
+        IEnumerable<Travel> ReadAllActive();
     }
 }

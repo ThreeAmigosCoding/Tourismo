@@ -89,5 +89,10 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
 
             return filteredTravels;
         }
+
+        public IEnumerable<Travel> ReadAllActive()
+        {
+            return _travelRepository.ReadAll().Where(travel => travel.IsActive);
+        }
     }
 }

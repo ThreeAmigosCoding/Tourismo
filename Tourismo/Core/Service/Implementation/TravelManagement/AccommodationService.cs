@@ -41,6 +41,11 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
             return _accommodationRepository.ReadAll();
         }
 
+        public IEnumerable<Accommodation> ReadAllActive()
+        {
+            return _accommodationRepository.ReadAll().Where(accomodation => accomodation.IsActive);
+        }
+
         public Accommodation Update(Accommodation entity)
         {
             return _accommodationRepository.Update(entity);
