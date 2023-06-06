@@ -19,6 +19,51 @@ namespace Tourismo.Migrations
                 .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("AdditionalAttractionArrangements", b =>
+                {
+                    b.Property<Guid>("AdditionalAttractionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ArrangementId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("AdditionalAttractionId", "ArrangementId");
+
+                    b.HasIndex("ArrangementId");
+
+                    b.ToTable("AdditionalAttractionArrangements");
+                });
+
+            modelBuilder.Entity("AdditionalAttractionTravels", b =>
+                {
+                    b.Property<Guid>("AdditionalAttractionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("TravelId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("AdditionalAttractionId", "TravelId");
+
+                    b.HasIndex("TravelId");
+
+                    b.ToTable("AdditionalAttractionTravels");
+                });
+
+            modelBuilder.Entity("DefaultAttractionTravels", b =>
+                {
+                    b.Property<Guid>("DefaultAttractionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("TravelId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("DefaultAttractionId", "TravelId");
+
+                    b.HasIndex("TravelId");
+
+                    b.ToTable("DefaultAttractionTravels");
+                });
+
             modelBuilder.Entity("Tourismo.Core.Model.Helper.DateRange", b =>
                 {
                     b.Property<Guid>("Id")
@@ -53,11 +98,12 @@ namespace Tourismo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("ArrangementId")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
@@ -69,17 +115,10 @@ namespace Tourismo.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double");
 
-                    b.Property<Guid?>("SectionId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ArrangementId");
-
-                    b.HasIndex("SectionId");
 
                     b.ToTable("Accommodations");
                 });
@@ -122,39 +161,10 @@ namespace Tourismo.Migrations
                     b.ToTable("Arrangements");
                 });
 
-            modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Section", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid?>("TravelId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TravelId");
-
-                    b.ToTable("Sections");
-                });
-
             modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.TouristAttraction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("ArrangementId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -178,19 +188,7 @@ namespace Tourismo.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double");
 
-                    b.Property<Guid?>("SectionId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("SectionId1")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ArrangementId");
-
-                    b.HasIndex("SectionId");
-
-                    b.HasIndex("SectionId1");
 
                     b.ToTable("TouristAttractions");
                 });
@@ -199,6 +197,9 @@ namespace Tourismo.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("AccommodationId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -223,6 +224,8 @@ namespace Tourismo.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
 
                     b.ToTable("Travels");
                 });
@@ -267,6 +270,51 @@ namespace Tourismo.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("AdditionalAttractionArrangements", b =>
+                {
+                    b.HasOne("Tourismo.Core.Model.TravelManagement.TouristAttraction", null)
+                        .WithMany()
+                        .HasForeignKey("AdditionalAttractionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tourismo.Core.Model.TravelManagement.Arrangement", null)
+                        .WithMany()
+                        .HasForeignKey("ArrangementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AdditionalAttractionTravels", b =>
+                {
+                    b.HasOne("Tourismo.Core.Model.TravelManagement.TouristAttraction", null)
+                        .WithMany()
+                        .HasForeignKey("AdditionalAttractionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tourismo.Core.Model.TravelManagement.Travel", null)
+                        .WithMany()
+                        .HasForeignKey("TravelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DefaultAttractionTravels", b =>
+                {
+                    b.HasOne("Tourismo.Core.Model.TravelManagement.TouristAttraction", null)
+                        .WithMany()
+                        .HasForeignKey("DefaultAttractionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tourismo.Core.Model.TravelManagement.Travel", null)
+                        .WithMany()
+                        .HasForeignKey("TravelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Tourismo.Core.Model.Helper.DateRange", b =>
                 {
                     b.HasOne("Tourismo.Core.Model.TravelManagement.Travel", null)
@@ -276,14 +324,6 @@ namespace Tourismo.Migrations
 
             modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Accommodation", b =>
                 {
-                    b.HasOne("Tourismo.Core.Model.TravelManagement.Arrangement", null)
-                        .WithMany("Accommodations")
-                        .HasForeignKey("ArrangementId");
-
-                    b.HasOne("Tourismo.Core.Model.TravelManagement.Section", null)
-                        .WithMany("Accommodations")
-                        .HasForeignKey("SectionId");
-
                     b.OwnsOne("Tourismo.Core.Model.Helper.Location", "Location", b1 =>
                         {
                             b1.Property<Guid>("AccommodationId")
@@ -338,27 +378,8 @@ namespace Tourismo.Migrations
                     b.Navigation("Traveler");
                 });
 
-            modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Section", b =>
-                {
-                    b.HasOne("Tourismo.Core.Model.TravelManagement.Travel", null)
-                        .WithMany("Sections")
-                        .HasForeignKey("TravelId");
-                });
-
             modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.TouristAttraction", b =>
                 {
-                    b.HasOne("Tourismo.Core.Model.TravelManagement.Arrangement", null)
-                        .WithMany("AdditionalAttractions")
-                        .HasForeignKey("ArrangementId");
-
-                    b.HasOne("Tourismo.Core.Model.TravelManagement.Section", null)
-                        .WithMany("AdditionalAttractions")
-                        .HasForeignKey("SectionId");
-
-                    b.HasOne("Tourismo.Core.Model.TravelManagement.Section", null)
-                        .WithMany("DefaultAttractions")
-                        .HasForeignKey("SectionId1");
-
                     b.OwnsOne("Tourismo.Core.Model.Helper.Location", "Location", b1 =>
                         {
                             b1.Property<Guid>("TouristAttractionId")
@@ -386,27 +407,20 @@ namespace Tourismo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Arrangement", b =>
+            modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Travel", b =>
                 {
-                    b.Navigation("Accommodations");
+                    b.HasOne("Tourismo.Core.Model.TravelManagement.Accommodation", "Accommodation")
+                        .WithMany()
+                        .HasForeignKey("AccommodationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("AdditionalAttractions");
-                });
-
-            modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Section", b =>
-                {
-                    b.Navigation("Accommodations");
-
-                    b.Navigation("AdditionalAttractions");
-
-                    b.Navigation("DefaultAttractions");
+                    b.Navigation("Accommodation");
                 });
 
             modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Travel", b =>
                 {
                     b.Navigation("Periods");
-
-                    b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618
         }

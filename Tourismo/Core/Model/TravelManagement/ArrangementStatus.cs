@@ -4,6 +4,7 @@
     {
         Reserved,
         Active,
-        Finished
+        Finished,
+        Canceled
     }
 }

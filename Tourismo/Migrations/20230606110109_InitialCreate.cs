@@ -15,20 +15,44 @@ namespace Tourismo.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Travels",
+                name: "Accommodations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Name = table.Column<string>(type: "longtext", nullable: false),
                     ImagePath = table.Column<string>(type: "longtext", nullable: false),
-                    MinimalPrice = table.Column<double>(type: "double", nullable: false),
-                    ShortDescription = table.Column<string>(type: "longtext", nullable: false),
+                    Price = table.Column<double>(type: "double", nullable: false),
+                    Location_Address = table.Column<string>(type: "longtext", nullable: false),
+                    Location_Latitude = table.Column<double>(type: "double", nullable: false),
+                    Location_Longitude = table.Column<double>(type: "double", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Travels", x => x.Id);
+                    table.PrimaryKey("PK_Accommodations", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "TouristAttractions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false),
+                    ImagePath = table.Column<string>(type: "longtext", nullable: false),
+                    Price = table.Column<double>(type: "double", nullable: false),
+                    Location_Address = table.Column<string>(type: "longtext", nullable: false),
+                    Location_Latitude = table.Column<double>(type: "double", nullable: false),
+                    Location_Longitude = table.Column<double>(type: "double", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TouristAttractions", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -49,6 +73,56 @@ namespace Tourismo.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Travels",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    AccommodationId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    ImagePath = table.Column<string>(type: "longtext", nullable: false),
+                    MinimalPrice = table.Column<double>(type: "double", nullable: false),
+                    ShortDescription = table.Column<string>(type: "longtext", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Travels", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Travels_Accommodations_AccommodationId",
+                        column: x => x.AccommodationId,
+                        principalTable: "Accommodations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "AdditionalAttractionTravels",
+                columns: table => new
+                {
+                    AdditionalAttractionId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    TravelId = table.Column<Guid>(type: "char(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdditionalAttractionTravels", x => new { x.AdditionalAttractionId, x.TravelId });
+                    table.ForeignKey(
+                        name: "FK_AdditionalAttractionTravels_TouristAttractions_AdditionalAtt~",
+                        column: x => x.AdditionalAttractionId,
+                        principalTable: "TouristAttractions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AdditionalAttractionTravels_Travels_TravelId",
+                        column: x => x.TravelId,
+                        principalTable: "Travels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -75,23 +149,27 @@ namespace Tourismo.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Sections",
+                name: "DefaultAttractionTravels",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Name = table.Column<string>(type: "longtext", nullable: false),
-                    TravelId = table.Column<Guid>(type: "char(36)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    DefaultAttractionId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    TravelId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sections", x => x.Id);
+                    table.PrimaryKey("PK_DefaultAttractionTravels", x => new { x.DefaultAttractionId, x.TravelId });
                     table.ForeignKey(
-                        name: "FK_Sections_Travels_TravelId",
+                        name: "FK_DefaultAttractionTravels_TouristAttractions_DefaultAttractio~",
+                        column: x => x.DefaultAttractionId,
+                        principalTable: "TouristAttractions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DefaultAttractionTravels_Travels_TravelId",
                         column: x => x.TravelId,
                         principalTable: "Travels",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -133,85 +211,39 @@ namespace Tourismo.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Accommodations",
+                name: "AdditionalAttractionArrangements",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Name = table.Column<string>(type: "longtext", nullable: false),
-                    Price = table.Column<double>(type: "double", nullable: false),
-                    Location_Address = table.Column<string>(type: "longtext", nullable: false),
-                    Location_Latitude = table.Column<double>(type: "double", nullable: false),
-                    Location_Longitude = table.Column<double>(type: "double", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    ArrangementId = table.Column<Guid>(type: "char(36)", nullable: true),
-                    SectionId = table.Column<Guid>(type: "char(36)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    AdditionalAttractionId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    ArrangementId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accommodations", x => x.Id);
+                    table.PrimaryKey("PK_AdditionalAttractionArrangements", x => new { x.AdditionalAttractionId, x.ArrangementId });
                     table.ForeignKey(
-                        name: "FK_Accommodations_Arrangements_ArrangementId",
+                        name: "FK_AdditionalAttractionArrangements_Arrangements_ArrangementId",
                         column: x => x.ArrangementId,
                         principalTable: "Arrangements",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Accommodations_Sections_SectionId",
-                        column: x => x.SectionId,
-                        principalTable: "Sections",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "TouristAttractions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Name = table.Column<string>(type: "longtext", nullable: false),
-                    Description = table.Column<string>(type: "longtext", nullable: false),
-                    ImagePath = table.Column<string>(type: "longtext", nullable: false),
-                    Price = table.Column<double>(type: "double", nullable: false),
-                    Location_Address = table.Column<string>(type: "longtext", nullable: false),
-                    Location_Latitude = table.Column<double>(type: "double", nullable: false),
-                    Location_Longitude = table.Column<double>(type: "double", nullable: false),
-                    ArrangementId = table.Column<Guid>(type: "char(36)", nullable: true),
-                    SectionId = table.Column<Guid>(type: "char(36)", nullable: true),
-                    SectionId1 = table.Column<Guid>(type: "char(36)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TouristAttractions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TouristAttractions_Arrangements_ArrangementId",
-                        column: x => x.ArrangementId,
-                        principalTable: "Arrangements",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TouristAttractions_Sections_SectionId",
-                        column: x => x.SectionId,
-                        principalTable: "Sections",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TouristAttractions_Sections_SectionId1",
-                        column: x => x.SectionId1,
-                        principalTable: "Sections",
-                        principalColumn: "Id");
+                        name: "FK_AdditionalAttractionArrangements_TouristAttractions_Addition~",
+                        column: x => x.AdditionalAttractionId,
+                        principalTable: "TouristAttractions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accommodations_ArrangementId",
-                table: "Accommodations",
+                name: "IX_AdditionalAttractionArrangements_ArrangementId",
+                table: "AdditionalAttractionArrangements",
                 column: "ArrangementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accommodations_SectionId",
-                table: "Accommodations",
-                column: "SectionId");
+                name: "IX_AdditionalAttractionTravels_TravelId",
+                table: "AdditionalAttractionTravels",
+                column: "TravelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Arrangements_PeriodId",
@@ -234,40 +266,33 @@ namespace Tourismo.Migrations
                 column: "TravelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sections_TravelId",
-                table: "Sections",
+                name: "IX_DefaultAttractionTravels_TravelId",
+                table: "DefaultAttractionTravels",
                 column: "TravelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TouristAttractions_ArrangementId",
-                table: "TouristAttractions",
-                column: "ArrangementId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TouristAttractions_SectionId",
-                table: "TouristAttractions",
-                column: "SectionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TouristAttractions_SectionId1",
-                table: "TouristAttractions",
-                column: "SectionId1");
+                name: "IX_Travels_AccommodationId",
+                table: "Travels",
+                column: "AccommodationId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Accommodations");
+                name: "AdditionalAttractionArrangements");
 
             migrationBuilder.DropTable(
-                name: "TouristAttractions");
+                name: "AdditionalAttractionTravels");
+
+            migrationBuilder.DropTable(
+                name: "DefaultAttractionTravels");
 
             migrationBuilder.DropTable(
                 name: "Arrangements");
 
             migrationBuilder.DropTable(
-                name: "Sections");
+                name: "TouristAttractions");
 
             migrationBuilder.DropTable(
                 name: "DateRange");
@@ -277,6 +302,9 @@ namespace Tourismo.Migrations
 
             migrationBuilder.DropTable(
                 name: "Travels");
+
+            migrationBuilder.DropTable(
+                name: "Accommodations");
         }
     }
 }

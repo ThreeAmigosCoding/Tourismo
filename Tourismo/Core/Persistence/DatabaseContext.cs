@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Model.UserManagement;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Tourismo.Core.Persistence
 {
@@ -16,7 +17,6 @@ namespace Tourismo.Core.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Accommodation> Accommodations { get; set; }
         public DbSet<Arrangement> Arrangements { get; set; }
-        public DbSet<Section> Sections { get; set; }
         public DbSet<TouristAttraction> TouristAttractions { get; set; }
         public DbSet<Travel> Travels { get; set; }
 
@@ -37,6 +37,51 @@ namespace Tourismo.Core.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Travel>()
+                .HasMany(t => t.DefaultAttractions)
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "DefaultAttractionTravels",
+                    j => j
+                        .HasOne<TouristAttraction>()
+                        .WithMany()
+                        .HasForeignKey("DefaultAttractionId"),
+                    j => j
+                        .HasOne<Travel>()
+                        .WithMany()
+                        .HasForeignKey("TravelId")
+                );
+
+            modelBuilder.Entity<Travel>()
+                .HasMany(t => t.AdditionalAttractions)
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "AdditionalAttractionTravels",
+                    j => j
+                        .HasOne<TouristAttraction>()
+                        .WithMany()
+                        .HasForeignKey("AdditionalAttractionId"),
+                    j => j
+                        .HasOne<Travel>()
+                        .WithMany()
+                        .HasForeignKey("TravelId")
+                );
+
+            modelBuilder.Entity<Arrangement>()
+                .HasMany(t => t.AdditionalAttractions)
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "AdditionalAttractionArrangements",
+                    j => j
+                        .HasOne<TouristAttraction>()
+                        .WithMany()
+                        .HasForeignKey("AdditionalAttractionId"),
+                    j => j
+                        .HasOne<Arrangement>()
+                        .WithMany()
+                        .HasForeignKey("ArrangementId")
+                );
         }
     }
 }

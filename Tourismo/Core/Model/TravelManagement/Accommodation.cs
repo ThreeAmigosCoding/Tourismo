@@ -8,6 +8,9 @@ namespace Tourismo.Core.Model.TravelManagement
         private string _name;
         public string Name { get => _name; set => OnPropertyChanged(ref _name, value); }
 
+        private string _imagePath;
+        public string ImagePath { get => _imagePath; set => OnPropertyChanged(ref _imagePath, value); }
+
         private double _price;
         public double Price { get => _price; set => OnPropertyChanged(ref _price, value); }
 
