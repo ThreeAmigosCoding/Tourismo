@@ -9,7 +9,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Tourismo.Core.Commands.Client;
 using Tourismo.Core.Model.TravelManagement;
+using Tourismo.Core.Ninject;
 using Tourismo.Core.Service.Interface.TravelManagement;
+using Tourismo.Core.Utility;
 using Tourismo.GUI.Utility;
 using Tourismo.Resources.Credentials;
 using Tourismo.Resources.Variables;
@@ -36,6 +38,7 @@ namespace Tourismo.GUI.Client
         private string _maxPrice;
         private Visibility _errMsgVisibility;
         private string _errMsgText;
+        private Travel _selectedTravel;
 
         #endregion
 
@@ -173,12 +176,24 @@ namespace Tourismo.GUI.Client
             }
         }
 
+        public Travel SelectedTravel
+        {
+            get => _selectedTravel;
+            set
+            {
+                _selectedTravel = value;
+                OpenReservationCreationCommand.Execute(this);
+                OnPropertyChanged(nameof(SelectedTravel));
+            }
+        }
+
         #endregion
 
         #region Commands
 
         public ICommand ApplyFiltersCommand { get; }
         public ICommand ResetFiltersCommand { get; }
+        public ICommand OpenReservationCreationCommand { get; }
 
         #endregion 
 
@@ -194,6 +209,7 @@ namespace Tourismo.GUI.Client
 
             ResetFiltersCommand = new ResetFiltersCommand(this);
             ApplyFiltersCommand = new ApplyFiltersCommand(this);
+            OpenReservationCreationCommand = new OpenReservationCreationCommand(this);
 
             FilterItems();
         }
@@ -214,5 +230,7 @@ namespace Tourismo.GUI.Client
                 FilteredTravels = new ObservableCollection<Travel>(filteredItems);
             }
         }
+
+        
     }
 }

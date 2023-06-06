@@ -32,6 +32,10 @@
         <client:HistoryOverviewView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type client:ReservationCreationViewModel}">
+        <client:ReservationCreationView/>
+    </DataTemplate>
+
     <!--Agent-->
     
     <DataTemplate DataType="{x:Type navigation:AgentHomeViewModel}">
