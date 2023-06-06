@@ -271,7 +271,7 @@ namespace Tourismo.Core.Persistence
                 Price = 200.0,
                 Location = new Location
                 {
-                    Address = "Мирово b.b, Mirovo 19370",
+                    Address = "Mirovo b.b, Mirovo 19370",
                     Latitude = 43.81318,
                     Longitude = 21.88434
                 },
