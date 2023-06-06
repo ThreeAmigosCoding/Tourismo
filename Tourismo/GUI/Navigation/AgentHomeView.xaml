@@ -48,7 +48,7 @@
                              FontSize="18"
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding AccommodationsOverviewCommand}"
+                             Command="{Binding AccommodationOverviewCommand}"
                              Width="240"/>
 
                     <RadioButton Content="📝 Reports"

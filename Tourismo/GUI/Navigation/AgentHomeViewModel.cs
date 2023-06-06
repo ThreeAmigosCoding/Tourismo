@@ -7,7 +7,10 @@ using System.Windows.Input;
 using Tourismo.Core.Commands.Auth;
 using Tourismo.Core.Model.UserManagement;
 using Tourismo.Core.Utility;
+using Tourismo.GUI.Agent;
 using Tourismo.GUI.Utility;
+using Tourismo.Core.Ninject;
+using Tourismo.Core.Commands.Navigation;
 
 namespace Tourismo.GUI.Navigation
 {
@@ -20,15 +23,22 @@ namespace Tourismo.GUI.Navigation
 
         public ICommand? LogOutCommand { get; set; }
 
+        public ICommand? AccommodationOverviewCommand { get; set; }
+
         public AgentHomeViewModel()
         {
             LogOutCommand = new LogOutCommand();
+            AccommodationOverviewCommand = new AgentAccommodationOverviewCommand();
             RegisterHandler();
         }
 
         private void RegisterHandler()
         {
-
+            EventBus.RegisterHandler("AgentAccommodationOverview", () => 
+            {
+                AccommodationOverviewViewModel AccommodationOverviewViewModel = ServiceLocator.Get<AccommodationOverviewViewModel>();
+                SwitchCurrentViewModel(AccommodationOverviewViewModel);
+            });
         }
     }
 }

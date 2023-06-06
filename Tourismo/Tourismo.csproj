@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GUI\Agent\" />
     <Folder Include="Migrations\" />
     <Folder Include="Resources\Images\TouristAttraction\" />
   </ItemGroup>
