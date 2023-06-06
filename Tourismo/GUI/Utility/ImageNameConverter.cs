@@ -10,7 +10,7 @@ namespace Tourismo.GUI.Utility
 {
     public class ImageNameConverter : IValueConverter
     {
-        private const string ResourcePath = "/Tourismo;component/Resources/Images/Travel/"; // Replace with your actual resource path
+        private const string ResourcePath = "/Tourismo;component/Resources/Images/"; // Replace with your actual resource path
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Remove="Resources\Fonts\playfair.ttf" />
     <None Remove="Resources\Fonts\poppins.ttf" />
+    <None Remove="Resources\Images\delete_icon.svg" />
+    <None Remove="Resources\Images\edit_icon.svg" />
     <None Remove="Resources\Images\HCI-Background.jpg" />
     <None Remove="Resources\Images\Logo.png" />
     <None Remove="Resources\Images\LogoV2.svg" />
@@ -48,6 +50,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Fonts\poppins.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\delete_icon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\edit_icon.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\HCI-Background.jpg">
