@@ -11,12 +11,18 @@
   <ItemGroup>
     <None Remove="Resources\Fonts\playfair.ttf" />
     <None Remove="Resources\Fonts\poppins.ttf" />
+    <None Remove="Resources\Images\Accommodation\kodRajka.jpg" />
+    <None Remove="Resources\Images\Accommodation\konakLjubica.jpg" />
     <None Remove="Resources\Images\delete_icon.svg" />
     <None Remove="Resources\Images\edit_icon.svg" />
     <None Remove="Resources\Images\HCI-Background.jpg" />
     <None Remove="Resources\Images\Logo.png" />
     <None Remove="Resources\Images\LogoV2.svg" />
     <None Remove="Resources\Images\TouristAttraction\banjaZdrelo.jpg" />
+    <None Remove="Resources\Images\TouristAttraction\homoljskePlanine.jpg" />
+    <None Remove="Resources\Images\TouristAttraction\manastirGornjak.jpg" />
+    <None Remove="Resources\Images\TouristAttraction\manastirLozica.jpg" />
+    <None Remove="Resources\Images\TouristAttraction\rtanj.jpg" />
     <None Remove="Resources\Images\Travel\homoljskePlanine.jpg" />
     <None Remove="Resources\Images\Travel\rtanj.jpg" />
     <None Remove="Resources\Images\Travel\travel1.jpg" />
@@ -52,6 +58,12 @@
     <Resource Include="Resources\Fonts\poppins.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Accommodation\kodRajka.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Accommodation\konakLjubica.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\delete_icon.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -66,6 +78,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\TouristAttraction\banjaZdrelo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\TouristAttraction\homoljskePlanine.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\TouristAttraction\manastirGornjak.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\TouristAttraction\manastirLozica.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\TouristAttraction\rtanj.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Travel\homoljskePlanine.jpg">

@@ -5,8 +5,285 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Tourismo.GUI.Client"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:utility ="clr-namespace:Tourismo.GUI.Utility"
+             d:DesignHeight="800" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <utility:ImageNameConverter x:Key="ImageNameConverter" />
+    </UserControl.Resources>
+    
     <Grid Background="White">
-        <TextBlock Text="{Binding Travel.Name}"></TextBlock>  
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+              Margin="20 20 20 20">
+            
+            <ScrollViewer>
+                <StackPanel>
+                    <StackPanel Orientation="Vertical">
+
+                        <TextBlock                  
+                        Text="{Binding Travel.Name}"
+                        FontWeight="Regular"
+                        FontSize="36"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Playfair}" 
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"
+                        Margin="0, 0, 0, 10"/>
+
+                        <Image
+                        Stretch="UniformToFill"
+                        Source="{Binding Travel.ImagePath, Converter={StaticResource ImageNameConverter}}"/>
+
+                        <Grid Background="{StaticResource DarkGreen}">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock FontFamily="{DynamicResource Poppins}"
+                                       FontSize="18"
+                                       Foreground="White"
+                                       Padding="10 8"
+                                       Text="{Binding Travel.MinimalPrice, StringFormat='Starts at: {0}rsd'}"/>
+                        </Grid>
+
+                    </StackPanel>
+                    <Separator VerticalAlignment="Stretch" Margin="0, 20, 10, 0" />
+                    <StackPanel Orientation="Vertical"
+                                Margin="0, 10, 0, 0">
+                        <TextBlock                  
+                        Text="Tourist attractions"
+                        FontWeight="Bold"
+                        FontSize="30"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+                        
+                        <TextBlock                  
+                        Text="{Binding CurrentAttraction.Name, UpdateSourceTrigger=PropertyChanged}"
+                        FontWeight="Bold"
+                        FontSize="28"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        Margin="0, 0, 0, 10"
+                        TextWrapping="Wrap"/>
+                        
+                        <Grid Margin="0, 0, 0, 15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="&lt;"
+                                    Grid.Column="0"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontSize="20"
+                                    Padding="0"
+                                    MaxWidth="50"
+                                    Height="36"
+                                    FontFamily="{DynamicResource Poppins}"
+                                    Margin="0, 0, 10, 0"
+                                    Command="{Binding PreviousAttractionCommand}"/>
+                            <Image
+                                Grid.Column="1"
+                                Stretch="UniformToFill"
+                                Height="250"
+                                Source="{Binding CurrentAttraction.ImagePath, Converter={StaticResource ImageNameConverter}}"/>    
+                            <Button Content="&gt;"
+                                    Grid.Column="2"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontSize="20"
+                                    Padding="0"
+                                    MaxWidth="50"
+                                    Height="36"
+                                    FontFamily="{DynamicResource Poppins}"
+                                    Margin="10, 0, 0, 0"
+                                    Command="{Binding NextAttractionCommand}"/>
+                        </Grid>
+                        <TextBlock                  
+                        Text="Description"
+                        FontWeight="Bold"
+                        FontSize="28"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"/>
+                        
+                        <TextBlock
+                        Text="{Binding CurrentAttraction.Description, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap"
+                        FontWeight="Bold"
+                        FontSize="22"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"/>
+                        
+                        <TextBlock
+                        Text="{Binding CurrentAttraction.Price, StringFormat='Price: {0}rsd', UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap"
+                        FontWeight="Bold"
+                        FontSize="22"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"/>
+                        
+                        <TextBlock                  
+                        Text="Additional attractions"
+                        Margin="0, 15, 0, 0"
+                        TextWrapping="Wrap"
+                        FontWeight="Bold"
+                        FontSize="28"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"/>
+
+                        <StackPanel>
+                            <ItemsControl ItemsSource="{Binding AddedAttractions}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Content="{Binding Attraction.Name}"
+                                                  FontSize="22"  
+                                                  HorizontalAlignment="Left"
+                                                  FontFamily="{DynamicResource Poppins}"
+                                                  Foreground="{StaticResource DarkGreen}"
+                                                  IsChecked="{Binding IsSelected}"                             
+                                                  Command="{Binding DataContext.UpdateTotalPriceCommand, 
+                                                        RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                    <Separator VerticalAlignment="Stretch" Margin="0, 10, 10, 10" />
+                    <StackPanel>
+                        <TextBlock                  
+                        Text="Accommodation"
+                        FontWeight="Bold"
+                        FontSize="30"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+
+                        <TextBlock                  
+                        Text="{Binding Travel.Accommodation.Name, UpdateSourceTrigger=PropertyChanged}"
+                        FontWeight="Bold"
+                        FontSize="28"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        Margin="0, 0, 0, 10"
+                        TextWrapping="Wrap"/>
+                        
+                        <Image
+                                Stretch="UniformToFill"
+                                Source="{Binding Travel.Accommodation.ImagePath, Converter={StaticResource ImageNameConverter}}"/>
+
+                    </StackPanel>
+                    <Separator VerticalAlignment="Stretch" Margin="0, 20, 10, 10" />
+                    <StackPanel>
+
+                        <TextBlock                  
+                        Text="Available periods"
+                        FontWeight="Bold"
+                        FontSize="30"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+                      
+                        <ComboBox Background="White" 
+                                      Height="40"
+                                      ItemsSource="{Binding AvailablePeriods}"
+                                      SelectedItem="{Binding SelectedPeriod, UpdateSourceTrigger=PropertyChanged}"
+                                      FontFamily="{DynamicResource Poppins}"
+                                      FontSize="18"
+                                      SelectedIndex="0"
+                                      Margin="0, 0, 10, 0"/>
+
+                    </StackPanel>
+                    <StackPanel Margin="0, 10, 0, 0">
+                        <TextBlock                  
+                        Text="Summary"
+                        FontWeight="Bold"
+                        FontSize="30"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+
+                        <TextBlock                  
+                        Text="{Binding Travel.Name, StringFormat='• {0}'}"
+                        FontWeight="Bold"
+                        FontSize="22"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+
+                        <TextBlock                  
+                        Text="{Binding AdditionalAttractionsSummary, StringFormat='• Additional attractions: {0}'}"
+                        FontWeight="Bold"
+                        FontSize="22"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+
+                        <TextBlock                  
+                        Text="{Binding SelectedPeriod, StringFormat='• {0}'}"
+                        FontWeight="Bold"
+                        FontSize="22"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+
+                        <TextBlock                  
+                        Text="{Binding TotalPrice, StringFormat='• Price: {0}rsd'}"
+                        FontWeight="Bold"
+                        FontSize="22"  
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource Poppins}"
+                        Foreground="{StaticResource DarkGreen}"
+                        TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <Grid HorizontalAlignment="Right">
+                        <Button Content="Make a reservation"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontSize="18"
+                                    Height="36"
+                                    Margin="10"
+                                    FontFamily="{DynamicResource Poppins}"                                  
+                                    Command="{Binding MakeAReservationCommand}"/>
+
+
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+               
+        </Grid>
+        
+        <Grid Grid.Column="1"
+              Background="{StaticResource DarkGreen}">
+            <m:Map x:Name="mapControl" Mode="AerialWithLabels" CredentialsProvider="{Binding MapApiKey}"
+                   Center="44.0165, 21.0059" ZoomLevel="7" ViewChangeOnFrame="MapControl_ViewChangeOnFrame">
+                
+            </m:Map>
+        </Grid>
     </Grid>
 </UserControl>

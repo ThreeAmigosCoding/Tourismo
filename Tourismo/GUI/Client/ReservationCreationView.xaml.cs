@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace Tourismo.GUI.Client
 {
@@ -23,6 +24,14 @@ namespace Tourismo.GUI.Client
         public ReservationCreationView()
         {
             InitializeComponent();
+        }
+
+        private void MapControl_ViewChangeOnFrame(object sender, MapEventArgs e)
+        {
+            if (mapControl.ZoomLevel < 7)
+            {
+                mapControl.ZoomLevel = 7;
+            }
         }
     }
 }
