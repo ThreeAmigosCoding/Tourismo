@@ -26,6 +26,12 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
             return _accommodationRepository.Create(entity);
         }
 
+        public void Deactivate(Accommodation accommodation)
+        {
+            accommodation.IsActive = false;
+            _accommodationRepository.Update(accommodation);
+        }
+
         public Accommodation Delete(Guid id)
         {
             return _accommodationRepository.Delete(id);

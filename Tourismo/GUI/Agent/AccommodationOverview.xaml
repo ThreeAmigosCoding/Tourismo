@@ -55,10 +55,11 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" 
-                              VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding FilteredAccomodations}">
-                        <ItemsControl.ItemsPanel>
+                <ListView ItemsSource="{Binding FilteredAccomodations}"
+                          ItemContainerStyle="{DynamicResource RemoveDefaultListViewHover}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          SelectedItem="{Binding SelectedAccommodation}">
+                        <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel FlowDirection="LeftToRight"
                                            ItemWidth="400"
@@ -68,8 +69,8 @@
                                      />
 
                             </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
                             <DataTemplate>
 
                                 <Grid Margin="0, 0, 35, 20"
@@ -130,28 +131,19 @@
                                               TextWrapping="Wrap">
                                             </TextBlock>
 
-                                            <StackPanel Grid.Column="1"
+                                        <StackPanel Grid.Column="1"
                                                 Orientation="Horizontal">
-
-                                                <Button Content="🖉"
-                                                    Margin="0, 0, 10, 0"
-                                                    Background="{StaticResource LightGreen}"
-                                                    Foreground="{StaticResource DarkGreen}"
-                                                    BorderBrush="Transparent"
-                                                    FontFamily="{DynamicResource Poppins}"
-                                                    Width="auto"
-                                                    Command="{Binding EditAccommodationCommand}">
-                                                    
-                                                </Button>
-
-                                                <Button Content="🗑️"
+                                            
+                                            <Button Content="🗑️"
                                                     Margin="0, 0, 10, 0"
                                                     Background="{StaticResource DeleteRed}"
                                                     Foreground="White"
                                                     BorderBrush="Transparent"
                                                     FontFamily="{DynamicResource Poppins}"
                                                     Width="auto"
-                                                    Command="{Binding DeleteAccommodationCommand}">
+                                                    Command="{Binding DataContext.DeleteAccommodationCommand, 
+                                                        RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                    CommandParameter="{Binding}">
                                           
                                                 </Button>
                                             </StackPanel>
@@ -162,9 +154,8 @@
                                 </Grid>
 
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+                        </ListView.ItemTemplate>
+                    </ListView>
             </Grid>
 
             <Button Grid.Row="2" 

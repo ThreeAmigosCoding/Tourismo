@@ -67,7 +67,7 @@
                     Foreground="White"
                     BorderBrush="Transparent"
                     Command="{Binding LogOutCommand}"
-                    Margin="10,0,0,20"
+                    Margin="10,0,10,20"
                     FontSize="16"
                     Height="36"
                     FontFamily="{DynamicResource Poppins}"/>
@@ -75,7 +75,6 @@
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
-                            Margin="10"
                             Content="{Binding CurrentViewModel}"/>
         </Grid>
     </Border>

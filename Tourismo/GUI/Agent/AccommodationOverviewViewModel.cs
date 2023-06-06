@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Tourismo.Core.Commands.Agent;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.GUI.Utility;
@@ -54,15 +56,23 @@ namespace Tourismo.GUI.Agent
         }
         #endregion
 
+        #region Commands
+
+        public ICommand DeleteAccommodationCommand { get; }
+
+        #endregion
+
 
         public AccommodationOverviewViewModel(IAccommodationService accommodationService)
         {
             _accommodationService = accommodationService;
             _accommodations = _accommodationService.ReadAllActive().ToList();
             FilterItems();
+
+            DeleteAccommodationCommand = new DeleteAccommodationCommand(this);
         }
 
-        private void FilterItems()
+        public void FilterItems()
         {
             if (string.IsNullOrEmpty(SearchText))
             {
