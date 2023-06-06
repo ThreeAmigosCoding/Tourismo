@@ -1,4 +1,6 @@
-﻿using Tourismo.Core.Model.Helper;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Utility;
 
 namespace Tourismo.Core.Model.TravelManagement

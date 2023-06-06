@@ -13,9 +13,6 @@ namespace Tourismo.Core.Model.TravelManagement
         private Travel _travel;
         public virtual Travel Travel { get => _travel; set  => OnPropertyChanged(ref _travel, value); }
 
-        private List<Accommodation> _accommodations;
-        public virtual List<Accommodation> Accommodations { get => _accommodations; set => OnPropertyChanged(ref _accommodations, value); }
-
         private List<TouristAttraction> _additionalAttractions;
         public virtual List<TouristAttraction> AdditionalAttractions { get => _additionalAttractions; set => OnPropertyChanged(ref _additionalAttractions, value); }
 
