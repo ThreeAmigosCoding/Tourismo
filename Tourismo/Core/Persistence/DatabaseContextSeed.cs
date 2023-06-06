@@ -93,7 +93,7 @@ namespace Tourismo.Core.Persistence
         {
             new Travel
             {
-                Name = "Travel 1",
+                Name = "Homoljske planine",
                 DefaultAttractions = context.TouristAttractions.Take(2).ToList(),
                 AdditionalAttractions = context.TouristAttractions.Skip(2).Take(2).ToList(),
                 Accommodation = new Accommodation
@@ -122,13 +122,13 @@ namespace Tourismo.Core.Persistence
                         EndDate = DateTime.Now.AddDays(25)
                     }
                 },
-                ImagePath = "travel1.jpg",
+                ImagePath = "Travel/homoljskePlanine.jpg",
                 MinimalPrice = 50.0,
                 ShortDescription = "Short description for Travel 1"
             },
             new Travel
             {
-                Name = "Travel 2",
+                Name = "Rtanj",
                 DefaultAttractions = context.TouristAttractions.Skip(4).Take(2).ToList(),
                 AdditionalAttractions = context.TouristAttractions.Skip(6).Take(2).ToList(),
                 Accommodation = new Accommodation
@@ -157,7 +157,7 @@ namespace Tourismo.Core.Persistence
                         EndDate = DateTime.Now.AddDays(45)
                     }
                 },
-                ImagePath = "travel2.jpg",
+                ImagePath = "Travel/rtanj.jpg",
                 MinimalPrice = 100.0,
                 ShortDescription = "Short description for Travel 2"
             },

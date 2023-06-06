@@ -4,37 +4,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tourismo.Core.Model.TravelManagement;
+using Tourismo.Core.Repository.Interface.TravelManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
 
 namespace Tourismo.Core.Service.Implementation.TravelManagement
 {
     public class AccommodationService : IAccommodationService
     {
+        private readonly IAccommodationRepository _accommodationRepository;
+
+        public AccommodationService(IAccommodationRepository accommodationRepository)
+        {
+            _accommodationRepository = accommodationRepository;
+        }
+
+
 
         #region CRUD Methods
         public Accommodation Create(Accommodation entity)
         {
-            throw new NotImplementedException();
+            return _accommodationRepository.Create(entity);
         }
 
         public Accommodation Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return _accommodationRepository.Delete(id);
         }
 
         public Accommodation Read(Guid id)
         {
-            throw new NotImplementedException();
+            return _accommodationRepository.Read(id);
         }
 
         public IEnumerable<Accommodation> ReadAll()
         {
-            throw new NotImplementedException();
+            return _accommodationRepository.ReadAll();
         }
 
         public Accommodation Update(Accommodation entity)
         {
-            throw new NotImplementedException();
+            return _accommodationRepository.Update(entity);
         }
         #endregion
 

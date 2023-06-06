@@ -24,6 +24,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -73,12 +74,12 @@
                                         FontSize="28"
                                         FontFamily="{DynamicResource Playfair}"
                                         FontWeight="Medium"
-                                        Text="{Binding Accommodation.Name}"
+                                        Text="{Binding Name}"
                                         Margin="0, 10, 0, 10"/>
                                     <Image
                                         Grid.Row="1"
                                         Stretch="UniformToFill"
-                                        Source="{Binding Accommodation.ImagePath, Converter={StaticResource ImageNameConverter}}">
+                                        Source="{Binding ImagePath, Converter={StaticResource ImageNameConverter}}">
                                     </Image>
 
 
@@ -96,7 +97,7 @@
                                           FontSize="18"
                                           Foreground="White"
                                           Padding="10 8"                                         
-                                          Text="{Binding Accommodation.Location.Address}"
+                                          Text="{Binding Location.Address}"
                                           TextWrapping="Wrap">
                                         </TextBlock>
 
@@ -114,37 +115,33 @@
                                               FontSize="18"
                                               Foreground="White"
                                               Padding="10 8"
-                                              Text="{Binding Accommodation.Price, StringFormat='Price per night: {0}rsd'}"
+                                              Text="{Binding Price, StringFormat='Price per night: {0}rsd'}"
                                               TextWrapping="Wrap">
                                             </TextBlock>
 
-                                            <StackPanel Grid.Column="0"
+                                            <StackPanel Grid.Column="1"
                                                 Orientation="Horizontal">
 
-                                                <Button
+                                                <Button Content="🖉"
                                                     Margin="0, 0, 10, 0"
-                                                    Background="{StaticResource DarkGreen}"
-                                                    Foreground="White"
+                                                    Background="{StaticResource LightGreen}"
+                                                    Foreground="{StaticResource DarkGreen}"
                                                     BorderBrush="Transparent"
                                                     FontFamily="{DynamicResource Poppins}"
-                                                    Width="80"
+                                                    Width="auto"
                                                     Command="{Binding EditAccommodationCommand}">
-                                                    <Button.Content>
-                                                        <Image Source="../../Resources/Images/edit_icon.svg"/>
-                                                    </Button.Content>
+                                                    
                                                 </Button>
 
-                                                <Button
+                                                <Button Content="🗑️"
                                                     Margin="0, 0, 10, 0"
-                                                    Background="{StaticResource DarkGreen}"
+                                                    Background="{StaticResource DeleteRed}"
                                                     Foreground="White"
                                                     BorderBrush="Transparent"
                                                     FontFamily="{DynamicResource Poppins}"
-                                                    Width="80"
+                                                    Width="auto"
                                                     Command="{Binding DeleteAccommodationCommand}">
-                                                    <Button.Content>
-                                                        <Image Source="../../Resources/Images/delete_icon.svg"/>
-                                                    </Button.Content>
+                                          
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
@@ -159,6 +156,16 @@
                 </ScrollViewer>
             </Grid>
 
+            <Button Grid.Row="2" 
+                    Content="Add new"
+                    Background="{StaticResource DarkGreen}"
+                    Foreground="White"
+                    Margin="0, 0, 25, 0"
+                    Height="auto"
+                    FontSize="20"
+                    BorderBrush="Transparent">
+                
+            </Button>
         </Grid>
     </Grid>
 </UserControl>
