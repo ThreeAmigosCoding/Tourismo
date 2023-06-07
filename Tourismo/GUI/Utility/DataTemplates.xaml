@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:auth="clr-namespace:Tourismo.GUI.Auth"
                     xmlns:navigation="clr-namespace:Tourismo.GUI.Navigation"
-                    xmlns:client="clr-namespace:Tourismo.GUI.Client">
+                    xmlns:client="clr-namespace:Tourismo.GUI.Client"
+                    xmlns:agent="clr-namespace:Tourismo.GUI.Agent">
 
 
     <DataTemplate DataType="{x:Type auth:LoginViewModel}">
@@ -31,10 +32,18 @@
         <client:HistoryOverviewView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type client:ReservationCreationViewModel}">
+        <client:ReservationCreationView/>
+    </DataTemplate>
+
     <!--Agent-->
     
     <DataTemplate DataType="{x:Type navigation:AgentHomeViewModel}">
         <navigation:AgentHomeView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:AccommodationOverviewViewModel}">
+        <agent:AccommodationOverview/>
     </DataTemplate>
 
 </ResourceDictionary>

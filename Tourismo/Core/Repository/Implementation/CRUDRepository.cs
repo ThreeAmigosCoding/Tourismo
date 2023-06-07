@@ -32,10 +32,20 @@ namespace Tourismo.Core.Repository.Implementation
         public virtual T Create(T entity)
         {
             _entities.Add(entity);
+
+            foreach (var entry in _context.ChangeTracker.Entries())
+            {
+                if (entry.Entity != entity && entry.State != EntityState.Unchanged)
+                {
+                    entry.State = EntityState.Unchanged;
+                }
+            }
+
             _context.SaveChanges();
 
             return entity;
         }
+
 
         public virtual T Update(T entity)
         {

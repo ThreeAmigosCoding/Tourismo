@@ -3,5 +3,6 @@
 
     <SolidColorBrush x:Key="DarkGreen" Color="#032D23"/>
     <SolidColorBrush x:Key="LightGreen" Color="#50A060"/>
+    <SolidColorBrush x:Key="DeleteRed" Color="#EE3939"/>
 
 </ResourceDictionary>

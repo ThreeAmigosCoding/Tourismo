@@ -55,6 +55,12 @@ namespace Tourismo.GUI.Navigation
                 HistoryOverviewViewModel HistoryOverviewViewModel = ServiceLocator.Get<HistoryOverviewViewModel>();
                 SwitchCurrentViewModel(HistoryOverviewViewModel);
             });
+            EventBus.RegisterHandler("OpenReservationCreation", (SelectedTravel) =>
+            {
+                GlobalStore.AddObject("TravelForReservation", SelectedTravel);
+                ReservationCreationViewModel ReservationCreationViewModel = ServiceLocator.Get<ReservationCreationViewModel>();
+                SwitchCurrentViewModel(ReservationCreationViewModel);
+            });
         }
 
     }
