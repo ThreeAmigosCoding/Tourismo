@@ -59,7 +59,6 @@
     <Resource Include="Resources\Fonts\poppins.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\Accommodation\HCI-Background.png" />
     <Resource Include="Resources\Images\Accommodation\kodRajka.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

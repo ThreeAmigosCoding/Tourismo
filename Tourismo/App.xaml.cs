@@ -18,7 +18,7 @@ namespace Tourismo
         {
             using (DatabaseContext db = new DatabaseContext())
             {
-                //DatabaseContextSeed.Seed(db);
+                DatabaseContextSeed.Seed(db);
             }
         }
     }

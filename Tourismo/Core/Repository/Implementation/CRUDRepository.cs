@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Persistence;
 using Tourismo.Core.Repository.Interface;
 using Tourismo.Core.Utility;
@@ -33,14 +34,17 @@ namespace Tourismo.Core.Repository.Implementation
         {
             _entities.Add(entity);
 
-            foreach (var entry in _context.ChangeTracker.Entries())
+            if (entity is Arrangement || entity is Travel)
             {
-                if (entry.Entity != entity && entry.State != EntityState.Unchanged)
+                foreach (var entry in _context.ChangeTracker.Entries())
                 {
-                    entry.State = EntityState.Unchanged;
+                    if (entry.Entity != entity && entry.State != EntityState.Unchanged)
+                    {
+                        entry.State = EntityState.Unchanged;
+                    }
                 }
             }
-
+            
             _context.SaveChanges();
 
             return entity;
