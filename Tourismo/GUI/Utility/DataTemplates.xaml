@@ -46,4 +46,8 @@
         <agent:AccommodationOverview/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type agent:AccommodationCRUDViewModel}">
+        <agent:AccommodationCRUDView/>
+    </DataTemplate>
+
 </ResourceDictionary>

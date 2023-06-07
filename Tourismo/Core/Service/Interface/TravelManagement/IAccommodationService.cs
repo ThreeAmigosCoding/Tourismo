@@ -9,5 +9,8 @@ namespace Tourismo.Core.Service.Interface.TravelManagement
 {
     public interface IAccommodationService : ICRUDService<Accommodation>
     {
+        IEnumerable<Accommodation> ReadAllActive();
+
+        void Deactivate(Accommodation accommodation);
     }
 }

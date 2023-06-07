@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="GUI/Theme/Colors.xaml"/>
                 <ResourceDictionary Source="GUI/Theme/Fonts.xaml"/>
                 <ResourceDictionary Source="GUI/Theme/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/DataProviders/DataProviders.xaml"/>
 
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
             </ResourceDictionary.MergedDictionaries>

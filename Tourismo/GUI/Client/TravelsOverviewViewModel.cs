@@ -201,7 +201,7 @@ namespace Tourismo.GUI.Client
         public TravelsOverviewViewModel(ITravelService travelService)
         {
             _travelService = travelService;
-            _travels = _travelService.ReadAll().OrderBy(t => t.Periods.Min(p => p.StartDate)).ToList();
+            _travels = _travelService.ReadAllActive().OrderBy(t => t.Periods.Min(p => p.StartDate)).ToList();
             _startDate = null;
             _endDate = null;
             _lowerBoundaryStart = DateTime.Now;
