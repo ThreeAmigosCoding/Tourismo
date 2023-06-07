@@ -34,6 +34,7 @@ namespace Tourismo.Core.Commands.Agent
                 _viewModel.FilterItems();
                 MessageBox.Show("Successfully deleted: " + accommodation.Name, "Success");
             }
+
         }
     }
 }

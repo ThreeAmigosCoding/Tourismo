@@ -39,6 +39,12 @@ namespace Tourismo.GUI.Navigation
                 AccommodationOverviewViewModel AccommodationOverviewViewModel = ServiceLocator.Get<AccommodationOverviewViewModel>();
                 SwitchCurrentViewModel(AccommodationOverviewViewModel);
             });
+
+            EventBus.RegisterHandler("SwitchToAccommodationCRUD", () =>
+            {
+                AccommodationCRUDViewModel AccommodationCRUDViewModel = ServiceLocator.Get<AccommodationCRUDViewModel>();
+                SwitchCurrentViewModel(AccommodationCRUDViewModel);
+            });
         }
     }
 }
