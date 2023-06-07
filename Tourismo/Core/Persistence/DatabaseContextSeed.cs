@@ -15,9 +15,9 @@ namespace Tourismo.Core.Persistence
         public static void Seed(DatabaseContext context)
         {
             SeedUsers(context);
+            SeedAccommodations(context);
             SeedTouristAttractions(context);
             SeedTravels(context);
-            SeedAccommodations(context);
             SeedArrangements(context);
         }
 
@@ -43,7 +43,51 @@ namespace Tourismo.Core.Persistence
                 Phone = "987654321",
                 Role = Role.Agent
             },
-            // Add more user objects here
+            new User
+            {
+                EmailAddress = "user3@example.com",
+                Password = "password3",
+                FirstName = "Pera",
+                LastName = "Perić",
+                Phone = "987654321",
+                Role = Role.Client
+            },
+            new User
+            {
+                EmailAddress = "user4@example.com",
+                Password = "password4",
+                FirstName = "Mika",
+                LastName = "Mikić",
+                Phone = "987654321",
+                Role = Role.Client
+            },
+            new User
+            {
+                EmailAddress = "milos@example.com",
+                Password = "milos123",
+                FirstName = "Miloš",
+                LastName = "Čuturić",
+                Phone = "987654321",
+                Role = Role.Agent
+            },
+            new User
+            {
+                EmailAddress = "luka@example.com",
+                Password = "luka123",
+                FirstName = "Luka",
+                LastName = "Đorđević",
+                Phone = "987654321",
+                Role = Role.Agent
+            },
+            new User
+            {
+                EmailAddress = "marko@example.com",
+                Password = "marko123",
+                FirstName = "Marko",
+                LastName = "Janošević",
+                Phone = "987654321",
+                Role = Role.Agent
+            }          
         };
 
             context.Users.AddRange(users);
@@ -56,28 +100,67 @@ namespace Tourismo.Core.Persistence
         {
             new TouristAttraction
             {
-                Name = "Attraction 1",
-                Description = "Description for Attraction 1",
-                ImagePath = "image1.jpg",
-                Price = 10.0,
+                Name = "Rtanj",
+                Description = "Planina Rtanj – Srpska piramida, misterije, svetilište. Poznato je da je istočna Srbija veoma bogata prirodom. Tako je u tom delu Srbije smeštena i srpska „piramida“ – planina Rtanj. Planina Rtanj se nalazi u Zaječarskom okrugu, u blizini Boljevca.",
+                ImagePath = "TouristAttraction/rtanj.jpg",
+                Price = 5000.0,
                 Location = new Location
                 {
-                    Address = "Mise Dimitrijevica 18",
-                    Latitude = 123.456,
-                    Longitude = 456.789
+                    Address = "Rtanj",
+                    Latitude = 43.77269,
+                    Longitude = 21.87629
                 }
             },
             new TouristAttraction
             {
-                Name = "Attraction 2",
-                Description = "Description for Attraction 2",
-                ImagePath = "image2.jpg",
-                Price = 20.0,
+                Name = "Manastir Lozica",
+                Description = "U ataru sela Krivi Vir, na nešto više tri kilometara od samog sela, nalazi se manastir Lozica, koji je posvećen Arhangelu Gavrilu.",
+                ImagePath = "TouristAttraction/manastirLozica.jpg",
+                Price = 500.0,
                 Location = new Location
                 {
-                    Address = "Mise Dimitrijevica 18",
-                    Latitude = 987.654,
-                    Longitude = 654.321
+                    Address = "Krivi Vir",
+                    Latitude = 43.79979,
+                    Longitude = 21.75992
+                }
+            },
+            new TouristAttraction
+            {
+                Name = "Homoljske planine",
+                Description = "Za Homoljske planine vezuju se brojne legende i mistične priče. U njih možemo da sumnjamo, ali u lepotu ovog kraja, sigurne ne.",
+                ImagePath = "TouristAttraction/homoljskePlanine.jpg",
+                Price = 2500.0,
+                Location = new Location
+                {
+                    Address = "Jošanica",
+                    Latitude = 44.33132,
+                    Longitude = 21.75847
+                }
+            },
+            new TouristAttraction
+            {
+                Name = "Manastir Gornjak",
+                Description = "Manastir Gornjak leži na manjem, proširenom platou Mlave u Gornjačkoj klisuri. Prislonjen je uz kamene litice Ježevca ispod kojih promiče brza i bistra Mlava.",
+                ImagePath = "TouristAttraction/manastirGornjak.jpg",
+                Price = 500.0,
+                Location = new Location
+                {
+                    Address = "105, Breznica",
+                    Latitude = 44.26608,
+                    Longitude = 21.54357
+                }
+            },
+            new TouristAttraction
+            {
+                Name = "Banja Ždrelo",
+                Description = "Banja Ždrelo ili pak Mlavske Terme, banja nadomak Petrovaca na Mlavi koja pleni svojim jedinstvenim mogućnostima i sadržajem.",
+                ImagePath = "TouristAttraction/banjaZdrelo.jpg",
+                Price = 1000.0,
+                Location = new Location
+                {
+                    Address = "Ždrelo, 66, Ždrelo 12300",
+                    Latitude = 44.30689,
+                    Longitude = 21.48383
                 }
             },
             // Add more tourist attraction objects here
@@ -90,60 +173,13 @@ namespace Tourismo.Core.Persistence
         private static void SeedTravels(DatabaseContext context)
         {
             var travels = new List<Travel>
-        {
-            new Travel
-            {
-                Name = "Homoljske planine",
-                DefaultAttractions = context.TouristAttractions.Take(2).ToList(),
-                AdditionalAttractions = context.TouristAttractions.Skip(2).Take(2).ToList(),
-                Accommodation = new Accommodation
-                {
-                    Name = "Accommodation 1",
-                    ImagePath = "accommodation1.jpg",
-                    Price = 100.0,
-                    Location = new Location
-                    {
-                        Address = "Mise Dimitrijevica 18",
-                        Latitude = 123.456,
-                        Longitude = 456.789
-                    },
-                    Type = AccommodationType.Hotel
-                },
-                Periods = new List<DateRange>
-                {
-                    new DateRange
-                    {
-                        StartDate = DateTime.Now.AddDays(10),
-                        EndDate = DateTime.Now.AddDays(15)
-                    },
-                    new DateRange
-                    {
-                        StartDate = DateTime.Now.AddDays(20),
-                        EndDate = DateTime.Now.AddDays(25)
-                    }
-                },
-                ImagePath = "Travel/homoljskePlanine.jpg",
-                MinimalPrice = 50.0,
-                ShortDescription = "Short description for Travel 1"
-            },
+        {   
             new Travel
             {
                 Name = "Rtanj",
-                DefaultAttractions = context.TouristAttractions.Skip(4).Take(2).ToList(),
-                AdditionalAttractions = context.TouristAttractions.Skip(6).Take(2).ToList(),
-                Accommodation = new Accommodation
-                {
-                    Name = "Accommodation 2",
-                    ImagePath = "accommodation2.jpg",
-                    Price = 200.0,
-                    Location = new Location
-                    {
-                        Address = "Mise Dimitrijevica 18",
-                        Latitude = 987.654,
-                        Longitude = 654.321
-                    },
-                    Type = AccommodationType.Motel
-                },
+                DefaultAttractions = context.TouristAttractions.Where(a => a.Name == "Rtanj").ToList(),
+                AdditionalAttractions = context.TouristAttractions.Where(a => a.Name == "Manastir Lozica").ToList(),
+                Accommodation = context.Accommodations.Where(a => a.Name == "Konak Ljubica").First(),
                 Periods = new List<DateRange>
                 {
                     new DateRange
@@ -155,12 +191,55 @@ namespace Tourismo.Core.Persistence
                     {
                         StartDate = DateTime.Now.AddDays(40),
                         EndDate = DateTime.Now.AddDays(45)
+                    },
+                    new DateRange
+                    {
+                        StartDate = DateTime.Now.AddDays(50),
+                        EndDate = DateTime.Now.AddDays(55)
+                    },
+                    new DateRange
+                    {
+                        StartDate = DateTime.Now.AddDays(60),
+                        EndDate = DateTime.Now.AddDays(65)
                     }
                 },
                 ImagePath = "Travel/rtanj.jpg",
-                MinimalPrice = 100.0,
-                ShortDescription = "Short description for Travel 2"
+                MinimalPrice = 5000.0,
+                ShortDescription = "Avantura počinje! Noćno penjanje i čekanje izlaska sunca na vrhu Šiljak."
             },
+            new Travel
+            {
+                Name = "Homoljske planine",
+                DefaultAttractions = context.TouristAttractions.Where(a => a.Name == "Homoljske planine" || a.Name == "Manastir Gornjak").ToList(),
+                AdditionalAttractions = context.TouristAttractions.Where(a => a.Name == "Banja Ždrelo").ToList(),
+                Accommodation = context.Accommodations.Where(a => a.Name == "Kod Rajka").First(),
+                Periods = new List<DateRange>
+                {
+                    new DateRange
+                    {
+                        StartDate = DateTime.Now.AddDays(10),
+                        EndDate = DateTime.Now.AddDays(13)
+                    },
+                    new DateRange
+                    {
+                        StartDate = DateTime.Now.AddDays(20),
+                        EndDate = DateTime.Now.AddDays(23)
+                    },
+                    new DateRange
+                    {
+                        StartDate = DateTime.Now.AddDays(30),
+                        EndDate = DateTime.Now.AddDays(33)
+                    },
+                    new DateRange
+                    {
+                        StartDate = DateTime.Now.AddDays(40),
+                        EndDate = DateTime.Now.AddDays(43)
+                    }
+                },
+                ImagePath = "Travel/homoljskePlanine.jpg",
+                MinimalPrice = 3000.0,
+                ShortDescription = "Vodimo Vas u predele Istočne Srbije gde otkrivamo šta videti na Homoljskim planinama. Pored predivne prirode, obilazimo manastir Gornjak, reku Mlavu, banju Ždrelo i uživamo u pogledu sa vrha Ježevca."
+            }
             // Add more travel objects here
         };
 
@@ -174,29 +253,29 @@ namespace Tourismo.Core.Persistence
         {
             new Accommodation
             {
-                Name = "Accommodation 1",
-                ImagePath = "accommodation1.jpg",
+                Name = "Kod Rajka",
+                ImagePath = "Accommodation/kodRajka.jpg",
                 Price = 100.0,
                 Location = new Location
                 {
-                    Address = "Mise Dimitrijevica 18",
-                    Latitude = 123.456,
-                    Longitude = 456.789
+                    Address = "161 Ždrelo RS, 12300",
+                    Latitude = 44.27481,
+                    Longitude = 21.52464
                 },
-                Type = AccommodationType.Hotel
+                Type = AccommodationType.Restaurant
             },
             new Accommodation
             {
-                Name = "Accommodation 2",
-                ImagePath = "accommodation2.jpg",
+                Name = "Konak Ljubica",
+                ImagePath = "Accommodation/konakLjubica.jpg",
                 Price = 200.0,
                 Location = new Location
                 {
-                    Address = "Mise Dimitrijevica 18",
-                    Latitude = 987.654,
-                    Longitude = 654.321
+                    Address = "Mirovo b.b, Mirovo 19370",
+                    Latitude = 43.81318,
+                    Longitude = 21.88434
                 },
-                Type = AccommodationType.Motel
+                Type = AccommodationType.LogCabbin
             },
             // Add more accommodation objects here
         };
@@ -211,28 +290,28 @@ namespace Tourismo.Core.Persistence
         {
             new Arrangement
             {
-                Traveler = context.Users.FirstOrDefault(u => u.Role == Role.Client),
-                Travel = context.Travels.FirstOrDefault(),
-                AdditionalAttractions = context.TouristAttractions.Take(2).ToList(),
+                Traveler = context.Users.FirstOrDefault(u => u.EmailAddress == "user1@example.com"),
+                Travel = context.Travels.FirstOrDefault(t => t.Name == "Rtanj"),
+                AdditionalAttractions = context.TouristAttractions.Where(t => t.Name == "Manastir Lozica").ToList(),
                 Period = new DateRange
                 {
-                    StartDate = DateTime.Now.AddDays(10),
-                    EndDate = DateTime.Now.AddDays(15)
+                    StartDate = DateTime.Now.AddDays(40),
+                    EndDate = DateTime.Now.AddDays(45)
                 },
-                Price = 150.0,
-                ArrangementStatus = ArrangementStatus.Active
+                Price = 5500.0,
+                ArrangementStatus = ArrangementStatus.Reserved
             },
             new Arrangement
             {
-                Traveler = context.Users.FirstOrDefault(u => u.Role == Role.Agent),
-                Travel = context.Travels.Skip(1).FirstOrDefault(),
-                AdditionalAttractions = context.TouristAttractions.Skip(2).Take(2).ToList(),
+                Traveler = context.Users.FirstOrDefault(u => u.EmailAddress == "user3@example.com"),
+                Travel = context.Travels.FirstOrDefault(t => t.Name == "Rtanj"),
+                AdditionalAttractions = new List<TouristAttraction>(),
                 Period = new DateRange
                 {
-                    StartDate = DateTime.Now.AddDays(20),
-                    EndDate = DateTime.Now.AddDays(25)
+                    StartDate = DateTime.Now.AddDays(40),
+                    EndDate = DateTime.Now.AddDays(45)
                 },
-                Price = 250.0,
+                Price = 5000.0,
                 ArrangementStatus = ArrangementStatus.Reserved
             },
             // Add more arrangement objects here
