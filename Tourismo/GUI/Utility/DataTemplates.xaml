@@ -66,4 +66,8 @@
         <agent:AttractionCRUDView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type agent:AgentHelpViewModel}">
+        <agent:AgentHelpView/>
+    </DataTemplate>
+
 </ResourceDictionary>

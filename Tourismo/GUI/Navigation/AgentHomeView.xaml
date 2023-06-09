@@ -58,6 +58,14 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ReportsOverviewCommand}"
                              Width="240"/>
+
+                    <RadioButton Content="❔ Help"
+                             Height="50"
+                             FontSize="18"
+                             FontFamily="{DynamicResource Poppins}"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AgentHelpCommand}"
+                             Width="240"/>
                 </StackPanel>
 
                 <Button Content="Log Out"
