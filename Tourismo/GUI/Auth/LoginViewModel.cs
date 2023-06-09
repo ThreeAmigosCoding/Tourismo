@@ -17,7 +17,7 @@ namespace Tourismo.GUI.Auth
         private IUserService _userService;
         public IUserService UserService { get => _userService; }
 
-        private string _email = "user1@example.com";
+        private string _email = "user2@example.com";
         public string Email
         {
             get => _email;
@@ -27,7 +27,7 @@ namespace Tourismo.GUI.Auth
             }
         }
 
-        private string _password = "password1";
+        private string _password = "password2";
         public string Password
         {
             get => _password;
