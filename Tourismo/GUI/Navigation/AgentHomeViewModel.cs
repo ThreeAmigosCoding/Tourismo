@@ -25,10 +25,14 @@ namespace Tourismo.GUI.Navigation
 
         public ICommand? AccommodationOverviewCommand { get; set; }
 
+        public ICommand? ReportsOverviewCommand { get; set; }
+
         public AgentHomeViewModel()
         {
             LogOutCommand = new LogOutCommand();
             AccommodationOverviewCommand = new AgentAccommodationOverviewCommand();
+            ReportsOverviewCommand = new AgentReportsOverviewCommand();
+            SwitchCurrentViewModel(ServiceLocator.Get<ReportsOverviewViewModel>());
             RegisterHandler();
         }
 
@@ -44,6 +48,12 @@ namespace Tourismo.GUI.Navigation
             {
                 AccommodationCRUDViewModel AccommodationCRUDViewModel = ServiceLocator.Get<AccommodationCRUDViewModel>();
                 SwitchCurrentViewModel(AccommodationCRUDViewModel);
+            });
+
+            EventBus.RegisterHandler("SwitchToAgentReportsOverview", () =>
+            {
+                ReportsOverviewViewModel ReportsOverviewViewModel = ServiceLocator.Get<ReportsOverviewViewModel>();
+                SwitchCurrentViewModel(ReportsOverviewViewModel);
             });
         }
     }
