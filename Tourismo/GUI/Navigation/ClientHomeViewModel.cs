@@ -61,6 +61,11 @@ namespace Tourismo.GUI.Navigation
                 ReservationCreationViewModel ReservationCreationViewModel = ServiceLocator.Get<ReservationCreationViewModel>();
                 SwitchCurrentViewModel(ReservationCreationViewModel);
             });
+            EventBus.RegisterHandler("ReservationDetails", () =>
+            {
+                ReservationDetailsViewModel ReservationDetailsViewModel = ServiceLocator.Get<ReservationDetailsViewModel>();
+                SwitchCurrentViewModel(ReservationDetailsViewModel);
+            });
         }
 
     }
