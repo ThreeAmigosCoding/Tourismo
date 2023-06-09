@@ -11,8 +11,8 @@ using Tourismo.Core.Persistence;
 namespace Tourismo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230606110109_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230609195921_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -233,6 +233,64 @@ namespace Tourismo.Migrations
                     b.ToTable("Travels");
                 });
 
+            modelBuilder.Entity("Tourismo.Core.Model.UserDocumentation.UserDocumentation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserDocumentation");
+                });
+
+            modelBuilder.Entity("Tourismo.Core.Model.UserDocumentation.UserDocumentationSection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("UserDocumentationId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserDocumentationId");
+
+                    b.ToTable("UserDocumentationSections");
+                });
+
             modelBuilder.Entity("Tourismo.Core.Model.UserManagement.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -421,9 +479,21 @@ namespace Tourismo.Migrations
                     b.Navigation("Accommodation");
                 });
 
+            modelBuilder.Entity("Tourismo.Core.Model.UserDocumentation.UserDocumentationSection", b =>
+                {
+                    b.HasOne("Tourismo.Core.Model.UserDocumentation.UserDocumentation", null)
+                        .WithMany("Sections")
+                        .HasForeignKey("UserDocumentationId");
+                });
+
             modelBuilder.Entity("Tourismo.Core.Model.TravelManagement.Travel", b =>
                 {
                     b.Navigation("Periods");
+                });
+
+            modelBuilder.Entity("Tourismo.Core.Model.UserDocumentation.UserDocumentation", b =>
+                {
+                    b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618
         }

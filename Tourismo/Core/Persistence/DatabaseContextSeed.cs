@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Model.TravelManagement;
+using Tourismo.Core.Model.UserDocumentation;
 using Tourismo.Core.Model.UserManagement;
 
 namespace Tourismo.Core.Persistence
@@ -19,6 +21,7 @@ namespace Tourismo.Core.Persistence
             SeedTouristAttractions(context);
             SeedTravels(context);
             SeedArrangements(context);
+            SeedDocumentation(context);
         }
 
         private static void SeedUsers(DatabaseContext context)
@@ -320,5 +323,63 @@ namespace Tourismo.Core.Persistence
             context.Arrangements.AddRange(arrangements);
             context.SaveChanges();
         }
+
+        private static void SeedDocumentation(DatabaseContext context)
+        {
+            var documentation = new List<UserDocumentation>
+            {
+                new UserDocumentation
+                {
+                    Name = "Agent documentation v01",
+                    Type = UserDocumentationType.AgentDocumentation,
+                    Sections =  new List<UserDocumentationSection>
+                    {
+                        new UserDocumentationSection
+                        {
+                            Name = "Agent placeholder title",
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+                            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            ImagePath = "Documentation/documentation.png"
+                        },
+                        new UserDocumentationSection
+                        {
+                            Name = "Agent lorem ipsum",
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+                            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            ImagePath = "Documentation/documentation.png"
+                        }
+                    }
+                },
+
+                new UserDocumentation
+                {
+                    Name = "Client documentation v01",
+                    Type = UserDocumentationType.ClientDocumentation,
+                    Sections =  new List<UserDocumentationSection>
+                    {
+                        new UserDocumentationSection
+                        {
+                            Name = "Client placeholder title",
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+                            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            ImagePath = "Documentation/documentation.png"
+                        },
+                        new UserDocumentationSection
+                        {
+                            Name = "Client lorem ipsum",
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+                            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            ImagePath = "Documentation/documentation.png"
+                        }
+                    }
+                },
+
+            };
+
+            context.UserDocumentation.AddRange(documentation);
+            context.SaveChanges();
+
+        }
+
     }
 }
