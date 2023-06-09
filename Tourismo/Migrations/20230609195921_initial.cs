@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Tourismo.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +57,22 @@ namespace Tourismo.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "UserDocumentation",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserDocumentation", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -98,6 +114,29 @@ namespace Tourismo.Migrations
                         principalTable: "Accommodations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "UserDocumentationSections",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false),
+                    ImagePath = table.Column<string>(type: "longtext", nullable: false),
+                    UserDocumentationId = table.Column<Guid>(type: "char(36)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserDocumentationSections", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserDocumentationSections_UserDocumentation_UserDocumentatio~",
+                        column: x => x.UserDocumentationId,
+                        principalTable: "UserDocumentation",
+                        principalColumn: "Id");
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -274,6 +313,11 @@ namespace Tourismo.Migrations
                 name: "IX_Travels_AccommodationId",
                 table: "Travels",
                 column: "AccommodationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserDocumentationSections_UserDocumentationId",
+                table: "UserDocumentationSections",
+                column: "UserDocumentationId");
         }
 
         /// <inheritdoc />
@@ -289,10 +333,16 @@ namespace Tourismo.Migrations
                 name: "DefaultAttractionTravels");
 
             migrationBuilder.DropTable(
+                name: "UserDocumentationSections");
+
+            migrationBuilder.DropTable(
                 name: "Arrangements");
 
             migrationBuilder.DropTable(
                 name: "TouristAttractions");
+
+            migrationBuilder.DropTable(
+                name: "UserDocumentation");
 
             migrationBuilder.DropTable(
                 name: "DateRange");
