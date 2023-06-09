@@ -12,7 +12,7 @@ namespace Tourismo.Core.Commands.Navigation
     {
         public override void Execute(object? parameter)
         {
-            EventBus.FireEvent("AgentAtractionOverview");
+            EventBus.FireEvent("AgentAttractionOverview");
         }
     }
 }

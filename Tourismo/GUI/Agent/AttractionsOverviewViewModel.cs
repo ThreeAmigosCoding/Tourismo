@@ -90,7 +90,7 @@ namespace Tourismo.GUI.Agent
             _attractions = _attractionService.ReadAllActive().ToList();
             FilterItems();
 
-            //SwitchToAttractionCRUD = new SwitchToAttractionCRUD();
+            SwitchToAttractionCRUD = new SwitchToAttractionCRUD();
             DeleteAttractionCommand = new DeleteAttractionCommand(this);
         }
 

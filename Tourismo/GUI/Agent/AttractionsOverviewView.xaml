@@ -58,7 +58,7 @@
                 <ListView ItemsSource="{Binding FilteredAttractions}"
                           ItemContainerStyle="{DynamicResource RemoveDefaultListViewHover}"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          SelectedItem="{Binding SelectedAccommodation}">
+                          SelectedItem="{Binding SelectedAttraction}">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel FlowDirection="LeftToRight"
@@ -166,7 +166,7 @@
                 Height="auto"
                 FontSize="20"
                 BorderBrush="Transparent"
-                Command="{Binding SwitchToAccommodationCRUD}"
+                Command="{Binding SwitchToAttractionCRUD}"
                 CommandParameter="create">
             </Button>
 

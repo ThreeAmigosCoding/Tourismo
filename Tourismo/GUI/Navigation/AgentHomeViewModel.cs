@@ -49,10 +49,16 @@ namespace Tourismo.GUI.Navigation
                 SwitchCurrentViewModel(AccommodationCRUDViewModel);
             });
 
-            EventBus.RegisterHandler("AgentAtractionOverview", () =>
+            EventBus.RegisterHandler("AgentAttractionOverview", () =>
             {
                 AttractionsOverviewViewModel AttractionsOverviewViewModel = ServiceLocator.Get<AttractionsOverviewViewModel>();
                 SwitchCurrentViewModel(AttractionsOverviewViewModel);
+            });
+
+            EventBus.RegisterHandler("SwitchToAttractionCRUD", () =>
+            {
+                AttractionCRUDViewModel AttractionCRUDViewModel = ServiceLocator.Get<AttractionCRUDViewModel>();
+                SwitchCurrentViewModel(AttractionCRUDViewModel);
             });
         }
     }
