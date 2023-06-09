@@ -50,4 +50,8 @@
         <agent:AccommodationCRUDView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type agent:AttractionsOverviewViewModel}">
+        <agent:AttractionsOverviewView/>
+    </DataTemplate>
+
 </ResourceDictionary>
