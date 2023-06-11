@@ -36,6 +36,14 @@
         <client:ReservationCreationView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type client:ReservationDetailsViewModel}">
+        <client:ReservationDetailsView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:ClientHelpViewModel}">
+        <client:ClientHelpView/>
+    </DataTemplate>
+
     <!--Agent-->
     
     <DataTemplate DataType="{x:Type navigation:AgentHomeViewModel}">
@@ -50,12 +58,25 @@
         <agent:AccommodationCRUDView/>
     </DataTemplate>
 
+
     <DataTemplate DataType="{x:Type agent:ReportsOverviewViewModel}">
         <agent:ReportsOverviewView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type agent:ArrangementsForTravelViewModel}">
         <agent:ArrangementsForTravelView/>
+    </DataTemplate>
+   
+    <DataTemplate DataType="{x:Type agent:AttractionsOverviewViewModel}">
+        <agent:AttractionsOverviewView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:AttractionCRUDViewModel}">
+        <agent:AttractionCRUDView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:AgentHelpViewModel}">
+        <agent:AgentHelpView/>
     </DataTemplate>
 
 

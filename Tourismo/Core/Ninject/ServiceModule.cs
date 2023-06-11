@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tourismo.Core.Repository.Implementation;
+
 using Tourismo.Core.Repository.Implementation.Help;
 using Tourismo.Core.Repository.Implementation.TravelManagement;
 using Tourismo.Core.Repository.Implementation.UserManagement;
@@ -16,6 +17,11 @@ using Tourismo.Core.Service.Implementation.Help;
 using Tourismo.Core.Service.Implementation.TravelManagement;
 using Tourismo.Core.Service.Implementation.UserManagement;
 using Tourismo.Core.Service.Interface.Help;
+using Tourismo.Core.Repository.Implementation.Documentation;
+using Tourismo.Core.Repository.Interface.Documentation;
+using Tourismo.Core.Service.Implementation.Documentation;
+using Tourismo.Core.Service.Interface.Documentation;
+
 using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.Core.Service.Interface.UserManagement;
 using Tourismo.GUI.Auth;
@@ -40,6 +46,8 @@ namespace Tourismo.Core.Ninject
             Bind(typeof(ITouristAttractionRepository)).To(typeof(TouristAttractionRepository));
             Bind(typeof(IDateRangeRepository)).To(typeof(DateRangeRepository));
 
+            Bind(typeof(IUserDocumentationRepository)).To(typeof(UserDocumentationRepository));
+
             #endregion
 
             #region Services
@@ -51,6 +59,8 @@ namespace Tourismo.Core.Ninject
             Bind(typeof(IAccommodationService)).To(typeof(AccommodationService));
             Bind(typeof(ITouristAttractionService)).To(typeof(TouristAttractionService));
             Bind(typeof(IDateRangeService)).To(typeof(DateRangeService));
+
+            Bind(typeof(IUserDocumentationService)).To(typeof(UserDocumentationService));
 
             #endregion
         }
