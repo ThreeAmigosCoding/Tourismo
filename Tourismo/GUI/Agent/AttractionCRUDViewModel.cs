@@ -12,6 +12,7 @@ using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.Core.Utility;
 using Tourismo.GUI.Utility;
 using Tourismo.Resources.Credentials;
+using Tourismo.Core.Commands.Navigation;
 
 namespace Tourismo.GUI.Agent
 {
@@ -100,6 +101,8 @@ namespace Tourismo.GUI.Agent
 
         public ICommand? DeleteAttractionCommand { get; }
 
+        public ICommand? AgentAttractionOverviewCommand { get; }
+
         #endregion
 
         public AttractionCRUDViewModel(ITouristAttractionService attractionService)
@@ -122,6 +125,7 @@ namespace Tourismo.GUI.Agent
             SaveAttractionCommand = new SaveAttractionCommand(this);
             ChooseAttractionImageCommand = new ChooseAttractionImageCommand(this);
             DeleteAttractionCommand = new DeleteAttractionFromDetailsCommand(this);
+            AgentAttractionOverviewCommand = new AgentAttractionOverviewCommand();
         }
 
     }

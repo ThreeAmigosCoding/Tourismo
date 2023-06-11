@@ -33,5 +33,10 @@ namespace Tourismo.GUI.Agent
                 mapControl.ZoomLevel = 7;
             }
         }
+
+        private void WhenLoaded(object sender, RoutedEventArgs e)
+        {
+            accommodationNameTb.Focus();
+        }
     }
 }

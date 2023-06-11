@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Tourismo.GUI.Navigation"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200">
-    
+             d:DesignHeight="800" d:DesignWidth="1200"
+             Loaded="HomeView_Loaded"
+             Unloaded="HomeView_Unloaded">
+
+   
     <Border Background="{StaticResource LightGreen}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -35,21 +38,31 @@
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding TravelsOverviewCommand}"
-                             Width="240"/>
+                             Width="240"
+                             x:Name="AgentTravelsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="0"/>
                     <RadioButton Content="🏛️ Attractions"
                              Height="50"
                              FontSize="18"
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AttractionsOverviewCommand}"
-                             Width="240"/>
+                             Width="240"
+                             IsChecked="True"
+                             x:Name="AgentAttractionsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="1"/>
                     <RadioButton Content="🍴 Accommodations"
                              Height="50"
                              FontSize="18"
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AccommodationOverviewCommand}"
-                             Width="240"/>
+                             Width="240"
+                             x:Name="AgentAccommodationsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="2"/>
 
                     <RadioButton Content="📝 Reports"
                              Height="50"
@@ -57,7 +70,10 @@
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ReportsOverviewCommand}"
-                             Width="240"/>
+                             Width="240"
+                             x:Name="AgentReportsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="3"/>
 
                     <RadioButton Content="❔ Help"
                              Height="50"
@@ -65,7 +81,9 @@
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AgentHelpCommand}"
-                             Width="240"/>
+                             Width="240"
+                             x:Name="AgentHelpNav"
+                             Tag="4"/>
                 </StackPanel>
 
                 <Button Content="Log Out"

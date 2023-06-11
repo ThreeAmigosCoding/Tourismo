@@ -37,7 +37,7 @@ namespace Tourismo.GUI.Navigation
             AccommodationOverviewCommand = new AgentAccommodationOverviewCommand();
 
             ReportsOverviewCommand = new AgentReportsOverviewCommand();
-            SwitchCurrentViewModel(ServiceLocator.Get<ReportsOverviewViewModel>());
+            SwitchCurrentViewModel(ServiceLocator.Get<AttractionsOverviewViewModel>());
 
             AttractionsOverviewCommand = new AgentAttractionOverviewCommand();
             AgentHelpCommand = new AgentHelpCommand();
