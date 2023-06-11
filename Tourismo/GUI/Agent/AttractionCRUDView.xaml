@@ -18,6 +18,7 @@
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveAttractionCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="D" Command="{Binding DeleteAttractionCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="Delete" Command="{Binding DeleteAttractionCommand}"/>
         <KeyBinding Key="Esc" Command="{Binding AgentAttractionOverviewCommand}"/>
     </UserControl.InputBindings>
 

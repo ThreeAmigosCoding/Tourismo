@@ -18,6 +18,7 @@
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveAccommodationCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="D" Command="{Binding DeleteAccommodationCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="Delete" Command="{Binding DeleteAccommodationCommand}"/>
         <KeyBinding Key="Esc" Command="{Binding AgentAccommodationOverviewCommand}"/>
     </UserControl.InputBindings>
 
