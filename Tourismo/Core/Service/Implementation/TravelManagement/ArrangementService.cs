@@ -63,6 +63,24 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
 
         }
 
+        public Summarry GetSummarryByTravel(Travel travel) 
+        {
+            int totalSold = ReadAll().Count(a => a.Travel.Id == travel.Id);
+            double totalEarned = ReadAll()
+                .Where(a => a.Travel.Id == travel.Id)
+                .Sum(a => a.Price);
+
+            return new Summarry(totalSold, totalEarned);
+        }
+
+        public List<Arrangement> GetTravelArrangements(Travel travel)
+        {
+            return _arrangementRepository.ReadAll()
+                .Where(arrangement => arrangement.Travel.Id == travel.Id)
+                .OrderByDescending(arrangement => arrangement.Period.StartDate)
+                .ToList();
+        }
+
         #region CRUD Methods
 
         public Arrangement Create(Arrangement entity)

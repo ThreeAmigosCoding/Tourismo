@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using Tourismo.Core.Commands.Navigation;
 using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Service.Interface.Help;
@@ -74,7 +76,10 @@ namespace Tourismo.GUI.Agent
         public List<int> Years { get; set; }
         #endregion
 
-       
+        #region Commands
+        public ICommand? ArrangementsForTravelCommand { get; }
+        #endregion
+
         public ReportsOverviewViewModel(IDateRangeService dateRangeService, IArrangementService arrangementService) 
         { 
             _dateRangeService = dateRangeService;
@@ -85,6 +90,8 @@ namespace Tourismo.GUI.Agent
  
             TravelsByMonth = _arrangementService.GetTravelsByMonth(generateDate());
             Summarry = _arrangementService.GetSummarryByMonth(generateDate());
+
+            ArrangementsForTravelCommand = new AgentArrangementForTravelCommand(this);
         }
 
         private List<string> generateMonths() 

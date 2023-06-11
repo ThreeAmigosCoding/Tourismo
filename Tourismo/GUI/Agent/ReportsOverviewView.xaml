@@ -119,7 +119,8 @@
                                         FontSize="15"
                                         FontWeight="Bold"
                                         FontFamily="{DynamicResource Poppins}"
-                                        Command="{Binding ArrangementsForTravelCommand}"
+                                        Command="{Binding DataContext.ArrangementsForTravelCommand,
+                                        RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                         CommandParameter="{Binding Key}"></Button>
 
                                 </Grid>

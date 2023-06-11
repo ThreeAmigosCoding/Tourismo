@@ -18,5 +18,9 @@ namespace Tourismo.Core.Service.Interface.TravelManagement
         Dictionary<Travel, int> GetTravelsByMonth(DateTime month);
 
         Summarry GetSummarryByMonth(DateTime month);
+
+        Summarry GetSummarryByTravel(Travel travel);
+
+        List<Arrangement> GetTravelArrangements(Travel travel);
     }
 }

@@ -55,6 +55,12 @@ namespace Tourismo.GUI.Navigation
                 ReportsOverviewViewModel ReportsOverviewViewModel = ServiceLocator.Get<ReportsOverviewViewModel>();
                 SwitchCurrentViewModel(ReportsOverviewViewModel);
             });
+
+            EventBus.RegisterHandler("SwitchToArrangementsForTravel", () =>
+            {
+                ArrangementsForTravelViewModel ArrangementsForTravelViewModel = ServiceLocator.Get<ArrangementsForTravelViewModel>();
+                SwitchCurrentViewModel(ArrangementsForTravelViewModel);
+            });
         }
     }
 }
