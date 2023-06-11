@@ -134,6 +134,7 @@ namespace Tourismo.GUI.Agent
             }
             else
             {
+                _selectedLocation = new Location(44.0165, 21.0059);
                 _deleteButtonVisibility = Visibility.Hidden;
                 _attraction = new TouristAttraction();
                 _attraction.Location = new Core.Model.Helper.Location();

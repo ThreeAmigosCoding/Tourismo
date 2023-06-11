@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,8 @@ namespace Tourismo.GUI.Agent
         private Visibility _errMsgVisibility;
 
         private IAccommodationService _accommodationService;
+        private Location _selectedLocation;
+
         #endregion
 
         #region Properties
@@ -101,6 +104,19 @@ namespace Tourismo.GUI.Agent
                 OnPropertyChanged(nameof(_accommodationService));
             }
         }
+
+        public Location SelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value;
+                Accommodation.Location.Longitude = _selectedLocation.Longitude;
+                Accommodation.Location.Latitude = _selectedLocation.Latitude;
+                OnPropertyChanged(nameof(SelectedLocation));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -109,6 +125,8 @@ namespace Tourismo.GUI.Agent
         public ICommand? ChooseAccommodationImageCommand { get; }
 
         public ICommand? DeleteAccommodationCommand { get; }
+
+        public ICommand? ViewAccommodationOnMapCommand { get; }
         #endregion
 
         public AccommodationCRUDViewModel(IAccommodationService accommodationService) 
@@ -120,9 +138,13 @@ namespace Tourismo.GUI.Agent
             {
                 _deleteButtonVisibility = Visibility.Visible;
                 _accommodation = GlobalStore.ReadObject<Accommodation>("SelectedAccommodation");
+                _selectedLocation = new Location();
+                _selectedLocation.Longitude = Accommodation.Location.Longitude;
+                _selectedLocation.Latitude = Accommodation.Location.Latitude;
             }
             else
             {
+                _selectedLocation = new Location(44.0165, 21.0059);
                 _deleteButtonVisibility = Visibility.Hidden;
                 _accommodation = new Accommodation();
                 _accommodation.Location = new Core.Model.Helper.Location();
@@ -131,6 +153,7 @@ namespace Tourismo.GUI.Agent
             SaveAccommodationCommand = new SaveAccommodationCommand(this);
             ChooseAccommodationImageCommand = new ChooseAccommodationImageCommand(this);
             DeleteAccommodationCommand = new DeleteAccommodationFromDetailsCommand(this);
+            ViewAccommodationOnMapCommand = new ViewAccommodationOnMapCommand(this);
 
         }
     }
