@@ -1,4 +1,5 @@
-﻿using Ninject.Activation;
+﻿using Microsoft.Maps.MapControl.WPF;
+using Ninject.Activation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,6 +36,11 @@ namespace Tourismo.GUI.Client
         private double _totalPrice;
         private string _additionalAttractionsSummary = "None";
         private IArrangementService _arrangementService;
+
+        private List<AttractionLocation> _attractionLocations;
+        private Microsoft.Maps.MapControl.WPF.Location _mapCenter;
+        private double _mapZoomLevel;
+        private AccommodationLocation _accommodationLocation;
 
         #endregion
 
@@ -75,6 +81,7 @@ namespace Tourismo.GUI.Client
             set
             {
                 _currentAttraction = value;
+                MapZoomLevel = 4;
                 OnPropertyChanged(nameof(CurrentAttraction));
             }
         }
@@ -131,6 +138,56 @@ namespace Tourismo.GUI.Client
 
         public IArrangementService ArrangementService { get => _arrangementService; }
 
+        public List<AttractionLocation> AttractionLocations
+        {
+            get => _attractionLocations;
+            set
+            {
+                _attractionLocations = value;
+                OnPropertyChanged(nameof(AttractionLocations));
+            }
+        }
+
+        public double MapZoomLevel
+        {
+            get => _mapZoomLevel;
+            set
+            {
+                _mapZoomLevel = value;
+                OnPropertyChanged(nameof(MapZoomLevel));
+            }
+        }
+
+        public Microsoft.Maps.MapControl.WPF.Location MapCenter
+        {
+            get => _mapCenter;
+            set
+            {
+                _mapCenter = value;
+                OnPropertyChanged(nameof(MapCenter));
+            }
+        }
+
+        public AccommodationLocation AccommodationLocation
+        {
+            get { return _accommodationLocation; }
+            set 
+            {
+                _accommodationLocation = value;
+                OnPropertyChanged(nameof(AccommodationLocation));
+            }
+        }
+
+        public string AccommodationPin
+        {
+            get => "Pins/accommodation.png";
+        }
+
+        public string AttractionPin
+        {
+            get => "Pins/attraction.png";
+        }
+
         #endregion
 
         #region Commands
@@ -139,6 +196,8 @@ namespace Tourismo.GUI.Client
         public ICommand NextAttractionCommand { get; private set; }
         public ICommand UpdateTotalPriceCommand { get; private set; }
         public ICommand MakeAReservationCommand { get; private set; }
+        public ICommand PushpinClickCommand { get; private set; }
+        public ICommand AccommodationClickCommand { get; private set; }
 
         #endregion
 
@@ -159,18 +218,26 @@ namespace Tourismo.GUI.Client
 
             _totalPrice = _travel.MinimalPrice;
 
+            InitializeMap();
+
             NextAttractionCommand = new RelayCommand(NextAttraction);
             PreviousAttractionCommand = new RelayCommand(PreviousAttraction);
             UpdateTotalPriceCommand = new RelayCommand(UpdateTotalPrice);
             MakeAReservationCommand = new RelayCommand(MakeAReservation);
+            PushpinClickCommand = new RelayCommand<object>(PushpinClick);
+            AccommodationClickCommand = new RelayCommand(AccommodationClick);
         }
-
+        
         private void NextAttraction()
         {
             if (_attractionsIndex == _allAttractions.Count - 1)
                 _attractionsIndex = 0;
             else _attractionsIndex++;
             CurrentAttraction = _allAttractions[_attractionsIndex];
+            MapZoomLevel = 8;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                CurrentAttraction.Location.Latitude, 
+                CurrentAttraction.Location.Longitude);
         }
 
         private void PreviousAttraction()
@@ -180,7 +247,12 @@ namespace Tourismo.GUI.Client
                 _attractionsIndex = _allAttractions.Count - 1;
             else _attractionsIndex--;
             CurrentAttraction = _allAttractions[_attractionsIndex];
+            MapZoomLevel = 8;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                CurrentAttraction.Location.Latitude, 
+                CurrentAttraction.Location.Longitude);
         }
+
         private void UpdateTotalPrice()
         {
             TotalPrice = Travel.MinimalPrice;
@@ -198,6 +270,7 @@ namespace Tourismo.GUI.Client
             else
                 AdditionalAttractionsSummary = "None";
         }
+
         private void MakeAReservation()
         {
             string summary = "• " + Travel.Name + "\n• Additional attractions: " + AdditionalAttractionsSummary + "\n• " + SelectedPeriod + "\n• Price: " + TotalPrice + "rsd";
@@ -224,6 +297,41 @@ namespace Tourismo.GUI.Client
                 MessageBox.Show("Reservation Confirmed! Your travel plans are set, get ready for an amazing journey!");
                 EventBus.FireEvent("ClientTravelsOverview");
             }
+        }
+
+        private void InitializeMap()
+        {
+            _attractionLocations = new List<AttractionLocation>(_allAttractions.Concat(AdditionalAttractions)
+                .Select(al => new AttractionLocation(al)));
+            MapZoomLevel = 7;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(44.0165, 21.0059);
+            AccommodationLocation = new AccommodationLocation(Travel.Accommodation);
+        }
+
+        public void PushpinClick(object? parameter)
+        {
+            Guid id = (Guid)parameter;
+            for (int i = 0; i < _allAttractions.Count; i++)
+            {
+                if (id == _allAttractions[i].Id)
+                {
+                    CurrentAttraction = _allAttractions[i];
+                    _attractionsIndex = i;
+                    MapZoomLevel = 8;
+                    MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                        CurrentAttraction.Location.Latitude,
+                        CurrentAttraction.Location.Longitude);
+                    break;
+                }
+            }
+        }
+
+        public void AccommodationClick()
+        {
+            MapZoomLevel = 8;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                        Travel.Accommodation.Location.Latitude,
+                        Travel.Accommodation.Location.Longitude);
         }
     }
 
@@ -255,5 +363,34 @@ namespace Tourismo.GUI.Client
             _isSelected = false;
         }
 
+    }
+
+    public class AttractionLocation
+    {
+        public TouristAttraction TouristAttraction { get; set; }
+        public string Name { get; set; }
+        public Microsoft.Maps.MapControl.WPF.Location Location { get; set; }
+
+        public AttractionLocation(TouristAttraction attraction) 
+        {
+            TouristAttraction = attraction;
+            Name = attraction.Name;
+            Location = new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Latitude, attraction.Location.Longitude);
+        }
+
+    }
+
+    public class AccommodationLocation
+    {
+        public Accommodation Accommodation { get; set; }
+        public string Name { get; set; }
+        public Microsoft.Maps.MapControl.WPF.Location Location { get; set; }
+
+        public AccommodationLocation(Accommodation accommodation)
+        {
+            Accommodation = accommodation;
+            Name = accommodation.Name;
+            Location = new Microsoft.Maps.MapControl.WPF.Location(accommodation.Location.Latitude, accommodation.Location.Longitude);
+        }
     }
 }

@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:utility ="clr-namespace:Tourismo.GUI.Utility"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="800" d:DesignWidth="800">
 
     <UserControl.Resources>
@@ -21,7 +22,7 @@
         <Grid Grid.Column="0"
               Margin="20 20 20 20">
             
-            <ScrollViewer>
+            <ScrollViewer x:Name="scrollView">
                 <StackPanel>
                     <StackPanel Orientation="Vertical">
 
@@ -55,7 +56,8 @@
                     </StackPanel>
                     <Separator VerticalAlignment="Stretch" Margin="0, 20, 10, 0" />
                     <StackPanel Orientation="Vertical"
-                                Margin="0, 10, 0, 0">
+                                Margin="0, 10, 0, 0"
+                                x:Name="AttractionsPanel">
                         <TextBlock                  
                         Text="Tourist attractions"
                         FontWeight="Bold"
@@ -94,6 +96,7 @@
                                     Margin="0, 0, 10, 0"
                                     Command="{Binding PreviousAttractionCommand}"/>
                             <Image
+                                x:Name="AttractionImage"
                                 Grid.Column="1"
                                 Stretch="UniformToFill"
                                 Height="250"
@@ -111,7 +114,8 @@
                                     Margin="10, 0, 0, 0"
                                     Command="{Binding NextAttractionCommand}"/>
                         </Grid>
-                        <TextBlock                  
+                        <TextBlock 
+                            x:Name="DescriptionTitle"
                         Text="Description"
                         FontWeight="Bold"
                         FontSize="28"  
@@ -137,7 +141,8 @@
                         FontFamily="{DynamicResource Poppins}"
                         Foreground="{StaticResource DarkGreen}"/>
                         
-                        <TextBlock                  
+                        <TextBlock
+                            x:Name="AdditionalAttractionsTitle"
                         Text="Additional attractions"
                         Margin="0, 15, 0, 0"
                         TextWrapping="Wrap"
@@ -166,7 +171,19 @@
                         
                     </StackPanel>
                     <Separator VerticalAlignment="Stretch" Margin="0, 10, 10, 10" />
-                    <StackPanel>
+                    <StackPanel x:Name="AccommodationPanel" 
+                                Cursor="Hand"
+                                MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction 
+                                            Command="{Binding DataContext.AccommodationClickCommand,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type StackPanel}}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
                         <TextBlock                  
                         Text="Accommodation"
                         FontWeight="Bold"
@@ -187,6 +204,7 @@
                         TextWrapping="Wrap"/>
                         
                         <Image
+                            x:Name="AccommodationImage"
                                 Stretch="UniformToFill"
                                 Source="{Binding Travel.Accommodation.ImagePath, Converter={StaticResource ImageNameConverter}}"/>
 
@@ -280,9 +298,49 @@
         
         <Grid Grid.Column="1"
               Background="{StaticResource DarkGreen}">
-            <m:Map x:Name="mapControl" Mode="AerialWithLabels" CredentialsProvider="{Binding MapApiKey}"
-                   Center="44.0165, 21.0059" ZoomLevel="7" ViewChangeOnFrame="MapControl_ViewChangeOnFrame">
-                
+            <m:Map x:Name="mapControl" 
+                   Mode="Road" 
+                   CredentialsProvider="{Binding MapApiKey}"
+                   Center="{Binding MapCenter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                   ZoomLevel="{Binding MapZoomLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                   ViewChangeOnFrame="MapControl_ViewChangeOnFrame">
+
+                <m:Pushpin  Location="{Binding AccommodationLocation.Location, Mode=TwoWay}"
+                            MouseLeftButtonDown="ScrollToAccommodation"
+                            Background="Blue">
+                    <Image Source="{Binding AccommodationPin, 
+                        Converter={StaticResource ImageNameConverter}}" >
+                    </Image>
+                </m:Pushpin>
+
+                <m:MapItemsControl ItemsSource="{Binding AttractionLocations}">
+                    <m:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            
+                            <m:Pushpin  Location="{Binding Location, Mode=TwoWay}"  
+                                        Tag="{Binding TouristAttraction.Id}"
+                                        MouseLeftButtonDown="ScrollToAttractions"
+                                        Background="{StaticResource DarkGreen}">
+                                <Image Source="{Binding DataContext.AttractionPin, 
+                                    Converter={StaticResource ImageNameConverter},
+                                    RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type m:MapItemsControl}}}" >
+                                </Image>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction 
+                                            Command="{Binding DataContext.PushpinClickCommand,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type m:MapItemsControl}}}"
+                                            CommandParameter="{Binding TouristAttraction.Id}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                
+                            </m:Pushpin>
+                            
+                        </DataTemplate>
+                    </m:MapItemsControl.ItemTemplate>
+                </m:MapItemsControl>
             </m:Map>
         </Grid>
     </Grid>
