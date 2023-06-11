@@ -23,5 +23,10 @@ namespace Tourismo.GUI.Auth
         {
             InitializeComponent();
         }
+
+        private void WhenLoaded(object sender, RoutedEventArgs e)
+        {
+            emailTb.Focus();
+        }
     }
 }
