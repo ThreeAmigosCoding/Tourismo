@@ -57,6 +57,18 @@ namespace Tourismo.Core.Repository.Implementation
             if (entityToUpdate != null)
             {
                 _context.Entry(entityToUpdate).CurrentValues.SetValues(entity);
+
+                if (entityToUpdate is Accommodation || entityToUpdate is TouristAttraction)
+                {
+                    var locationProperty = typeof(T).GetProperty("Location");
+                    if (locationProperty != null)
+                    {
+                        var locationValue = locationProperty.GetValue(entity);
+                        locationProperty.SetValue(entityToUpdate, locationValue);
+                    }
+
+                }
+
                 _context.SaveChanges();
             }
 

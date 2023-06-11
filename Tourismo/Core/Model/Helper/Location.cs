@@ -1,18 +1,19 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using Tourismo.Core.Utility;
 
 namespace Tourismo.Core.Model.Helper
 {
     [Owned]
-    public class Location
+    public class Location : ObservableEntity
     {
         private string _address;
-        public string Address { get { return _address; } set { _address = value; } }
+        public string Address { get { return _address; } set { OnPropertyChanged(ref _address, value); } }
 
         private double _latitude;
-        public double Latitude { get { return _latitude; } set { _latitude = value; } }
+        public double Latitude { get { return _latitude; } set { OnPropertyChanged(ref _latitude, value); } }
 
         private double _longitude;
-        public double Longitude { get { return _longitude; } set { _longitude = value; } }
+        public double Longitude { get { return _longitude; } set { OnPropertyChanged(ref _longitude, value); } }
     }
 }
