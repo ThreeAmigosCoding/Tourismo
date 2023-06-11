@@ -58,4 +58,8 @@
         <agent:AttractionCRUDView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type agent:TravelCRUDViewModel}">
+        <agent:TravelCRUDView/>
+    </DataTemplate>
+
 </ResourceDictionary>

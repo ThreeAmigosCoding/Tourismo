@@ -18,7 +18,10 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
             _accommodationRepository = accommodationRepository;
         }
 
-
+        public IEnumerable<Accommodation> ReadAllNonRestaurants()
+        {
+            return _accommodationRepository.ReadAll().Where(accomodation => accomodation.Type != AccommodationType.Restaurant);
+        }
 
         #region CRUD Methods
         public Accommodation Create(Accommodation entity)

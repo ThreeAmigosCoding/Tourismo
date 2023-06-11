@@ -34,6 +34,24 @@ namespace Tourismo.Core.Persistence
             optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=root123;database=tourismodb");
         }
 
+        public class DefaultAttractionTravel
+        {
+            public int DefaultAttractionId { get; set; }
+            public TouristAttraction DefaultAttraction { get; set; }
+
+            public int TravelId { get; set; }
+            public Travel Travel { get; set; }
+        }
+
+        public class AdditionalAttractionTravel
+        {
+            public int AdditionalAttractionId { get; set; }
+            public TouristAttraction AdditionalAttraction { get; set; }
+
+            public int TravelId { get; set; }
+            public Travel Travel { get; set; }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

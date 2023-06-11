@@ -77,6 +77,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="250"/>
                                         <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock 
                                         Grid.Row="0"
@@ -128,6 +129,33 @@
                                           TextWrapping="Wrap">
                                         </TextBlock>
                                     </Grid>
+                                <StackPanel Grid.Row="3" 
+                                            Orientation="Horizontal"
+                                            Background="{StaticResource DarkGreen}">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding DataContext.IsAgent, 
+                                                    RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <Button     Content="🗑️"
+                                                Margin="10"
+                                                Background="{StaticResource DeleteRed}"
+                                                Foreground="White"
+                                                BorderBrush="Transparent"
+                                                FontFamily="{DynamicResource Poppins}"
+                                                Width="auto"
+                                                MaxWidth="100"
+                                                Command="{Binding DataContext.DeleteTravelCommand, 
+                                                    RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                CommandParameter="{Binding}"/>
+
+                                </StackPanel>
                                 
                                 </Grid>
                             
@@ -305,6 +333,28 @@
                                 Margin="0 15 0 10"
                                 FontSize="16"
                                 TextWrapping="Wrap"/>
+
+                        <StackPanel>
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsAgent}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+
+                            <Separator VerticalAlignment="Stretch" Margin="0, 20, 0, 0" />
+                            <Button Content="Add New"
+                                    Background="{StaticResource DarkGreen}"
+                                    Foreground="White"
+                                    BorderBrush="Transparent"
+                                    FontFamily="{DynamicResource Poppins}"                                   
+                                    Command="{Binding SwitchToTravelCRUD}"
+                                    CommandParameter="create"/>
+                        </StackPanel>
 
                     </StackPanel>
                     
