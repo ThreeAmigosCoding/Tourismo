@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using Tourismo.Core.Commands;
 using Tourismo.Core.Commands.Agent;
+using Tourismo.Core.Commands.Navigation;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.Core.Utility;
@@ -109,6 +110,8 @@ namespace Tourismo.GUI.Agent
         public ICommand? ChooseAccommodationImageCommand { get; }
 
         public ICommand? DeleteAccommodationCommand { get; }
+
+        public ICommand? AgentAccommodationOverviewCommand { get; }
         #endregion
 
         public AccommodationCRUDViewModel(IAccommodationService accommodationService) 
@@ -131,6 +134,7 @@ namespace Tourismo.GUI.Agent
             SaveAccommodationCommand = new SaveAccommodationCommand(this);
             ChooseAccommodationImageCommand = new ChooseAccommodationImageCommand(this);
             DeleteAccommodationCommand = new DeleteAccommodationFromDetailsCommand(this);
+            AgentAccommodationOverviewCommand = new AgentAccommodationOverviewCommand();
 
         }
     }
