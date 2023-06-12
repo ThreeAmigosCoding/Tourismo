@@ -35,6 +35,11 @@ namespace Tourismo.GUI.Agent
             }
         }
 
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("accommodation_crud", this);
+        }
+
         private async void MapWithPushpins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Pin.Visibility = Visibility.Visible;

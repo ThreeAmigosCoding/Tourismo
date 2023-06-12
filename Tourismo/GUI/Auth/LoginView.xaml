@@ -8,6 +8,11 @@
         mc:Ignorable="d"
              Loaded="WhenLoaded">
 
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" 
+                        Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding LoginCommand}"/>
     </UserControl.InputBindings>

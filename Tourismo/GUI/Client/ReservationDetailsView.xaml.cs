@@ -35,6 +35,11 @@ namespace Tourismo.GUI.Client
             }
         }
 
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("reservation_details", this);
+        }
+
         private void ScrollToAttractions(object sender, RoutedEventArgs e)
         {
             AttractionsPanel.BringIntoView();

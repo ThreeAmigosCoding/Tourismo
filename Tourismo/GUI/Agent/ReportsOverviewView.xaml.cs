@@ -25,5 +25,10 @@ namespace Tourismo.GUI.Agent
         {
             InitializeComponent();
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("reports_overview", this);
+        }
     }
 }

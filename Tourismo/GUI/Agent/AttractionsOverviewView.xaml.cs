@@ -29,5 +29,10 @@ namespace Tourismo.GUI.Agent
         {
             searchAttractionsTb.Focus();
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("attractions_overview", this);
+        }
     }
 }

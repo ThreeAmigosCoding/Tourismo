@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:Tourismo.GUI.Auth"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d">
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" 
+                        Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />

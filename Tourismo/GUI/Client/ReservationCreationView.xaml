@@ -13,7 +13,12 @@
     <UserControl.Resources>
         <utility:ImageNameConverter x:Key="ImageNameConverter" />
     </UserControl.Resources>
-    
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" 
+                        Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

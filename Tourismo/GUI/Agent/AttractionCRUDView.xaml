@@ -15,6 +15,11 @@
         <utility:ImageNameConverter x:Key="ImageNameConverter" />
     </UserControl.Resources>
 
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" 
+                        Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveAttractionCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="D" Command="{Binding DeleteAttractionCommand}"/>
