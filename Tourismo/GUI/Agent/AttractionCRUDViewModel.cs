@@ -12,7 +12,9 @@ using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.Core.Utility;
 using Tourismo.GUI.Utility;
 using Tourismo.Resources.Credentials;
+
 using Microsoft.Maps.MapControl.WPF;
+using Tourismo.Core.Commands.Navigation;
 
 namespace Tourismo.GUI.Agent
 {
@@ -116,6 +118,9 @@ namespace Tourismo.GUI.Agent
         public ICommand? DeleteAttractionCommand { get; }
 
         public ICommand? ViewAttractionOnMapCommand { get; }
+        
+        public ICommand? AgentAttractionOverviewCommand { get; }
+
 
         #endregion
 
@@ -143,7 +148,11 @@ namespace Tourismo.GUI.Agent
             SaveAttractionCommand = new SaveAttractionCommand(this);
             ChooseAttractionImageCommand = new ChooseAttractionImageCommand(this);
             DeleteAttractionCommand = new DeleteAttractionFromDetailsCommand(this);
+
             ViewAttractionOnMapCommand = new ViewAttractionOnMapCommand(this);
+
+            AgentAttractionOverviewCommand = new AgentAttractionOverviewCommand();
+
         }
 
     }

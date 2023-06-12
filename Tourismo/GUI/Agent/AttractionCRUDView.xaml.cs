@@ -69,5 +69,10 @@ namespace Tourismo.GUI.Agent
             }
         }
 
+        private void WhenLoaded(object sender, RoutedEventArgs e)
+        {
+            attractionNameTb.Focus();
+        }
+
     }
 }

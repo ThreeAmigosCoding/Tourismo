@@ -58,6 +58,15 @@
         <agent:AccommodationCRUDView/>
     </DataTemplate>
 
+
+    <DataTemplate DataType="{x:Type agent:ReportsOverviewViewModel}">
+        <agent:ReportsOverviewView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:ArrangementsForTravelViewModel}">
+        <agent:ArrangementsForTravelView/>
+    </DataTemplate>
+   
     <DataTemplate DataType="{x:Type agent:AttractionsOverviewViewModel}">
         <agent:AttractionsOverviewView/>
     </DataTemplate>
@@ -69,5 +78,6 @@
     <DataTemplate DataType="{x:Type agent:AgentHelpViewModel}">
         <agent:AgentHelpView/>
     </DataTemplate>
+
 
 </ResourceDictionary>

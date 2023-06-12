@@ -68,5 +68,10 @@ namespace Tourismo.GUI.Agent
                 Pin.Location = location;
             }
         }
+         
+        private void WhenLoaded(object sender, RoutedEventArgs e)
+        {
+            accommodationNameTb.Focus();
+        }
     }
 }
