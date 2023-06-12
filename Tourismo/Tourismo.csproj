@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
@@ -50,7 +51,9 @@
     <PackageReference Include="MySql.Data" Version="8.0.33" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="MySqlConnector" Version="2.2.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Ninject" Version="3.3.6" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -38,7 +38,6 @@ namespace Tourismo.Core.Commands.Agent
 
         public override void Execute(object? parameter)
         {
-            setLocation();
 
             if (_viewModel.Mode == "create")
             {
@@ -53,12 +52,6 @@ namespace Tourismo.Core.Commands.Agent
                 MessageBox.Show("Successfully updated: " + _viewModel.Attraction.Name, "Success");
                 EventBus.FireEvent("AgentAttractionOverview");
             }
-        }
-
-        private void setLocation()
-        {
-            _viewModel.Attraction.Location.Longitude = 55D;
-            _viewModel.Attraction.Location.Latitude = 55D;
         }
 
         private bool validatePrice()

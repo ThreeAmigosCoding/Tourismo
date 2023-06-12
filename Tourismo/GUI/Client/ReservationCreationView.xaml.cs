@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -32,6 +33,41 @@ namespace Tourismo.GUI.Client
             {
                 mapControl.ZoomLevel = 7;
             }
+        }
+
+        private void ScrollToAttractions(object sender, RoutedEventArgs e) 
+        {
+            AttractionsPanel.BringIntoView();
+        }
+
+        private void ScrollToAccommodation(object sender, RoutedEventArgs e)
+        {
+            AccommodationPanel.BringIntoView();
+        }
+
+        private void RestaurantDetails(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            StackPanel stackPanel = (StackPanel)sender;
+
+            DropShadowEffect dropShadow = new DropShadowEffect()
+            {
+                ShadowDepth = 4,
+                Direction = -45,
+                Color = Colors.Black,
+                Opacity = 0.6
+            };
+            stackPanel.Effect = dropShadow;
+        }
+
+        private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            StackPanel stackPanel = (StackPanel)sender;
+            stackPanel.Effect = null;
         }
     }
 }

@@ -51,6 +51,7 @@
             <ScrollViewer  Grid.Row="1" Margin="0, 15, 0, 15">
                     <StackPanel>
                         <TextBox 
+                            x:Name="Name"
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     FontSize="20" 
                     x:Name="accommodationNameTb"
@@ -58,15 +59,37 @@
                     materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
                     Text="{Binding Accommodation.Name, UpdateSourceTrigger=PropertyChanged}"/>
 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
                         <TextBox 
-                    Margin="0, 15, 0, 0"
-                    Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                    FontSize="20" 
-                    materialDesign:HintAssist.Hint="Address"
-                    materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
-                    Text="{Binding Accommodation.Location.Address, UpdateSourceTrigger=PropertyChanged}"/>
+                           x:Name="AddressTb"
+                            Margin="0, 15, 0, 0"
+                            Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                            FontSize="20" 
+                            materialDesign:HintAssist.Hint="Address"
+                            materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
+                            Text="{Binding Accommodation.Location.Address, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBox 
+                        <Button Content="Map view"
+                                VerticalAlignment="Center"
+                            Grid.Column="1"
+                            Background="{StaticResource DarkGreen}"
+                            Foreground="White"
+                            Margin="10, 20, 0, 0"
+                            Padding="0, 0, 0, 5"
+                            Height="50"
+                            FontSize="20"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewAccommodationOnMapCommand}">
+                        </Button>
+
+                    </Grid>
+
+                    <TextBox 
                     Margin="0, 15, 0, 0"
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     FontSize="20" 
@@ -168,9 +191,14 @@
 
         <Grid Grid.Column="1"
               Background="{StaticResource DarkGreen}">
-            <m:Map x:Name="mapControl" Mode="AerialWithLabels" CredentialsProvider="{Binding MapCredentials}"
-                   Center="44.0165, 21.0059" ZoomLevel="7" ViewChangeOnFrame="MapControl_ViewChangeOnFrame">
+            <m:Map x:Name="mapControl" Mode="Road" CredentialsProvider="{Binding MapCredentials}"
+                   Center="44.0165, 21.0059" ZoomLevel="7" ViewChangeOnFrame="MapControl_ViewChangeOnFrame"
+                   MouseDoubleClick="MapWithPushpins_MouseDoubleClick">
 
+                <m:Pushpin x:Name="Pin"
+                           Visibility="Visible"
+                           Location="{Binding SelectedLocation, Mode=TwoWay}"/>
+                
             </m:Map>
         </Grid>
 
