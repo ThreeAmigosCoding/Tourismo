@@ -73,7 +73,7 @@ namespace Tourismo.GUI.Navigation
 
         private void shiftDown()
         {
-            if (selectedNavItem < 4)
+            if (selectedNavItem < 3)
             {
                 selectedNavItem++;
                 navItems[selectedNavItem].IsChecked = true;
@@ -89,7 +89,6 @@ namespace Tourismo.GUI.Navigation
             navItems.Add(1, AgentAttractionsNav);
             navItems.Add(2, AgentAccommodationsNav);
             navItems.Add(3, AgentReportsNav);
-            navItems.Add(4, AgentHelpNav);
         }
 
 
@@ -99,6 +98,16 @@ namespace Tourismo.GUI.Navigation
             int parameter = Convert.ToInt32(radioButton.Tag);
 
             selectedNavItem = parameter;
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                HelpProvider.ShowHelp("agent_navigation", this);
+                //string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+            }
         }
     }
 }

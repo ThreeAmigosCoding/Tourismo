@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tourismo.Core.Model.UserManagement;
+using Tourismo.Core.Utility;
 
 namespace Tourismo.GUI.Client
 {
@@ -44,8 +46,12 @@ namespace Tourismo.GUI.Client
             IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
             if (focusedControl is DependencyObject)
             {
+                User user = GlobalStore.ReadObject<User>("LoggedUser");
+                if (user != null && user.Role == Role.Client) 
+                {
+                    HelpProvider.ShowHelp("travels_overview", this);
+                }
                 //string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
-                HelpProvider.ShowHelp("travels_overview", this);
             }
         }
 

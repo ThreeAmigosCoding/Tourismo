@@ -1,11 +1,54 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: gainsboro
+        }
+
+        p {
+            font-family: "Poppins", sans-serif;
+            font-size: 20px;
+        }
+
+        .container {
+            margin-left: 50px;
+        }
+
+        .img-div {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        img {
+            width: 60%;
+        }
+
+        a {
+            color: green;
+        }
+
+        a:hover {
+            background-color: rgb(210, 197, 197);
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Client travels overview</h1>
+    <h1>Client Travels overview</h1>
+    <div class="container">
+        <p>
+            In travels overview you are provided with the list of available travels. You are able to <b>search travels by their name</b>, and also <b>filter travels</b> by their price and available date range. Also you can <b>sort travels</b> by some of the given categories.
+            When you want to have a look at all travels again, just press the <b>reset</b> button and you are good to go.
+        </p>
+        <div class="img-div"><img src="Images/client_travel_overview.png" alt="nothing"></div>
+        <p>
+            When you want to make a reservation click on the card of the travel which you want to go to and it will lead you to
+            <br> <a href="reservation_creation.html"> Make a reservation page </a>
+        </p>
+    </div>
 </body>
 </html>

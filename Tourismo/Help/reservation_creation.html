@@ -1,11 +1,50 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: gainsboro
+        }
+
+        p {
+            font-family: "Poppins", sans-serif;
+            font-size: 20px;
+        }
+
+        .container {
+            margin-left: 50px;
+        }
+
+        .img-div {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap:15px;
+        }
+
+        img {
+            width: 60%;
+        }
+    </style>
 </head>
 <body>
-    reservation_creation
+    <h1>Make a reservation</h1>
+    <div class="container">
+        <p>
+            When you want to make a reservation you are presented with all travel details where you can:
+            <br> - Take a look at travel's details.
+            <br> - Browse through travel's attractions by clicking left and right buttons displayed on the screen 
+            <br> - Choose additional  attractions by ticking the checkbox below attraction details.
+            <br> - Choose desired travel period.
+            <br> - Click <b>Make a reservation button</b> and book your travel.
+        </p>
+        <div class="img-div">
+            <img src="Images/makeARes1.jpg" alt="">
+            <img src="Images/makeARes2.png" alt="">
+            <img src="Images/makeARes3.png" alt="">
+        </div>
+    </div>
 </body>
 </html>

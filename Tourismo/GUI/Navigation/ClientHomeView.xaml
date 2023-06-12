@@ -9,6 +9,10 @@
              Loaded="HomeView_Loaded"
              Unloaded="HomeView_Unloaded">
 
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
     <Border Background="{StaticResource LightGreen}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -63,16 +67,7 @@
                              x:Name="ClientHistoryNav"
                              Click="HandleRadioButtonClick"
                              Tag="2"/>
-                    <RadioButton Content="❔ Help"
-                             Height="50"
-                             FontSize="20"
-                             FontFamily="{DynamicResource Poppins}"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding ClientHelpCommand}"
-                             Width="200"
-                             x:Name="ClientHelpNav"
-                             Click="HandleRadioButtonClick"
-                             Tag="3"/>
+                    
                 </StackPanel>
 
                 <Button Content="Log Out"
