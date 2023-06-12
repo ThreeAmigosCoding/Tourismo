@@ -27,15 +27,25 @@ namespace Tourismo.GUI.Navigation
         public ICommand? TravelsOverviewCommand { get; set; }
         public ICommand? AccommodationOverviewCommand { get; set; }
 
+        public ICommand? ReportsOverviewCommand { get; set; }
+
         public ICommand? AttractionsOverviewCommand { get; set; }
+
+        public ICommand? AgentHelpCommand { get; set; }
 
         public AgentHomeViewModel()
         {
             LogOutCommand = new LogOutCommand();
             AccommodationOverviewCommand = new AgentAccommodationOverviewCommand();
+
             TravelsOverviewCommand = new AgentTravelsOverviewCommand();
             AttractionsOverviewCommand = new AgentAttractionOverviewCommand();
             SwitchCurrentViewModel(ServiceLocator.Get<TravelsOverviewViewModel>());
+
+            ReportsOverviewCommand = new AgentReportsOverviewCommand();
+            AttractionsOverviewCommand = new AgentAttractionOverviewCommand();
+            AgentHelpCommand = new AgentHelpCommand();
+            
             RegisterHandler();
         }
 
@@ -65,6 +75,19 @@ namespace Tourismo.GUI.Navigation
                 SwitchCurrentViewModel(AccommodationCRUDViewModel);
             });
 
+
+            EventBus.RegisterHandler("SwitchToAgentReportsOverview", () =>
+            {
+                ReportsOverviewViewModel ReportsOverviewViewModel = ServiceLocator.Get<ReportsOverviewViewModel>();
+                SwitchCurrentViewModel(ReportsOverviewViewModel);
+            });
+
+            EventBus.RegisterHandler("SwitchToArrangementsForTravel", () =>
+            {
+                ArrangementsForTravelViewModel ArrangementsForTravelViewModel = ServiceLocator.Get<ArrangementsForTravelViewModel>();
+                SwitchCurrentViewModel(ArrangementsForTravelViewModel);
+            });
+            
             EventBus.RegisterHandler("AgentAttractionOverview", () =>
             {
                 AttractionsOverviewViewModel AttractionsOverviewViewModel = ServiceLocator.Get<AttractionsOverviewViewModel>();
@@ -75,6 +98,12 @@ namespace Tourismo.GUI.Navigation
             {
                 AttractionCRUDViewModel AttractionCRUDViewModel = ServiceLocator.Get<AttractionCRUDViewModel>();
                 SwitchCurrentViewModel(AttractionCRUDViewModel);
+            });
+
+            EventBus.RegisterHandler("AgentHelp", () =>
+            {
+                AgentHelpViewModel AgentHelpViewModel = ServiceLocator.Get<AgentHelpViewModel>();
+                SwitchCurrentViewModel(AgentHelpViewModel);
             });
         }
     }

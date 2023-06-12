@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tourismo.GUI.Auth"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+             Loaded="WhenLoaded">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding LoginCommand}"/>
+    </UserControl.InputBindings>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -61,6 +67,7 @@
                     Grid.Row="3"
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     FontSize="20" 
+                    x:Name="emailTb"
                     materialDesign:HintAssist.Hint="Email"
                     materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>

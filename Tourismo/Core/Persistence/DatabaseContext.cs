@@ -8,6 +8,8 @@ using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Model.UserManagement;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Tourismo.Core.Model.Helper;
+using Tourismo.Core.Model.UserDocumentation;
+
 
 namespace Tourismo.Core.Persistence
 {
@@ -21,6 +23,8 @@ namespace Tourismo.Core.Persistence
         public DbSet<TouristAttraction> TouristAttractions { get; set; }
         public DbSet<Travel> Travels { get; set; }
         public DbSet<DateRange> DateRange { get; set; }
+        public DbSet<UserDocumentation> UserDocumentation { get; set; }
+        public DbSet<UserDocumentationSection> UserDocumentationSections { get; set; }
 
         public DatabaseContext(string path = "") {
             DbPath = path;

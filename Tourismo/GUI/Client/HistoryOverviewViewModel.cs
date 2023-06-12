@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Tourismo.Core.Commands.Agent;
+using Tourismo.Core.Commands.Client;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Model.UserManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
@@ -19,6 +22,8 @@ namespace Tourismo.GUI.Client
         private List<Arrangement> _history;
         private IArrangementService _arrangementService;
 
+        private Arrangement _selectedArrangament; 
+
         #endregion
 
         #region Properties
@@ -33,7 +38,25 @@ namespace Tourismo.GUI.Client
             }
         }
 
+        public Arrangement SelectedArrangement
+        {
+            get { return _selectedArrangament; }
+            set
+            {
+                _selectedArrangament = value;
+                OnPropertyChanged(nameof(SelectedArrangement));
+                GlobalStore.AddObject("SelectedArrangament", _selectedArrangament);
+                SwitchToReservationDetails.Execute("history");
+            }
+        }
+
         public IArrangementService ArrangementService { get => _arrangementService; }
+
+        #endregion
+
+        #region Commands
+
+        ICommand SwitchToReservationDetails { get; }
 
         #endregion
 
@@ -41,6 +64,7 @@ namespace Tourismo.GUI.Client
         {
             _arrangementService = arrangementService;
             _history = _arrangementService.GetUserHistory(GlobalStore.ReadObject<User>("LoggedUser").EmailAddress);
+            SwitchToReservationDetails = new SwitchToReservationDetails();
         }
 
     }

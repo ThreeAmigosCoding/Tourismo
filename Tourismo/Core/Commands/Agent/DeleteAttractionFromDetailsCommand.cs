@@ -20,16 +20,20 @@ namespace Tourismo.Core.Commands.Agent
 
         public override void Execute(object? parameter)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this attraction: "
+            if (_viewModel.DeleteButtonVisibility == Visibility.Visible)
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this attraction: "
                 + _viewModel.Attraction.Name + "?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (result == MessageBoxResult.Yes)
-            {
-                _viewModel.AttractionService.Deactivate(_viewModel.Attraction);
-                MessageBox.Show("Successfully deleted: " + _viewModel.Attraction.Name, "Success");
+                if (result == MessageBoxResult.Yes)
+                {
+                    _viewModel.AttractionService.Deactivate(_viewModel.Attraction);
+                    MessageBox.Show("Successfully deleted: " + _viewModel.Attraction.Name, "Success");
+                    EventBus.FireEvent("AgentAttractionOverview");
+                }
+   
             }
-
-            EventBus.FireEvent("AgentAttractionOverview");
+            
         }
     }
 }

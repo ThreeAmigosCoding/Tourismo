@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Tourismo.GUI.Navigation"
              mc:Ignorable="d"
-             d:DesignHeight="800" d:DesignWidth="1200">
+             d:DesignHeight="800" d:DesignWidth="1200"
+             Loaded="HomeView_Loaded"
+             Unloaded="HomeView_Unloaded">
 
     <Border Background="{StaticResource LightGreen}">
         <Grid>
@@ -36,7 +38,10 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ClientTravelsOverviewCommand}"
                              Width="200" 
-                             IsChecked="True"/>
+                             IsChecked="True"
+                             x:Name="ClientTravelsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="0"/>
 
                     <RadioButton Content="🎫 Reservations"
                              Height="50"
@@ -44,14 +49,30 @@
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ClientReservationsOverviewCommand}"
-                             Width="200"/>
+                             Width="200"
+                             x:Name="ClientReservationsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="1"/>
                     <RadioButton Content="📜 History"
                              Height="50"
                              FontSize="20"
                              FontFamily="{DynamicResource Poppins}"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding ClientHistoryOverviewCommand}"
-                             Width="200"/>
+                             Width="200"
+                             x:Name="ClientHistoryNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="2"/>
+                    <RadioButton Content="❔ Help"
+                             Height="50"
+                             FontSize="20"
+                             FontFamily="{DynamicResource Poppins}"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ClientHelpCommand}"
+                             Width="200"
+                             x:Name="ClientHelpNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="3"/>
                 </StackPanel>
 
                 <Button Content="Log Out"

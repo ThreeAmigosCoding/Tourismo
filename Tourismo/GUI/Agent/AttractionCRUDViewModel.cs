@@ -13,6 +13,9 @@ using Tourismo.Core.Utility;
 using Tourismo.GUI.Utility;
 using Tourismo.Resources.Credentials;
 
+using Microsoft.Maps.MapControl.WPF;
+using Tourismo.Core.Commands.Navigation;
+
 namespace Tourismo.GUI.Agent
 {
     class AttractionCRUDViewModel : NavigableViewModel
@@ -31,6 +34,8 @@ namespace Tourismo.GUI.Agent
         private Visibility _errMsgVisibility;
 
         private ITouristAttractionService _attractionService;
+
+        private Location _selectedLocation;
 
         #endregion
 
@@ -90,6 +95,18 @@ namespace Tourismo.GUI.Agent
 
         public ITouristAttractionService AttractionService { get => _attractionService; }
 
+        public Location SelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value;
+                Attraction.Location.Longitude = _selectedLocation.Longitude;
+                Attraction.Location.Latitude = _selectedLocation.Latitude;
+                OnPropertyChanged(nameof(SelectedLocation));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -99,6 +116,11 @@ namespace Tourismo.GUI.Agent
         public ICommand? ChooseAttractionImageCommand { get; }
 
         public ICommand? DeleteAttractionCommand { get; }
+
+        public ICommand? ViewAttractionOnMapCommand { get; }
+        
+        public ICommand? AgentAttractionOverviewCommand { get; }
+
 
         #endregion
 
@@ -111,9 +133,13 @@ namespace Tourismo.GUI.Agent
             {
                 _deleteButtonVisibility = Visibility.Visible;
                 _attraction = GlobalStore.ReadObject<TouristAttraction>("SelectedAttraction");
+                _selectedLocation = new Location();
+                _selectedLocation.Longitude = Attraction.Location.Longitude;
+                _selectedLocation.Latitude = Attraction.Location.Latitude;
             }
             else
             {
+                _selectedLocation = new Location(44.0165, 21.0059);
                 _deleteButtonVisibility = Visibility.Hidden;
                 _attraction = new TouristAttraction();
                 _attraction.Location = new Core.Model.Helper.Location();
@@ -122,6 +148,11 @@ namespace Tourismo.GUI.Agent
             SaveAttractionCommand = new SaveAttractionCommand(this);
             ChooseAttractionImageCommand = new ChooseAttractionImageCommand(this);
             DeleteAttractionCommand = new DeleteAttractionFromDetailsCommand(this);
+
+            ViewAttractionOnMapCommand = new ViewAttractionOnMapCommand(this);
+
+            AgentAttractionOverviewCommand = new AgentAttractionOverviewCommand();
+
         }
 
     }

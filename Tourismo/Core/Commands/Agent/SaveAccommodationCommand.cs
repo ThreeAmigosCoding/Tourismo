@@ -39,7 +39,6 @@ namespace Tourismo.Core.Commands.Agent
 
         public override void Execute(object? parameter)
         {
-            setLocation();
 
             if (_viewModel.Mode == "create")
             {
@@ -55,12 +54,6 @@ namespace Tourismo.Core.Commands.Agent
                 EventBus.FireEvent("AgentAccommodationOverview");
             }
 
-        }
-
-        private void setLocation()
-        {
-            _viewModel.Accommodation.Location.Longitude = 55D;
-            _viewModel.Accommodation.Location.Latitude = 55D;
         }
 
         private bool validatePrice()

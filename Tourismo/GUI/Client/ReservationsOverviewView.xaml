@@ -40,79 +40,79 @@
                     Foreground="{StaticResource DarkGreen}"/>
             </Grid>
             <Grid Grid.Row="1">
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" 
-                              VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding Reservations}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel FlowDirection="LeftToRight"
-                                           ItemWidth="400"
-                                           Width="{Binding ActualWidth, 
-                                           RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                  AncestorType={x:Type ScrollViewer}}}"
-                                     />
+                <ListView ItemsSource="{Binding Reservations}"
+                          ItemContainerStyle="{DynamicResource RemoveDefaultListViewHover}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          SelectedItem="{Binding SelectedArrangement}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel FlowDirection="LeftToRight"
+                                        ItemWidth="400"
+                                        Width="{Binding ActualWidth, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type ScrollViewer}}}"
+                                    />
 
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
 
-                                <Grid Margin="0, 0, 35, 20"
-                                      Style="{DynamicResource HoverEffectTravelCard}">
+                            <Grid Margin="0, 0, 35, 20"
+                                    Style="{DynamicResource HoverEffectTravelCard}">
 
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="250"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock 
+                                    Grid.Row="0"
+                                    FontSize="28"
+                                    FontFamily="{DynamicResource Playfair}"
+                                    FontWeight="Medium"
+                                    Text="{Binding Travel.Name}"
+                                    Margin="0, 10, 0, 10"/>
+                                <Image
+                                    Grid.Row="1"
+                                    Stretch="UniformToFill"
+                                    Source="{Binding Travel.ImagePath, Converter={StaticResource ImageNameConverter}}">
+                                </Image>
+
+
+                                <Grid Grid.Row="2" 
+                                        Background="{StaticResource DarkGreen}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="250"/>
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock 
-                                        Grid.Row="0"
-                                        FontSize="28"
-                                        FontFamily="{DynamicResource Playfair}"
-                                        FontWeight="Medium"
-                                        Text="{Binding Travel.Name}"
-                                        Margin="0, 10, 0, 10"/>
-                                    <Image
-                                        Grid.Row="1"
-                                        Stretch="UniformToFill"
-                                        Source="{Binding Travel.ImagePath, Converter={StaticResource ImageNameConverter}}">
-                                    </Image>
-                                    
-
-                                    <Grid Grid.Row="2" 
-                                          Background="{StaticResource DarkGreen}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0"
-                                          FontFamily="{DynamicResource Poppins}"
-                                          FontSize="18"
-                                          Foreground="White"
-                                          Padding="10 8"                                         
-                                          Text="{Binding Period}"
-                                          TextWrapping="Wrap">
-                                        </TextBlock>
-                                        <TextBlock Grid.Row="1"
-                                          FontFamily="{DynamicResource Poppins}"
-                                          FontSize="18"
-                                          Foreground="White"
-                                          Padding="10 8"
-                                          Text="{Binding Travel.ShortDescription}"
-                                          TextWrapping="Wrap">
-                                        </TextBlock>
-                                        
-                                    </Grid>
+                                    <TextBlock Grid.Row="0"
+                                        FontFamily="{DynamicResource Poppins}"
+                                        FontSize="18"
+                                        Foreground="White"
+                                        Padding="10 8"                                         
+                                        Text="{Binding Period}"
+                                        TextWrapping="Wrap">
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1"
+                                        FontFamily="{DynamicResource Poppins}"
+                                        FontSize="18"
+                                        Foreground="White"
+                                        Padding="10 8"
+                                        Text="{Binding Travel.ShortDescription}"
+                                        TextWrapping="Wrap">
+                                    </TextBlock>
 
                                 </Grid>
 
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+                            </Grid>
+
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListView>
             </Grid>
 
             <TextBlock Grid.Row="1"
