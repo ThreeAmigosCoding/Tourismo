@@ -9,6 +9,7 @@ namespace Tourismo.Core.Repository.Interface.TravelManagement
 {
     public interface ITravelRepository : ICRUDRepository<Travel>
     {
-
+        public Travel CreateNewTravel(Travel travel);
+        public Travel UpdateTravel(Travel travel);
     }
 }

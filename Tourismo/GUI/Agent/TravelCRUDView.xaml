@@ -340,7 +340,7 @@
                                 FontSize="18"
                                 FontFamily="{DynamicResource Poppins}"
                                 BorderBrush="Transparent"
-                                Command="{Binding DeleteTravelCommand}"
+                                Command="{Binding DeleteTravelFromDetailsCommand}"
                                 Visibility="{Binding DeleteButtonVisibility}"/>
 
                     </Grid>

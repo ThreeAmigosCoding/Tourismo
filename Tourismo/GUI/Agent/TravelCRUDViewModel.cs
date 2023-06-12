@@ -239,6 +239,7 @@ namespace Tourismo.GUI.Agent
         public ICommand? AddPeriodCommand { get; }
         public ICommand? RemovePeriodCommand { get; }
         public ICommand? SaveTravelCommand { get; }
+        public ICommand? DeleteTravelFromDetailsCommand { get; }
 
         #endregion
 
@@ -290,6 +291,7 @@ namespace Tourismo.GUI.Agent
             AddPeriodCommand = new AddPeriodCommand(this);
             RemovePeriodCommand = new RemovePeriodCommand(this);
             SaveTravelCommand = new SaveTravelCommand(this);
+            DeleteTravelFromDetailsCommand = new DeleteTravelFromDetailsCommand(this);
 
             FilterItems();
         }

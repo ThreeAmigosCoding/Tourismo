@@ -64,8 +64,6 @@ namespace Tourismo.Core.Commands.Agent
                     MinimalPrice = _viewModel.DefaultAttractionsDragDropViewModel.Attractions.Sum(a => a.Price)
                 };
 
-                MessageBox.Show(travel.Periods[0].ToString());
-
                 _viewModel.TravelService.Create(travel);
                 MessageBox.Show("Successfully created: " + _viewModel.Travel.Name, "Success");
                 GlobalStore.AddObject("TravelCRUDMode", "create");
@@ -73,7 +71,14 @@ namespace Tourismo.Core.Commands.Agent
             }
             else
             {
-
+                _viewModel.Travel.DefaultAttractions = _viewModel.DefaultAttractionsDragDropViewModel.Attractions.ToList();
+                _viewModel.Travel.AdditionalAttractions = _viewModel.AdditionalAttractionsDragDropViewModel.Attractions.ToList();
+                _viewModel.Travel.Accommodation = _viewModel.SelectedAccommodation;
+                _viewModel.Travel.Periods = _viewModel.Periods.ToList();
+                _viewModel.Travel.MinimalPrice = _viewModel.DefaultAttractionsDragDropViewModel.Attractions.Sum(a => a.Price);
+                _viewModel.TravelService.Update(_viewModel.Travel);
+                MessageBox.Show("Successfully updated: " + _viewModel.Travel.Name, "Success");
+                EventBus.FireEvent("AgentTravelsOverview");
             }
         }
 

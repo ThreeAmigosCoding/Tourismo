@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Model.UserManagement;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Tourismo.Core.Model.Helper;
 
 namespace Tourismo.Core.Persistence
 {
@@ -19,6 +20,7 @@ namespace Tourismo.Core.Persistence
         public DbSet<Arrangement> Arrangements { get; set; }
         public DbSet<TouristAttraction> TouristAttractions { get; set; }
         public DbSet<Travel> Travels { get; set; }
+        public DbSet<DateRange> DateRange { get; set; }
 
         public DatabaseContext(string path = "") {
             DbPath = path;
@@ -32,25 +34,7 @@ namespace Tourismo.Core.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=root123;database=tourismodb");
-        }
-
-        public class DefaultAttractionTravel
-        {
-            public int DefaultAttractionId { get; set; }
-            public TouristAttraction DefaultAttraction { get; set; }
-
-            public int TravelId { get; set; }
-            public Travel Travel { get; set; }
-        }
-
-        public class AdditionalAttractionTravel
-        {
-            public int AdditionalAttractionId { get; set; }
-            public TouristAttraction AdditionalAttraction { get; set; }
-
-            public int TravelId { get; set; }
-            public Travel Travel { get; set; }
-        }
+        }    
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

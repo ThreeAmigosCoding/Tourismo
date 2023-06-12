@@ -240,11 +240,12 @@ namespace Tourismo.GUI.Client
             ApplyFiltersCommand = new ApplyFiltersCommand(this);
             OpenReservationCreationCommand = new OpenReservationCreationCommand(this);
             SwitchToTravelCRUD = new SwitchToTravelCRUD();
+            DeleteTravelCommand = new DeleteTravelCommand(this);
 
             FilterItems();
         }
 
-        private void FilterItems()
+        public void FilterItems()
         {
             if (string.IsNullOrEmpty(SearchText))
             {
