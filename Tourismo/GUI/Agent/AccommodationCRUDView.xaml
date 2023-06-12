@@ -97,7 +97,7 @@
                     Margin="0, 15, 0, 0"
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     FontSize="20" 
-                    materialDesign:HintAssist.Hint="Price"
+                    materialDesign:HintAssist.Hint="Price (per night)rsd"
                     materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
                     Text="{Binding Accommodation.Price, UpdateSourceTrigger=PropertyChanged}"/>
 

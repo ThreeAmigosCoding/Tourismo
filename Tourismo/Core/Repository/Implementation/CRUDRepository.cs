@@ -45,11 +45,7 @@ namespace Tourismo.Core.Repository.Implementation
                 }
             }
 
-            else if (entity is Travel)
-            {
-                
-            }
-
+            
             _context.SaveChanges();
 
             return entity;
