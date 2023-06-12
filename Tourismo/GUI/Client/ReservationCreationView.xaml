@@ -114,14 +114,7 @@
                                     Margin="10, 0, 0, 0"
                                     Command="{Binding NextAttractionCommand}"/>
                         </Grid>
-                        <TextBlock 
-                            x:Name="DescriptionTitle"
-                        Text="Description"
-                        FontWeight="Bold"
-                        FontSize="28"  
-                        HorizontalAlignment="Left"
-                        FontFamily="{DynamicResource Poppins}"
-                        Foreground="{StaticResource DarkGreen}"/>
+                        
                         
                         <TextBlock
                         Text="{Binding CurrentAttraction.Description, UpdateSourceTrigger=PropertyChanged}"
@@ -307,7 +300,8 @@
 
                 <m:Pushpin  Location="{Binding AccommodationLocation.Location, Mode=TwoWay}"
                             MouseLeftButtonDown="ScrollToAccommodation"
-                            Background="Blue">
+                            Background="Blue"
+                            Cursor="Hand">
                     <Image Source="{Binding AccommodationPin, 
                         Converter={StaticResource ImageNameConverter}}" >
                     </Image>
@@ -320,7 +314,8 @@
                             <m:Pushpin  Location="{Binding Location, Mode=TwoWay}"  
                                         Tag="{Binding TouristAttraction.Id}"
                                         MouseLeftButtonDown="ScrollToAttractions"
-                                        Background="{StaticResource DarkGreen}">
+                                        Background="{StaticResource DarkGreen}"
+                                        Cursor="Hand">
                                 <Image Source="{Binding DataContext.AttractionPin, 
                                     Converter={StaticResource ImageNameConverter},
                                     RelativeSource={RelativeSource Mode=FindAncestor, 

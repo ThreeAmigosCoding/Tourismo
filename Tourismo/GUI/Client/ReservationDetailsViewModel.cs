@@ -28,6 +28,11 @@ namespace Tourismo.GUI.Client
         private Travel _travel;
         private Visibility _cancelButtonVisibility;
 
+        private List<AttractionLocation> _attractionLocations;
+        private Microsoft.Maps.MapControl.WPF.Location _mapCenter;
+        private double _mapZoomLevel;
+        private AccommodationLocation _accommodationLocation;
+
         #endregion
 
         #region Properties
@@ -97,6 +102,57 @@ namespace Tourismo.GUI.Client
         public IArrangementService ArrangementService { get => _arrangementService; }
 
         public ITravelService TravelService { get => _travelService; }
+
+        public List<AttractionLocation> AttractionLocations
+        {
+            get => _attractionLocations;
+            set
+            {
+                _attractionLocations = value;
+                OnPropertyChanged(nameof(AttractionLocations));
+            }
+        }
+
+        public double MapZoomLevel
+        {
+            get => _mapZoomLevel;
+            set
+            {
+                _mapZoomLevel = value;
+                OnPropertyChanged(nameof(MapZoomLevel));
+            }
+        }
+
+        public Microsoft.Maps.MapControl.WPF.Location MapCenter
+        {
+            get => _mapCenter;
+            set
+            {
+                _mapCenter = value;
+                OnPropertyChanged(nameof(MapCenter));
+            }
+        }
+
+        public AccommodationLocation AccommodationLocation
+        {
+            get { return _accommodationLocation; }
+            set
+            {
+                _accommodationLocation = value;
+                OnPropertyChanged(nameof(AccommodationLocation));
+            }
+        }
+
+        public string AccommodationPin
+        {
+            get => "Pins/accommodation.png";
+        }
+
+        public string AttractionPin
+        {
+            get => "Pins/attraction.png";
+        }
+
         #endregion
 
         #region Commands
@@ -104,6 +160,8 @@ namespace Tourismo.GUI.Client
         public ICommand PreviousAttractionCommand { get; private set; }
         public ICommand NextAttractionCommand { get; private set; }
         public ICommand CancelReservationCommand { get; private set; }
+        public ICommand PushpinClickCommand { get; private set; }
+        public ICommand AccommodationClickCommand { get; private set; }
 
         #endregion
 
@@ -119,9 +177,14 @@ namespace Tourismo.GUI.Client
                 .Concat(_additionalAttractions).ToList();
             _currentAttraction = _allAttractions[0];
 
+            InitializeMap();
+
             NextAttractionCommand = new RelayCommand(NextAttraction);
             PreviousAttractionCommand = new RelayCommand(PreviousAttraction);
             CancelReservationCommand = new RelayCommand(CancelReservation);
+
+            PushpinClickCommand = new RelayCommand<object>(PushpinClick);
+            AccommodationClickCommand = new RelayCommand(AccommodationClick);
 
             if (GlobalStore.ReadObject<string>("ReservationDetails") == "history")
                 CancelVisibility = Visibility.Hidden;
@@ -134,6 +197,10 @@ namespace Tourismo.GUI.Client
                 _attractionsIndex = 0;
             else _attractionsIndex++;
             CurrentAttraction = _allAttractions[_attractionsIndex];
+            MapZoomLevel = 8;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                CurrentAttraction.Location.Latitude,
+                CurrentAttraction.Location.Longitude);
         }
 
         private void PreviousAttraction()
@@ -143,6 +210,10 @@ namespace Tourismo.GUI.Client
                 _attractionsIndex = _allAttractions.Count - 1;
             else _attractionsIndex--;
             CurrentAttraction = _allAttractions[_attractionsIndex];
+            MapZoomLevel = 8;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                CurrentAttraction.Location.Latitude,
+                CurrentAttraction.Location.Longitude);
         }
 
         private void CancelReservation()
@@ -157,5 +228,41 @@ namespace Tourismo.GUI.Client
                 EventBus.FireEvent("ClientReservationsOverview");
             }
         }
+
+        private void InitializeMap()
+        {
+            _attractionLocations = new List<AttractionLocation>(_allAttractions.Concat(AdditionalAttractions)
+                .Select(al => new AttractionLocation(al)));
+            MapZoomLevel = 7;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(44.0165, 21.0059);
+            AccommodationLocation = new AccommodationLocation(Travel.Accommodation);
+        }
+
+        public void PushpinClick(object? parameter)
+        {
+            Guid id = (Guid)parameter;
+            for (int i = 0; i < _allAttractions.Count; i++)
+            {
+                if (id == _allAttractions[i].Id)
+                {
+                    CurrentAttraction = _allAttractions[i];
+                    _attractionsIndex = i;
+                    MapZoomLevel = 8;
+                    MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                        CurrentAttraction.Location.Latitude,
+                        CurrentAttraction.Location.Longitude);
+                    break;
+                }
+            }
+        }
+
+        public void AccommodationClick()
+        {
+            MapZoomLevel = 8;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                        Travel.Accommodation.Location.Latitude,
+                        Travel.Accommodation.Location.Longitude);
+        }
+
     }
 }
