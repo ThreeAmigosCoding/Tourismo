@@ -42,6 +42,9 @@ namespace Tourismo.GUI.Client
         private double _mapZoomLevel;
         private AccommodationLocation _accommodationLocation;
 
+        private List<AccommodationLocation> _restaurants;
+        private IAccommodationService _accommodationService;
+
         #endregion
 
         #region Properties
@@ -178,6 +181,18 @@ namespace Tourismo.GUI.Client
             }
         }
 
+        public List<AccommodationLocation> Restaurants
+        {
+            get { return _restaurants; }
+            set
+            {
+                _restaurants = value;
+                OnPropertyChanged(nameof(Restaurants));
+            }
+        }
+
+        public IAccommodationService AccommodationService { get => _accommodationService; }
+
         public string AccommodationPin
         {
             get => "Pins/accommodation.png";
@@ -186,6 +201,11 @@ namespace Tourismo.GUI.Client
         public string AttractionPin
         {
             get => "Pins/attraction.png";
+        }
+
+        public string RestaurantPin
+        {
+            get => "Pins/restaurant.png";
         }
 
         #endregion
@@ -201,8 +221,9 @@ namespace Tourismo.GUI.Client
 
         #endregion
 
-        public ReservationCreationViewModel(IArrangementService arrangementService)
+        public ReservationCreationViewModel(IArrangementService arrangementService, IAccommodationService accommodationService)
         {
+            _accommodationService = accommodationService;
             _arrangementService = arrangementService;
             _travel = GlobalStore.ReadObject<Travel>("TravelForReservation");
             _additionalAttractions = _travel.AdditionalAttractions.OrderBy(a => a.CreatedAt).ToList();
@@ -306,6 +327,15 @@ namespace Tourismo.GUI.Client
             MapZoomLevel = 7;
             MapCenter = new Microsoft.Maps.MapControl.WPF.Location(44.0165, 21.0059);
             AccommodationLocation = new AccommodationLocation(Travel.Accommodation);
+
+            List<Accommodation> allRestaurants = AccommodationService.ReadAll()
+                .Where(a => a.Type == AccommodationType.Restaurant)
+                .ToList();
+
+            Restaurants = MapUtils.GetRestaurantsWithinRadius(allRestaurants, 
+                AccommodationLocation.Location.Latitude,
+                AccommodationLocation.Location.Longitude,
+                1.5).Select(a => new AccommodationLocation(a)).ToList();
         }
 
         public void PushpinClick(object? parameter)

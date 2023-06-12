@@ -245,6 +245,42 @@
                     </m:MapItemsControl.ItemTemplate>
                 </m:MapItemsControl>
 
+                <m:MapItemsControl ItemsSource="{Binding Restaurants}">
+                    <m:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                            <m:Pushpin  Location="{Binding Location, Mode=TwoWay}"  
+                                        MouseLeftButtonDown="RestaurantDetails"
+                                        Background="Turquoise"
+                                        Cursor="Hand">
+                                <Image Source="{Binding DataContext.RestaurantPin, 
+                                    Converter={StaticResource ImageNameConverter},
+                                    RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type m:MapItemsControl}}}" >
+                                </Image>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction 
+                                            Command="{Binding DataContext.RestaurantClickCommand,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type m:MapItemsControl}}}"
+                                            CommandParameter="{Binding Accommodation}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <ToolTipService.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{Binding Accommodation.Name}" />
+
+                                    </ToolTip>
+                                </ToolTipService.ToolTip>
+
+                            </m:Pushpin>
+
+                        </DataTemplate>
+                    </m:MapItemsControl.ItemTemplate>
+                </m:MapItemsControl>
+
             </m:Map>
         </Grid>
         

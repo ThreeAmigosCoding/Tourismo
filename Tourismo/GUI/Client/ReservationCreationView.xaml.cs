@@ -45,6 +45,11 @@ namespace Tourismo.GUI.Client
             AccommodationPanel.BringIntoView();
         }
 
+        private void RestaurantDetails(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             StackPanel stackPanel = (StackPanel)sender;

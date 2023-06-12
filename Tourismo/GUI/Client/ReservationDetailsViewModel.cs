@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Tourismo.Core.Model.TravelManagement;
+using Tourismo.Core.Service.Implementation.TravelManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.Core.Utility;
 using Tourismo.GUI.Utility;
@@ -32,6 +33,9 @@ namespace Tourismo.GUI.Client
         private Microsoft.Maps.MapControl.WPF.Location _mapCenter;
         private double _mapZoomLevel;
         private AccommodationLocation _accommodationLocation;
+
+        private List<AccommodationLocation> _restaurants;
+        private IAccommodationService _accommodationService;
 
         #endregion
 
@@ -143,6 +147,16 @@ namespace Tourismo.GUI.Client
             }
         }
 
+        public List<AccommodationLocation> Restaurants
+        {
+            get { return _restaurants; }
+            set
+            {
+                _restaurants = value;
+                OnPropertyChanged(nameof(Restaurants));
+            }
+        }
+
         public string AccommodationPin
         {
             get => "Pins/accommodation.png";
@@ -152,6 +166,13 @@ namespace Tourismo.GUI.Client
         {
             get => "Pins/attraction.png";
         }
+
+        public string RestaurantPin
+        {
+            get => "Pins/restaurant.png";
+        }
+
+        public IAccommodationService AccommodationService { get => _accommodationService; }
 
         #endregion
 
@@ -165,8 +186,10 @@ namespace Tourismo.GUI.Client
 
         #endregion
 
-        public ReservationDetailsViewModel(IArrangementService arrangementService, ITravelService travelService)
+        public ReservationDetailsViewModel(IArrangementService arrangementService, ITravelService travelService, 
+            IAccommodationService accommodationService)
         {
+            _accommodationService = accommodationService;
             _arrangementService = arrangementService;
             _arrangement = GlobalStore.ReadObject<Arrangement>("SelectedArrangament");
 
@@ -236,6 +259,15 @@ namespace Tourismo.GUI.Client
             MapZoomLevel = 7;
             MapCenter = new Microsoft.Maps.MapControl.WPF.Location(44.0165, 21.0059);
             AccommodationLocation = new AccommodationLocation(Travel.Accommodation);
+
+            List<Accommodation> allRestaurants = AccommodationService.ReadAll()
+                .Where(a => a.Type == AccommodationType.Restaurant)
+                .ToList();
+
+            Restaurants = MapUtils.GetRestaurantsWithinRadius(allRestaurants,
+                AccommodationLocation.Location.Latitude,
+                AccommodationLocation.Location.Longitude,
+                1.5).Select(a => new AccommodationLocation(a)).ToList();
         }
 
         public void PushpinClick(object? parameter)

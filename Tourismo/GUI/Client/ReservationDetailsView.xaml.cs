@@ -64,5 +64,10 @@ namespace Tourismo.GUI.Client
             StackPanel stackPanel = (StackPanel)sender;
             stackPanel.Effect = null;
         }
+
+        private void RestaurantDetails(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

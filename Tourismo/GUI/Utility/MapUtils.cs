@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Resources.Credentials;
 
 namespace Tourismo.GUI.Utility
@@ -74,6 +75,48 @@ namespace Tourismo.GUI.Utility
             }
 
             return null;
+        }
+
+        public static List<Accommodation> GetRestaurantsWithinRadius(List<Accommodation> allRestaurants, 
+            double targetLatitude, 
+            double targetLongitude, 
+            double radiusInKilometers)
+        {
+            List<Accommodation> restaurantsWithinRadius = new List<Accommodation>();
+
+            foreach (Accommodation restaurant in allRestaurants)
+            {
+                double distance = CalculateDistance(targetLatitude, targetLongitude, restaurant.Location.Latitude, restaurant.Location.Longitude);
+
+                if (distance <= radiusInKilometers)
+                {
+                    restaurantsWithinRadius.Add(restaurant);
+                }
+            }
+
+            return restaurantsWithinRadius;
+        }
+
+        public static double CalculateDistance(double latitude1, double longitude1, double latitude2, double longitude2)
+        {
+            const double earthRadiusInKilometers = 6371.0;
+
+            double dLat = ConvertToRadians(latitude2 - latitude1);
+            double dLon = ConvertToRadians(longitude2 - longitude1);
+
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                       Math.Cos(ConvertToRadians(latitude1)) * Math.Cos(ConvertToRadians(latitude2)) *
+                       Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+            double distance = earthRadiusInKilometers * c;
+            return distance;
+        }
+
+        public static double ConvertToRadians(double degrees)
+        {
+            return degrees * Math.PI / 180;
         }
 
     }
