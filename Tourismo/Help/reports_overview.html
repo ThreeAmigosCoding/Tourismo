@@ -1,11 +1,50 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    reports_overview
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <style>
+            body{
+                font-family: "Poppins", sans-serif;
+                background-color:gainsboro
+            }
+            p{
+                font-family: "Poppins", sans-serif;
+                font-size: 20px;
+            }
+            .container{
+                margin-left: 50px;
+            }
+            .img-div{
+                width:100%;
+                display: flex;
+                justify-content:center;
+            }
+            img{
+                width: 60%;
+            }
+            a{
+                color:green;
+            }
+            a:hover{
+                background-color: rgb(210, 197, 197);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Agent Travel Reports overview</h1>
+            <div class="container">
+                <p>In travel reports overview you are provided with the list of travels that were sold in the month that you choose.
+                </p>
+                <div class="img-div"><img src="Images/travel_reports_overview.png" alt="nothing"></div>
+                <p>There's a month and year picker available at the top right corner.</p>
+                <p>
+                    You can see a summary which shows how many travels were sold for the period and how much money was earned.
+                </p>
+                <p>When you want to see sold arrangements for certain travel, click on the button "Arrangements" in the bottom right corner of that travel card. It will lead you to
+                    <a href="arrangements_for_travel.html"> Arrangements reports page</a>.
+                </p>             
+            </div>
+    </body>
 </html>

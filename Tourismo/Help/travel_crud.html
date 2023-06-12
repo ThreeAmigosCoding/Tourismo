@@ -1,11 +1,109 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    travel_crud
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <style>
+            body{
+                font-family: "Poppins", sans-serif;
+                background-color:gainsboro
+            }
+            p{
+                font-family: "Poppins", sans-serif;
+                font-size: 20px;
+            }
+            .container{
+                margin-left: 50px;
+            }
+            .img-div{
+                width:100%;
+                display: flex;
+                justify-content:center;
+            }
+            img{
+                width: 60%;
+            }
+            a{
+                color:green;
+            }
+            a:hover{
+                background-color: rgb(210, 197, 197);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Travel Details overview</h1>
+            <div class="container">
+                <p>In travel details overview you are able to make changes for existing travel or to create a new one. That depends on the button that you have clicked in the <a href="travels_overview.html">Travels Overview Page</a>
+                </p>
+                   
+                <h2>Name, Description and Image</h2> 
+                <div class="img-div"><img src="Images/travel_crud1.png" alt="nothing"></div>           
+                <p>
+                    At the top, there are input fields for name and description and a button for travel image upload.
+                </p>
+                 
+                <hr>
+                <h2>List Views and Search Bar</h2>
+                <div class="img-div"><img src="Images/travel_crud2.png" alt="nothing"></div>
+                <p>The window features three list views: "All Attractions," "Default Attractions," and "Additional Attractions." These list views provide you with a convenient way to manage tourist attractions for your travel itinerary. You can drag and drop attractions between the list views to organize them according to your preferences. Additionally, there is a search bar available in the "All Attractions" list view to help you quickly find specific attractions.</p>
+
+                <h3>Managing Attractions</h3>
+
+                <p>
+                <strong>1. All Attractions:</strong> This is the main list view that displays all the tourist attractions available in the system. You can browse through the list to find attractions that interest you. The search bar located at the top of this list view allows you to search for attractions by their names. Simply enter your search query and the list will update in real-time to display the matching attractions.
+                </p>
+
+                <p>
+                <strong>2. Default Attractions:</strong> This list view contains the attractions that are automatically included in a new travel itinerary. You can drag attractions from the "All Attractions" list view and drop them into this list to add them to your travel plan. To remove an attraction from the default list, simply drag it back to the "All Attractions" list view.
+                </p>
+
+                <p>
+                <strong>3. Additional Attractions:</strong> This list view is meant for attractions that you want to add to your travel itinerary beyond the default ones. Similarly to the "Default Attractions" list view, you can drag attractions from the "All Attractions" list view and drop them into this list to include them in your travel plan. If you decide to remove an attraction from the additional list, drag it back to the "All Attractions" list view.
+                </p>
+
+                <h3>Using the Search Bar</h3>
+
+                <p>
+                The search bar in the "All Attractions" list view allows you to quickly find specific attractions based on their names. To search for an attraction, follow these steps:
+                </p>
+
+                <ol>
+                <li>Click on the search bar at the top of the "All Attractions" list view.</li>
+                <li>Enter the name of the attraction you want to find.</li>
+                <li>As you type, the list view will update in real-time to display the attractions that match your search query.</li>
+                <li>To clear the search results and display all attractions again, remove the text from the search bar.</li>
+                </ol>
+                
+                <hr>
+                <h2>Accommodation and Periods</h2> 
+                <div class="img-div"><img src="Images/travel_crud3.png" alt="nothing"></div>
+                <h3>Accommodation:</h3>
+    
+                <ol>
+                <li>In the accommodations list view, browse through the available options. The list view displays the existing accommodations.</li>
+                <li>Select the desired accommodation by clicking on it. The selected accommodation will be displayed.</li>
+                <li>The chosen accommodation will be associated with your travel.</li>
+                </ol>
+
+                <h3>Periods:</h3>
+    
+                <ol>
+                <li>Select the start date of the travel period using the date picker. Click on the input field to open the date picker, and choose the desired date.</li>
+                <li>Select the end date of the travel period using the date picker. Similarly, click on the input field to open the date picker, and choose the desired date.</li>
+                <li>Once both start and end dates are correctly inputted, the "Add Period" button will become available.</li>
+                <li>Click on the "Add Period" button to add the travel period to the list view below.</li>
+                <li>If you want to remove a specific travel period, select the period from the list view, and the "Remove Period" button will become available.</li>
+                <li>Click on the "Remove Period" button to delete the selected travel period from the list view.</li>
+                </ol>
+                
+                <hr>
+
+                <p>If all required fields are filled correctly, the "Save" button will become available.</p>
+                <p>Additionally, if you are in "Update" mode, "Delete" button will show in the bottom right corner.</p>
+                
+          
+            </div>
+    </body>
 </html>
