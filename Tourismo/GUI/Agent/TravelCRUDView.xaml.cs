@@ -25,5 +25,10 @@ namespace Tourismo.GUI.Agent
         {
             InitializeComponent();
         }
+
+        private void WhenLoaded(object sender, RoutedEventArgs e)
+        {
+            travelNameTb.Focus();
+        }
     }
 }

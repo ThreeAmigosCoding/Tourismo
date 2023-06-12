@@ -52,7 +52,6 @@
                 <StackPanel>
 
                     <TextBox 
-                        x:Name="Name"
                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                         FontSize="20" 
                         x:Name="attractionNameTb"

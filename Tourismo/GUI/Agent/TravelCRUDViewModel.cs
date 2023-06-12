@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Tourismo.Core.Commands.Agent;
+using Tourismo.Core.Commands.Navigation;
 using Tourismo.Core.Model.Helper;
 using Tourismo.Core.Model.TravelManagement;
 using Tourismo.Core.Service.Interface.TravelManagement;
@@ -240,6 +241,7 @@ namespace Tourismo.GUI.Agent
         public ICommand? RemovePeriodCommand { get; }
         public ICommand? SaveTravelCommand { get; }
         public ICommand? DeleteTravelFromDetailsCommand { get; }
+        public ICommand? TravelsOverviewCommand { get; }
 
         #endregion
 
@@ -292,6 +294,7 @@ namespace Tourismo.GUI.Agent
             RemovePeriodCommand = new RemovePeriodCommand(this);
             SaveTravelCommand = new SaveTravelCommand(this);
             DeleteTravelFromDetailsCommand = new DeleteTravelFromDetailsCommand(this);
+            TravelsOverviewCommand = new AgentTravelsOverviewCommand();
 
             FilterItems();
         }

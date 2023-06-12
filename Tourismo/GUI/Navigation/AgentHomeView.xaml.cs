@@ -26,7 +26,7 @@ namespace Tourismo.GUI.Navigation
         public AgentHomeView()
         {
             InitializeComponent();
-            selectedNavItem = 1;
+            selectedNavItem = 0;
             initializeDict();
 
         }

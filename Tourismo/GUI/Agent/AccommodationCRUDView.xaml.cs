@@ -60,8 +60,8 @@ namespace Tourismo.GUI.Agent
             if (response != "" && response.Split(",")[0] == "")
             {
                 AddressTb.Text = response.Split(",")[1];
-                if (Name.Text != "")
-                    AddressTb.Text = Name.Text + ", " + response.Split(",")[1];
+                if (accommodationNameTb.Text != "")
+                    AddressTb.Text = accommodationNameTb.Text + ", " + response.Split(",")[1];
             }
             else if (response == "")
             {

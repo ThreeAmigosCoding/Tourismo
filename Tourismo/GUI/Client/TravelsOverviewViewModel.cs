@@ -239,7 +239,7 @@ namespace Tourismo.GUI.Client
             ResetFiltersCommand = new ResetFiltersCommand(this);
             ApplyFiltersCommand = new ApplyFiltersCommand(this);
             OpenReservationCreationCommand = new OpenReservationCreationCommand(this);
-            SwitchToTravelCRUD = new SwitchToTravelCRUD();
+            SwitchToTravelCRUD = new SwitchToTravelCRUD(this);
             DeleteTravelCommand = new DeleteTravelCommand(this);
 
             FilterItems();

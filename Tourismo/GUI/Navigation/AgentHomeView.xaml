@@ -84,6 +84,7 @@
                              Command="{Binding AgentHelpCommand}"
                              Width="240"
                              x:Name="AgentHelpNav"
+                             Click="HandleRadioButtonClick"
                              Tag="4"/>
                 </StackPanel>
 

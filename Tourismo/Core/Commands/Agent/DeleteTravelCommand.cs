@@ -22,7 +22,10 @@ namespace Tourismo.Core.Commands.Agent
 
         public override void Execute(object? parameter)
         {
-            Travel travel = (Travel)parameter;
+            Travel travelFromViewModel = (Travel)parameter;
+
+            Travel travel = _viewModel.TravelService.ReadAll().FirstOrDefault(t => t.Id == travelFromViewModel.Id);
+            MessageBox.Show(travel.Periods[0].ToString());
 
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this travel: "
                 + travel.Name + "?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);

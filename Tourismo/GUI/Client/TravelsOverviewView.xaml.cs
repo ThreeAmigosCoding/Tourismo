@@ -34,5 +34,10 @@ namespace Tourismo.GUI.Client
         //    }
         //}
 
+        private void WhenLoaded(object sender, RoutedEventArgs e)
+        {
+            searchTravelsTb.Focus();
+        }
+
     }
 }

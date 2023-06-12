@@ -22,17 +22,21 @@ namespace Tourismo.Core.Commands.Agent
 
         public override void Execute(object? parameter)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this travel: "
+            if (_viewModel.Mode != "create")
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this travel: "
                 + _viewModel.Travel.Name + "?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (result == MessageBoxResult.Yes)
-            {
-                _viewModel.Travel.IsActive = false;
-                _viewModel.TravelService.Update(_viewModel.Travel);
-                MessageBox.Show("Successfully deleted: " + _viewModel.Travel.Name, "Success");
-            }
+                if (result == MessageBoxResult.Yes)
+                {
+                    _viewModel.Travel.IsActive = false;
+                    _viewModel.TravelService.Update(_viewModel.Travel);
+                    MessageBox.Show("Successfully deleted: " + _viewModel.Travel.Name, "Success");
+                }
 
-            EventBus.FireEvent("AgentTravelsOverview");
+                EventBus.FireEvent("AgentTravelsOverview");
+            }
         }
+            
     }
 }
