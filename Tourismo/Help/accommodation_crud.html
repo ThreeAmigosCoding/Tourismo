@@ -1,11 +1,62 @@
 ﻿<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                font-family: "Poppins", sans-serif;
+                background-color:gainsboro
+            }
+            p{
+                font-family: "Poppins", sans-serif;
+                font-size: 20px;
+            }
+            .container{
+                margin-left: 50px;
+            }
+            .img-div{
+                width:100%;
+                display: flex;
+                justify-content:center;
+            }
+            img{
+                width: 60%;
+            }
+            a{
+                color:green;
+            }
+            a:hover{
+                background-color: rgb(210, 197, 197);
+            }
+        </style>
+    </head>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    Accmm crud
-</body>
+    <body>
+        <h1>Accommodation details</h1>
+        <div class="container">
+            <p>
+                In this window, you can see and eddit accommodation details
+            </p>
+            <div class="img-div"><img src="Images/accommodation_crud1.png" alt="nothing"></div>
+            <p>
+                You can change accommodation data in the appropriate inputs, and if you mess up, an error message will be shown here:
+            </p>
+            <div class="img-div"><img src="Images/accommodation_crud3.png" alt="nothing"></div>
+            <p>
+                On the right side you have access to the map of Serbia. By double clicking anywhere on the map, the address will be updated automaticly. 
+                You can also enter an address first and click on the <b>Map view</b> button, wich will then pin the location on the map for you to verify it:
+            </p>
+            <div class="img-div"><img src="Images/accommodation_crud2.png" alt="nothing"></div>
+            <p>
+                When you are done with changeing the data, you can save your work by clicking the <b>Save</b> button, or you can tap <b>"Ctrl" + "S"</b> on the keyboard.
+            </p>
+            <p>
+                If you want to delete the accommodation, you can click the <b>Delete</b> button, or tap <b>"Ctrl" + "D"</b> on the keyboard.
+            </p>
+            <p>
+                If you change your mind and want to get back to the 
+                <a href="accommodation_overview.html">Accommodation overview</a>
+                you can do so by tapping <b>"Esc"</b> on your keyboard.
+            </p>
+        </div>
+    </body>
 </html>

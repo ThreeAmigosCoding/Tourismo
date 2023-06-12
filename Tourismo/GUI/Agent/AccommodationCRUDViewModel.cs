@@ -142,9 +142,9 @@ namespace Tourismo.GUI.Agent
             {
                 _deleteButtonVisibility = Visibility.Visible;
                 _accommodation = GlobalStore.ReadObject<Accommodation>("SelectedAccommodation");
-                _selectedLocation = new Location();
-                _selectedLocation.Longitude = Accommodation.Location.Longitude;
-                _selectedLocation.Latitude = Accommodation.Location.Latitude;
+                
+                _selectedLocation = new Location(Accommodation.Location.Latitude, Accommodation.Location.Longitude);
+                
             }
             else
             {

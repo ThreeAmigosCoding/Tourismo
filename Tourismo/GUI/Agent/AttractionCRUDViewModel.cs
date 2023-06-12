@@ -133,9 +133,8 @@ namespace Tourismo.GUI.Agent
             {
                 _deleteButtonVisibility = Visibility.Visible;
                 _attraction = GlobalStore.ReadObject<TouristAttraction>("SelectedAttraction");
-                _selectedLocation = new Location();
-                _selectedLocation.Longitude = Attraction.Location.Longitude;
-                _selectedLocation.Latitude = Attraction.Location.Latitude;
+                _attraction = _attractionService.ReadAll().FirstOrDefault(a => a.Id == _attraction.Id);
+                SelectedLocation = new Location(_attraction.Location.Latitude, _attraction.Location.Longitude);
             }
             else
             {
