@@ -183,6 +183,8 @@ namespace Tourismo.GUI.Client
         public ICommand CancelReservationCommand { get; private set; }
         public ICommand PushpinClickCommand { get; private set; }
         public ICommand AccommodationClickCommand { get; private set; }
+        public ICommand RestaurantClickCommand { get; private set; }
+
 
         #endregion
 
@@ -208,6 +210,7 @@ namespace Tourismo.GUI.Client
 
             PushpinClickCommand = new RelayCommand<object>(PushpinClick);
             AccommodationClickCommand = new RelayCommand(AccommodationClick);
+            RestaurantClickCommand = new RelayCommand<object>(RestaurantClick);
 
             if (GlobalStore.ReadObject<string>("ReservationDetails") == "history")
                 CancelVisibility = Visibility.Hidden;
@@ -294,6 +297,18 @@ namespace Tourismo.GUI.Client
             MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
                         Travel.Accommodation.Location.Latitude,
                         Travel.Accommodation.Location.Longitude);
+        }
+
+        public void RestaurantClick(object? parametar)
+        {
+            Accommodation restaurant = (Accommodation)parametar;
+            MapZoomLevel = 8;
+            MapCenter = new Microsoft.Maps.MapControl.WPF.Location(
+                restaurant.Location.Latitude,
+                restaurant.Location.Longitude);
+            string displayInfo = "Address: " + restaurant.Location.Address + "\n" +
+                "Half board price: " + restaurant.Price + " 100rsd";
+            MessageBox.Show(displayInfo, restaurant.Name);
         }
 
     }
