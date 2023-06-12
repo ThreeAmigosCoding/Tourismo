@@ -24,7 +24,7 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
 
         public Travel Create(Travel entity)
         {
-            return _travelRepository.Create(entity);
+            return _travelRepository.CreateNewTravel(entity);
         }
 
         public Travel Delete(Guid id)
@@ -44,7 +44,7 @@ namespace Tourismo.Core.Service.Implementation.TravelManagement
 
         public Travel Update(Travel entity)
         {
-            return _travelRepository.Update(entity);
+            return _travelRepository.UpdateTravel(entity);
         }
 
         #endregion

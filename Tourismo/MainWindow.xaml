@@ -9,6 +9,8 @@
         Title="{Binding ViewTitle}" 
         Height="800" 
         Width="1200"
+        MinHeight="670"
+        MinWidth="920"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>

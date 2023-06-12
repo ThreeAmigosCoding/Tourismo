@@ -11,6 +11,7 @@ using Tourismo.GUI.Agent;
 using Tourismo.GUI.Utility;
 using Tourismo.Core.Ninject;
 using Tourismo.Core.Commands.Navigation;
+using Tourismo.GUI.Client;
 
 namespace Tourismo.GUI.Navigation
 {
@@ -23,6 +24,7 @@ namespace Tourismo.GUI.Navigation
 
         public ICommand? LogOutCommand { get; set; }
 
+        public ICommand? TravelsOverviewCommand { get; set; }
         public ICommand? AccommodationOverviewCommand { get; set; }
 
         public ICommand? ReportsOverviewCommand { get; set; }
@@ -36,17 +38,31 @@ namespace Tourismo.GUI.Navigation
             LogOutCommand = new LogOutCommand();
             AccommodationOverviewCommand = new AgentAccommodationOverviewCommand();
 
-            ReportsOverviewCommand = new AgentReportsOverviewCommand();
-            SwitchCurrentViewModel(ServiceLocator.Get<AttractionsOverviewViewModel>());
+            TravelsOverviewCommand = new AgentTravelsOverviewCommand();
+            AttractionsOverviewCommand = new AgentAttractionOverviewCommand();
+            SwitchCurrentViewModel(ServiceLocator.Get<TravelsOverviewViewModel>());
 
+            ReportsOverviewCommand = new AgentReportsOverviewCommand();
             AttractionsOverviewCommand = new AgentAttractionOverviewCommand();
             AgentHelpCommand = new AgentHelpCommand();
-
+            
             RegisterHandler();
         }
 
         private void RegisterHandler()
         {
+            EventBus.RegisterHandler("AgentTravelsOverview", () =>
+            {
+                TravelsOverviewViewModel TravelsOverviewViewModel = ServiceLocator.Get<TravelsOverviewViewModel>();
+                SwitchCurrentViewModel(TravelsOverviewViewModel);
+            });
+
+            EventBus.RegisterHandler("SwitchToTravelCRUD", () =>
+            {
+                TravelCRUDViewModel TravelCRUDViewModel = ServiceLocator.Get<TravelCRUDViewModel>();
+                SwitchCurrentViewModel(TravelCRUDViewModel);
+            });
+
             EventBus.RegisterHandler("AgentAccommodationOverview", () => 
             {
                 AccommodationOverviewViewModel AccommodationOverviewViewModel = ServiceLocator.Get<AccommodationOverviewViewModel>();

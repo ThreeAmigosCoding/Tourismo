@@ -7,8 +7,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Tourismo.Core.Commands.Agent;
 using Tourismo.Core.Commands.Client;
 using Tourismo.Core.Model.TravelManagement;
+using Tourismo.Core.Model.UserManagement;
 using Tourismo.Core.Ninject;
 using Tourismo.Core.Service.Interface.TravelManagement;
 using Tourismo.Core.Utility;
@@ -39,6 +41,7 @@ namespace Tourismo.GUI.Client
         private Visibility _errMsgVisibility;
         private string _errMsgText;
         private Travel _selectedTravel;
+        private bool _isAgent = false;
 
         #endregion
 
@@ -182,8 +185,28 @@ namespace Tourismo.GUI.Client
             set
             {
                 _selectedTravel = value;
-                OpenReservationCreationCommand.Execute(this);
+                
                 OnPropertyChanged(nameof(SelectedTravel));
+
+                if (!IsAgent)
+                    OpenReservationCreationCommand.Execute(this);
+                else
+                {
+                    GlobalStore.AddObject("SelectedTravel", _selectedTravel);
+                    SwitchToTravelCRUD.Execute("update");
+                }
+
+                
+            }
+        }
+
+        public bool IsAgent
+        {
+            get => _isAgent;
+            set
+            {
+                _isAgent = value;
+                OnPropertyChanged(nameof(IsAgent));
             }
         }
 
@@ -194,6 +217,8 @@ namespace Tourismo.GUI.Client
         public ICommand ApplyFiltersCommand { get; }
         public ICommand ResetFiltersCommand { get; }
         public ICommand OpenReservationCreationCommand { get; }
+        public ICommand SwitchToTravelCRUD { get; }
+        public ICommand DeleteTravelCommand { get; }
 
         #endregion 
 
@@ -202,6 +227,10 @@ namespace Tourismo.GUI.Client
         {
             _travelService = travelService;
             _travels = _travelService.ReadAllActive().OrderBy(t => t.Periods.Min(p => p.StartDate)).ToList();
+
+            if (GlobalStore.ReadObject<User>("LoggedUser").Role == Role.Agent)
+                _isAgent = true;
+
             _startDate = null;
             _endDate = null;
             _lowerBoundaryStart = DateTime.Now;
@@ -210,11 +239,13 @@ namespace Tourismo.GUI.Client
             ResetFiltersCommand = new ResetFiltersCommand(this);
             ApplyFiltersCommand = new ApplyFiltersCommand(this);
             OpenReservationCreationCommand = new OpenReservationCreationCommand(this);
+            SwitchToTravelCRUD = new SwitchToTravelCRUD();
+            DeleteTravelCommand = new DeleteTravelCommand(this);
 
             FilterItems();
         }
 
-        private void FilterItems()
+        public void FilterItems()
         {
             if (string.IsNullOrEmpty(SearchText))
             {

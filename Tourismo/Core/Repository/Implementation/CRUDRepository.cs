@@ -34,7 +34,7 @@ namespace Tourismo.Core.Repository.Implementation
         {
             _entities.Add(entity);
 
-            if (entity is Arrangement || entity is Travel)
+            if (entity is Arrangement)
             {
                 foreach (var entry in _context.ChangeTracker.Entries())
                 {
@@ -44,7 +44,12 @@ namespace Tourismo.Core.Repository.Implementation
                     }
                 }
             }
-            
+
+            else if (entity is Travel)
+            {
+                
+            }
+
             _context.SaveChanges();
 
             return entity;

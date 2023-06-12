@@ -21,19 +21,20 @@ namespace Tourismo.GUI.Utility
                 string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 string projectDirectory = baseDirectory.Substring(0, baseDirectory.LastIndexOf("bin", StringComparison.OrdinalIgnoreCase));
 
-                string imagePath = Path.Combine(projectDirectory, ResourcePath, imageName);
 
-                try 
-                {
-                    return new BitmapImage(new Uri(imagePath));
-                }
-                catch (Exception ex) 
-                {
-                    string imagePathDefault = Path.Combine(projectDirectory, ResourcePath, "Travel/travel1.jpg");
-                    return new BitmapImage(new Uri(imagePathDefault));
-                }
-            
+            string imagePath = Path.Combine(projectDirectory, ResourcePath, imageName);
+            try
+            {
+                return new BitmapImage(new Uri(imagePath));
             }
+            catch (Exception ex)
+            {
+                string imagePathDefault = Path.Combine(projectDirectory, ResourcePath, "Travel/travel1.jpg");
+                return new BitmapImage(new Uri(imagePathDefault));
+            }
+        }
+
+
 
             return null;
         }

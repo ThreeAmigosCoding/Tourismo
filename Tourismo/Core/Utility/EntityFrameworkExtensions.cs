@@ -23,5 +23,6 @@ public static class EntityFrameworkExtensions
 
         return query;
     }
+
 }
 

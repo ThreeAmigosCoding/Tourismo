@@ -39,9 +39,11 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding TravelsOverviewCommand}"
                              Width="240"
+                             IsChecked="True"
                              x:Name="AgentTravelsNav"
                              Click="HandleRadioButtonClick"
                              Tag="0"/>
+
                     <RadioButton Content="🏛️ Attractions"
                              Height="50"
                              FontSize="18"
@@ -49,7 +51,6 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AttractionsOverviewCommand}"
                              Width="240"
-                             IsChecked="True"
                              x:Name="AgentAttractionsNav"
                              Click="HandleRadioButtonClick"
                              Tag="1"/>
