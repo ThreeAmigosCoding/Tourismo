@@ -24,5 +24,10 @@ namespace Tourismo.GUI.Client
         {
             InitializeComponent();
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("history_overview", this);
+        }
     }
 }

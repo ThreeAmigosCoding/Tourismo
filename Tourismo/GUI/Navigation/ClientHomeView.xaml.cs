@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tourismo.Core.Model.UserManagement;
+using Tourismo.Core.Utility;
 
 namespace Tourismo.GUI.Navigation
 {
@@ -74,7 +76,7 @@ namespace Tourismo.GUI.Navigation
 
         private void shiftDown()
         {
-            if (selectedNavItem < 3)
+            if (selectedNavItem < 2)
             {
                 selectedNavItem++;
                 navItems[selectedNavItem].IsChecked = true;
@@ -89,7 +91,6 @@ namespace Tourismo.GUI.Navigation
             navItems.Add(0, ClientTravelsNav);
             navItems.Add(1, ClientReservationsNav);
             navItems.Add(2, ClientHistoryNav);
-            navItems.Add(3, ClientHelpNav);
         }
 
 
@@ -99,6 +100,16 @@ namespace Tourismo.GUI.Navigation
             int parameter = Convert.ToInt32(radioButton.Tag);
 
             selectedNavItem = parameter;
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                HelpProvider.ShowHelp("client_navigation", this);
+                //string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+            }
         }
     }
 }

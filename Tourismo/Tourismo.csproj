@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\password.ttf" />
     <None Remove="Resources\Fonts\playfair.ttf" />
     <None Remove="Resources\Fonts\poppins.ttf" />
     <None Remove="Resources\Images\Accommodation\kodRajka.jpg" />
@@ -57,6 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Fonts\password.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Fonts\playfair.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

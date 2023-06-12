@@ -30,5 +30,10 @@ namespace Tourismo.GUI.Agent
         {
             travelNameTb.Focus();
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("travel_crud", this);
+        }
     }
 }

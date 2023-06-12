@@ -8,6 +8,11 @@
         mc:Ignorable="d"
              Loaded="WhenLoaded">
 
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" 
+                        Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding LoginCommand}"/>
     </UserControl.InputBindings>
@@ -62,23 +67,32 @@
                     HorizontalAlignment="Left"
                     FontFamily="{DynamicResource Playfair}" 
                     Foreground="{StaticResource DarkGreen}"/>
-               
-                <TextBox 
-                    Grid.Row="3"
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Email"
+                               Foreground="Gray"
+                               FontSize="15"></TextBlock>
+                    <TextBox 
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     FontSize="20" 
                     x:Name="emailTb"
-                    materialDesign:HintAssist.Hint="Email"
                     materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
                 
-                
-                <TextBox Grid.Row="4" 
+
+
+                <StackPanel Grid.Row="4" Margin="0, 10, 0, 0">
+                    <TextBlock Text="Password"
+                               Foreground="Gray"
+                               FontSize="15"></TextBlock>
+                    <TextBox 
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          FontSize="20" 
-                         materialDesign:HintAssist.Hint="Password"
-                         materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
+                         FontFamily="{DynamicResource Password}"
                          Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                
 
                 <TextBlock 
                     Grid.Row="5" 

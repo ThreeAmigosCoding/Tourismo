@@ -15,6 +15,11 @@
         <utility:ImageNameConverter x:Key="ImageNameConverter" />
     </UserControl.Resources>
 
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" 
+                        Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveAttractionCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="D" Command="{Binding DeleteAttractionCommand}"/>
@@ -105,7 +110,7 @@
                         Margin="0, 15, 0, 0"
                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                         FontSize="20" 
-                        materialDesign:HintAssist.Hint="Price"
+                        materialDesign:HintAssist.Hint="Price in rsd"
                         materialDesign:HintAssist.FontFamily="{DynamicResource Poppins}"
                         Text="{Binding Attraction.Price, UpdateSourceTrigger=PropertyChanged}"/>
 

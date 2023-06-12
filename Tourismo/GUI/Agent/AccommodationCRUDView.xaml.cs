@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tourismo.Core.Utility;
 using Tourismo.GUI.Utility;
 
 namespace Tourismo.GUI.Agent
@@ -33,6 +34,15 @@ namespace Tourismo.GUI.Agent
             {
                 mapControl.ZoomLevel = 7;
             }
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            string mode = GlobalStore.ReadObject<string>("AccommodationCRUDMode");
+            if (mode == "update")
+                HelpProvider.ShowHelp("accommodation_crud", this);
+            else
+                HelpProvider.ShowHelp("accommodation_creation", this);
         }
 
         private async void MapWithPushpins_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -28,5 +28,10 @@ namespace Tourismo.GUI.Auth
         {
             emailTb.Focus();
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("getting_started", this);
+        }
     }
 }

@@ -307,7 +307,7 @@ namespace Tourismo.GUI.Client
                 restaurant.Location.Latitude,
                 restaurant.Location.Longitude);
             string displayInfo = "Address: " + restaurant.Location.Address + "\n" +
-                "Half board price: " + restaurant.Price + " 100rsd";
+                "Half board price: " + restaurant.Price + " rsd";
             MessageBox.Show(displayInfo, restaurant.Name);
         }
 

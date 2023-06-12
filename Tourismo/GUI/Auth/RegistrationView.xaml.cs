@@ -23,5 +23,17 @@ namespace Tourismo.GUI.Auth
         {
             InitializeComponent();
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpProvider.ShowHelp("getting_started", this);
+            MessageBox.Show("Radi");
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                
+            }
+        }
     }
+
 }
