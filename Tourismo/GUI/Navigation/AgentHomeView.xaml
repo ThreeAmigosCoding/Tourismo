@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="Tourismo.GUI.Navigation.AgentHomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tourismo.GUI.Navigation"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1200"
+             Loaded="HomeView_Loaded"
+             Unloaded="HomeView_Unloaded">
+
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+
+    <Border Background="{StaticResource LightGreen}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{Binding Name, StringFormat='👤 Hello, {0}'}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="{StaticResource DarkGreen}"
+                       FontSize="22"
+                       FontFamily="{DynamicResource Poppins}"
+                       Margin="20,0,0,0" />
+                <StackPanel Grid.Row="1">
+                    <RadioButton Content="🗺 Travels"
+                             Height="50"
+                             FontSize="18"
+                             FontFamily="{DynamicResource Poppins}"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding TravelsOverviewCommand}"
+                             Width="240"
+                             IsChecked="True"
+                             x:Name="AgentTravelsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="0"/>
+
+                    <RadioButton Content="🏛️ Attractions"
+                             Height="50"
+                             FontSize="18"
+                             FontFamily="{DynamicResource Poppins}"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AttractionsOverviewCommand}"
+                             Width="240"
+                             x:Name="AgentAttractionsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="1"/>
+                    <RadioButton Content="🍴 Accommodations"
+                             Height="50"
+                             FontSize="18"
+                             FontFamily="{DynamicResource Poppins}"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AccommodationOverviewCommand}"
+                             Width="240"
+                             x:Name="AgentAccommodationsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="2"/>
+
+                    <RadioButton Content="📝 Reports"
+                             Height="50"
+                             FontSize="18"
+                             FontFamily="{DynamicResource Poppins}"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ReportsOverviewCommand}"
+                             Width="240"
+                             x:Name="AgentReportsNav"
+                             Click="HandleRadioButtonClick"
+                             Tag="3"/>
+
+                    
+                </StackPanel>
+
+                <Button Content="Log Out"
+                    Grid.Row="2"
+                    VerticalAlignment="Bottom"
+                    Background="{StaticResource DarkGreen}"
+                    Foreground="White"
+                    BorderBrush="Transparent"
+                    Command="{Binding LogOutCommand}"
+                    Margin="10,0,10,20"
+                    FontSize="16"
+                    Height="36"
+                    FontFamily="{DynamicResource Poppins}"/>
+            </Grid>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Content="{Binding CurrentViewModel}"/>
+        </Grid>
+    </Border>
+</UserControl>

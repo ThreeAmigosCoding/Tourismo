@@ -1,0 +1,90 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:auth="clr-namespace:Tourismo.GUI.Auth"
+                    xmlns:navigation="clr-namespace:Tourismo.GUI.Navigation"
+                    xmlns:client="clr-namespace:Tourismo.GUI.Client"
+                    xmlns:agent="clr-namespace:Tourismo.GUI.Agent">
+
+
+    <DataTemplate DataType="{x:Type auth:LoginViewModel}">
+        <auth:LoginView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type auth:RegistrationViewModel}">
+        <auth:RegistrationView/>
+    </DataTemplate>
+    
+    <!--Client-->
+    
+    <DataTemplate DataType="{x:Type navigation:ClientHomeViewModel}">
+        <navigation:ClientHomeView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:TravelsOverviewViewModel}">
+        <client:TravelsOverviewView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:ReservationsOverviewViewModel}">
+        <client:ReservationsOverviewView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:HistoryOverviewViewModel}">
+        <client:HistoryOverviewView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:ReservationCreationViewModel}">
+        <client:ReservationCreationView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:ReservationDetailsViewModel}">
+        <client:ReservationDetailsView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type client:ClientHelpViewModel}">
+        <client:ClientHelpView/>
+    </DataTemplate>
+
+    <!--Agent-->
+    
+    <DataTemplate DataType="{x:Type navigation:AgentHomeViewModel}">
+        <navigation:AgentHomeView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:AccommodationOverviewViewModel}">
+        <agent:AccommodationOverview/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:AccommodationCRUDViewModel}">
+        <agent:AccommodationCRUDView/>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type agent:ReportsOverviewViewModel}">
+        <agent:ReportsOverviewView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:ArrangementsForTravelViewModel}">
+        <agent:ArrangementsForTravelView/>
+    </DataTemplate>
+   
+    <DataTemplate DataType="{x:Type agent:AttractionsOverviewViewModel}">
+        <agent:AttractionsOverviewView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type agent:AttractionCRUDViewModel}">
+        <agent:AttractionCRUDView/>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type agent:TravelCRUDViewModel}">
+        <agent:TravelCRUDView/>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type agent:AgentHelpViewModel}">
+        <agent:AgentHelpView/>
+    </DataTemplate>
+
+
+
+</ResourceDictionary>
